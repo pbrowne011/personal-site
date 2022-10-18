@@ -5,6 +5,7 @@ but I guess it's necessary when your package (Hugo) requires it. In the future,
 I will try using GitRepos in my Programming folder for this.
 
 10/18/2022
+
 Well... here it is! My website's README.md page. The hackathon
 inspired me to start working on projects again. I'll see how this works, but
 hopefully it leads to some positive progress on the programming front.
