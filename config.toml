@@ -39,7 +39,7 @@ author = "authors"
 
 [[params.social]]
 name = "Email"
-icon = "far fa-envelope"
+icon = "fa fa-2x fa-envelope"
 weight = 0
 url = "mailto:pbrowne2@bu.edu"
 

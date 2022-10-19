@@ -1,25 +1,11 @@
 +++
 title = "About"
-description = "Hugo, the world's fastest framework for building websites"
-date = "2019-02-28"
-aliases = ["about-us", "about-hugo", "contact"]
-author = "Hugo Authors"
+description = "Pat Browne - About"
+author = "Pat Browne"
 +++
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Hi there! This is my personal website, meant to be a reference for the projects that I have worked on in the past. It's a bit empty, as I haven't done many projects yet. I'll try to think up something more clever using Markdown for this description when I get the chance.
 
-Hugo makes use of a variety of open source projects including:
+Right now, I am studying computer science at [Boston University](https://bu.edu). Previously, I worked at a startup called ProPhone (now [Topline Pro (YC W21)](https://www.toplinepro.com/)), where I helped service professionals to grow their businesses online. I also studied finance and applied math at [Notre Dame](nd.edu) for two years, and was involved with many of the finance clubs and projects at the school.
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
-
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
-
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
-
-Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+I am interested in learning as much as possible about software! Specifically, I am interested in backend and full stack development, artificial intelligence, robotics, and more. Some other interests include golf, card games, math puzzles, venture investing, effective altruism, and more. Feel free to reach out!

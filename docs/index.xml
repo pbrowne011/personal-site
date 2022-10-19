@@ -9,12 +9,11 @@
     <item>
       <title>About</title>
       <link>http://patbrowne.me/about/</link>
-      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://patbrowne.me/about/</guid>
-      <description>Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
-Hugo makes use of a variety of open source projects including:
-https://github.com/yuin/goldmark https://github.</description>
+      <description>Hi there! This is my personal website, meant to be a reference for the projects that I have worked on in the past. It&amp;rsquo;s a bit empty, as I haven&amp;rsquo;t done many projects yet. I&amp;rsquo;ll try to think up something more clever using Markdown for this description when I get the chance.
+Right now, I am studying computer science at Boston University. Previously, I worked at a startup called ProPhone (now Topline Pro (YC W21)), where I helped service professionals to grow their businesses online.</description>
     </item>
     
     <item>
@@ -23,7 +22,8 @@ https://github.com/yuin/goldmark https://github.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://patbrowne.me/projects/</guid>
-      <description>Nothing to see here&amp;hellip; Move along!</description>
+      <description>Projects Link to heading What I&amp;rsquo;ve worked on Link to heading This is a list of some of the projects I&amp;rsquo;ve worked on in the past.
+HackHarvard Link to heading October 2022 Project link A project where I built a wiki page usind Django, as well as an AI chatbot with Flask.</description>
     </item>
     
   </channel>
