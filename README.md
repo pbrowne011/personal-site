@@ -21,4 +21,4 @@ About Me" page, and a list of the projects I have completed (and want to show) r
 I guess we'll see how it goes from here, but I hope it works well. I may add in the anime.js or 
 particles.js background animation at some point... those are cool.
 
-Other than that, time to start working on publishing the site. Maybe it will be up tonight.
+This was built using [Hugo](https://gohugo.io/) and [coder](https://themes.gohugo.io/themes/hugo-coder/).
