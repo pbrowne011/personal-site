@@ -1,5 +1,5 @@
 publishDir = "docs/"
-baseURL = "http://wwww.patbrowne.me"
+baseURL = "http://pbrowne011.github.io/personal-site"
 title = "pat browne"
 theme = "hugo-coder"
 languageCode = "en"
