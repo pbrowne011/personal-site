@@ -1,7 +1,7 @@
 +++
 title = "About"
+slug = "about"
 description = "Pat Browne - About"
-author = "Pat Browne"
 +++
 
 Hi there! This is my personal website, meant to be a reference for the projects that I have worked on in the past. It's a bit empty, as I haven't done many projects yet. I'll try to think up something more clever using Markdown for this description when I get the chance.

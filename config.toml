@@ -1,6 +1,6 @@
 
 baseURL = "http://patbrowne.me"
-title = "pat browne"
+title = "Patrick Browne"
 theme = "hugo-coder"
 languageCode = "en"
 defaultContentLanguage = "en"
@@ -13,7 +13,7 @@ pygmentsCodeFencesGuessSyntax = true
 
 [params]
 author = "Pat Browne"
-description = "Pat Browne's personal website"
+description = "Patrick Browne's personal website"
 keywords = "blog,developer,personal,projects,programs,applications,programming"
 info = "Programmer"
 avatarURL = "images/profileimage.jpg"
