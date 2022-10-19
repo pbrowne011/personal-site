@@ -1,4 +1,4 @@
-publishDir = "docs"
+publishDir = "docs/"
 baseURL = "http://wwww.patbrowne.me"
 title = "patbrowne"
 theme = "hugo-coder"
