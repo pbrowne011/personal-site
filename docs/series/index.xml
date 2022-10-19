@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on pat browne</title>
-    <link>http://pbrowne011.github.io/personal-site/series/</link>
+    <link>http://patbrowne.me/series/</link>
     <description>Recent content in Series on pat browne</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="http://pbrowne011.github.io/personal-site/series/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="http://patbrowne.me/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://pbrowne011.github.io/personal-site/about/</loc>
+    <loc>http://patbrowne.me/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://pbrowne011.github.io/personal-site/authors/</loc>
+    <loc>http://patbrowne.me/authors/</loc>
   </url><url>
-    <loc>http://pbrowne011.github.io/personal-site/categories/</loc>
+    <loc>http://patbrowne.me/categories/</loc>
   </url><url>
-    <loc>http://pbrowne011.github.io/personal-site/</loc>
+    <loc>http://patbrowne.me/</loc>
   </url><url>
-    <loc>http://pbrowne011.github.io/personal-site/projects/</loc>
+    <loc>http://patbrowne.me/projects/</loc>
   </url><url>
-    <loc>http://pbrowne011.github.io/personal-site/series/</loc>
+    <loc>http://patbrowne.me/series/</loc>
   </url><url>
-    <loc>http://pbrowne011.github.io/personal-site/tags/</loc>
+    <loc>http://patbrowne.me/tags/</loc>
   </url>
 </urlset>
