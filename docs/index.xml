@@ -12,7 +12,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://patbrowne.me/about/</guid>
-      <description>Hi there! This is my personal website, meant to be a reference for the projects that I have worked on in the past. It&amp;rsquo;s a bit empty, as I haven&amp;rsquo;t done many projects yet. I&amp;rsquo;ll try to think up something more clever using Markdown for this description when I get the chance.
+      <description>Hi there! My name is Patrick Browne, and I&amp;rsquo;m a student from northern MA. This is my personal website, meant to be a reference for the projects that I have worked on in the past and those that I&amp;rsquo;m working on today.
 Right now, I am studying computer science at Boston University. Previously, I worked at a startup called ProPhone (now Topline Pro (YC W21)), where I helped service professionals to grow their businesses online.</description>
     </item>
     
@@ -22,8 +22,9 @@ Right now, I am studying computer science at Boston University. Previously, I wo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://patbrowne.me/projects/</guid>
-      <description>Projects Link to heading What I&amp;rsquo;ve worked on Link to heading This is a list of some of the projects I&amp;rsquo;ve worked on in the past.
-HackHarvard Link to heading October 2022 Project link A project where I built a wiki page usind Django, as well as an AI chatbot with Flask.</description>
+      <description>What I&amp;rsquo;m working on Link to heading These are some of the projects I&amp;rsquo;m currently working on
+Modeling the VIX Link to heading Spring 2023 Repository A project in Python to model the Volatility Index (VIX) using the GARCH and ARIMA models, as well as neural nets.
+Cubert Link to heading February 2023 Repository This is a project to implement different algorithms to solve a Rubik&amp;rsquo;s cube, each with a different definition of &amp;ldquo;efficiency&amp;rdquo;.</description>
     </item>
     
   </channel>
