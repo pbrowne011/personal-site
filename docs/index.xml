@@ -12,8 +12,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://patbrowne.me/about/</guid>
-      <description>Hi there! My name is Patrick Browne, and I&amp;rsquo;m a student from northern MA. This is my personal website, meant to be a reference for the projects that I have worked on in the past and those that I&amp;rsquo;m working on today.
-Right now, I am studying computer science at Boston University. Previously, I worked at a startup called ProPhone (now Topline Pro (YC W21)), where I helped service professionals to grow their businesses online.</description>
+      <description>Hi there! My name is Patrick Browne, and I&amp;rsquo;m a student from Massachusetts. This is my personal website, where I highlight some of my projects.
+Right now, I am studying computer science and statistics at Boston University. I am also working on research with Professor Appavoo into improving program execution at a low level using neural networks.
+Previously, I worked at a startup called ProPhone (now Topline Pro (YC W21)), where I helped service professionals to grow their businesses online.</description>
     </item>
     
     <item>
@@ -23,8 +24,7 @@ Right now, I am studying computer science at Boston University. Previously, I wo
       
       <guid>http://patbrowne.me/projects/</guid>
       <description>What I&amp;rsquo;m working on Link to heading These are some of the projects I&amp;rsquo;m currently working on
-Modeling the VIX Link to heading Spring 2023 Repository A project in Python to model the Volatility Index (VIX) using the GARCH and ARIMA models, as well as neural nets.
-Cubert Link to heading February 2023 Repository This is a project to implement different algorithms to solve a Rubik&amp;rsquo;s cube, each with a different definition of &amp;ldquo;efficiency&amp;rdquo;.</description>
+Systems Research Link to heading Summer and Fall 2023 Repository (private) From our proposal: &amp;ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&amp;hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study.</description>
     </item>
     
   </channel>
