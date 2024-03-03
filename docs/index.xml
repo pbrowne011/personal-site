@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Patrick Browne</title>
-    <link>http://patbrowne.me/</link>
+    <link>/</link>
     <description>Recent content on Patrick Browne</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://patbrowne.me/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>http://patbrowne.me/about/</link>
+      <link>/about/</link>
       <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://patbrowne.me/about/</guid>
+      <guid>/about/</guid>
       <description>My name is Pat Browne. I like to build things, and to understand how they work. This blog is one of the places where I do that.&#xA;I&amp;rsquo;m currently studying computer science and statistics at Boston University. Specific areas that I am interested in include compilers and operating systems, cryptography, machine learning/AI, probability, financial markets, and number theory. You can email me at pjbrowne011 [at] gmail [dot] com.</description>
     </item>
   </channel>

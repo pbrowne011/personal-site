@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://patbrowne.me/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://patbrowne.me/</loc>
+    <loc>/</loc>
   </url><url>
-    <loc>http://patbrowne.me/tags/</loc>
+    <loc>/tags/</loc>
   </url>
 </urlset>
