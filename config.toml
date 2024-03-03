@@ -23,7 +23,7 @@ summaryLength = 180
 [params]
 author = "Pat Browne"
 subtitle = ""
-favicon = "images/favicon.ico"
+favicon = "/images/favicon.ico"
 
 # Content types (not sections) to include on front page
 # Types I want to use: {"page", "post}
