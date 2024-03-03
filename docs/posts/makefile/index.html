@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Why do commands require tabs in a Makefile? | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Why do commands require tabs in a Makefile?" />
+<meta property="og:description" content="An unfortuate historical example of backwards compatibility" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/makefile/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-03T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Why do commands require tabs in a Makefile?"/>
+<meta name="twitter:description" content="An unfortuate historical example of backwards compatibility"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><link rel="stylesheet" type="text/css" href="/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="/">
+	<h1 class="site-title"><a href="/">Patrick Browne</a></h1>
+	<div class="site-description"><h2></h2><nav class="nav social">
+			<ul class="flat"><a href="mailto:pjbrowne011@gmail.com" title="Email"><i data-feather="mail"></i></a><a href="https://github.com/pbrowne011/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Why do commands require tabs in a Makefile?</h1>
+			<div class="meta">
+                           Mar 3, 2024 
+                          
+			</div>
+		</div>
+
+		<div class="markdown">
+			<p>When I was first learning how to write a Makefile to compile a C program, one
+thing that stuck me (and almost everyone who encounters it) as odd was the
+requirement that each command line start with a tab character (&rsquo;\t&rsquo;). Makefiles
+are used to automate repetitive tasks (such as recompiling a C/C++ program), and
+have a unique syntax. They are made up of rules, which consist of a &ldquo;target&rdquo;, a
+list of &ldquo;dependencies&rdquo;, and a series of &ldquo;commands&rdquo;. They look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>target: dependencies
+</span></span><span style="display:flex;"><span>	command
+</span></span></code></pre></div><p>For example, suppose I want to automate two different tasks: recompiling my
+program after editing some of the source code, and deleting all non-source
+files after editing them. I could write a Makefile that looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>.PHONY: clean
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>myprogram: myprogram.c
+</span></span><span style="display:flex;"><span>	gcc myprogram.c -o myprogram
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>clean:
+</span></span><span style="display:flex;"><span>	rm *.o *~ myprogram
+</span></span></code></pre></div><p>The .PHONY makes sure that when I run the shell command <code>make clean</code>, I don&rsquo;t
+create a file named <code>clean</code>. Instead, I run the command underneath, which
+removes the files I don&rsquo;t want in my directory. The other rule has a target
+filename <code>myprogram</code>, which requires a file named <code>myprogram.c</code>. If it finds
+this .c file in my directory, it will compile it using the command below. If you
+want to learn more about makefiles and their syntax, a resource that I highly
+recommend is <a href="https://makefiletutorial.com/">Makefile Tutorial</a>.</p>
+<p>Notice how each command is indented with a tab character. The UNIX utility
+<code>make</code> doesn&rsquo;t allow you to list a command underneath a target/dependency
+combination, or to indent with a number of spaces. In the
+<a href="https://www.youtube.com/watch?v=SsoOG6ZeyUI">&ldquo;tabs vs. spaces&rdquo; war</a>, <code>make</code> has
+definitifely taken a side. Why is this?</p>
+<p>The author of <code>make</code>, Stuart Feldman, has explained this debacle a few times,
+including
+<a href="https://beebo.org/haycorn/2015-04-20_tabs-and-makefiles.html">once to Michael Stillwell</a>.
+Stuart explained that <code>make</code> was written in a weekend. To tokenize Makefiles, he
+was using <a href="https://en.wikipedia.org/wiki/Lex_(software)">lex</a>, which was in
+its first version at the time. He got frustrated with trying to write a pattern
+for commands, and instead used a fixed patter (<code>'\t'</code>) to indicate rules. After
+a while, about a dozen people at Bell Labs were using <code>make</code>. He didn&rsquo;t want to
+disrupt his users, and so left the &ldquo;tab in colum 1&rdquo; rule in the UNIX command to
+preserve backwards compatibility.</p>
+<p>As he says in the email:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>&gt; Within a few weeks of writing Make, I already had a dozen friends who were 
+</span></span><span style="display:flex;"><span>&gt; using it.
+</span></span><span style="display:flex;"><span>&gt; 
+</span></span><span style="display:flex;"><span>&gt; So even though I knew that &#34;tab in column 1&#34; was a bad idea, I didn&#39;t want
+</span></span><span style="display:flex;"><span>&gt; to disrupt my user base.
+</span></span><span style="display:flex;"><span>&gt; 
+</span></span><span style="display:flex;"><span>&gt; So instead I wrought havoc on tens of millions.
+</span></span></code></pre></div><p>If you don&rsquo;t want to begin your commands with <code>'\t'</code>, different versions of
+<code>make</code> allow you to specify other characters. For example,
+<a href="https://www.gnu.org/software/make/manual/html_node/Special-Variables.html">GNUMake</a>
+allows for a special variable, <code>.RECIPEPREFIX</code>, where you can change the
+character that <code>make</code> assumes is introducing a recipe line. However, from
+personal experience, this isn&rsquo;t much help to someone who is trying to make a
+binary file and keeps getting syntax errors!</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/unix">unix</a></li>
+								
+								<li><a href="/tags/makefile">makefile</a></li>
+								
+								<li><a href="/tags/computer-history">computer-history</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+
+	
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  var newHref = window.location.pathname + href;
+                  link.setAttribute('href', newHref);
+              });
+          });
+        </script>
+</body>
+</html>
