@@ -1,22 +1,33 @@
 +++
 title = "About"
+date = 2024-03-01T00:00:00Z
+draft = false
+author = "Pat"
+description = "About me"
+tags = []
+categories = []
+images = []
 slug = "about"
-description = "Pat Browne - About"
+
+# modify type of page (posts show up on front page)
+# types can be found in mainSections
+type = "page"
+
+# if you want to display modification date
+# lastmod = 2024-03-01T00:00:00Z
+
+# redirect old URLs to new URL for post
+aliases = []
+
+# SEO keywords
+keywords = []
 +++
+My name is Pat Browne. I like to build things, and to understand how they work.
+This blog is one of the places where I do that.
 
-Hi there! My name is Patrick Browne, and I'm a student from Massachusetts.
-This is my personal website, where I highlight some of my projects.
-
-Right now, I am studying computer science and statistics at
-[Boston University](https://bu.edu). I am also working on research with
-[Professor Appavoo](https://jappavoo.github.io/) into improving program
-execution at a low level using neural networks.
-
-Previously, I worked at a startup called ProPhone (now
-[Topline Pro (YC W21)](https://www.toplinepro.com/)), where I helped service
-professionals to grow their businesses online. Before that, I studied finance
-and applied math at [Notre Dame](nd.edu) for two years.
-
-Areas that I am interested in include compilers and operating systems,
-cryptography, machine learning/AI, and probability. Please reach out, I always
-enjoy meeting new people!
+I'm currently studying [computer science](https://www.bu.edu/cs/) and
+[statistics](https://www.bu.edu/stat/) at 
+[Boston University](https://www.bu.edu/). Specific areas that I am interested 
+in include compilers and operating systems, cryptography, machine learning/AI,
+probability, financial markets, and number theory. You can email me at 
+pjbrowne011 [at] gmail [dot] com.

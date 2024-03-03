@@ -1,29 +1,42 @@
-
-baseURL = "http://patbrowne.me"
-title = "Patrick Browne"
-theme = "hugo-coder"
-languageCode = "en"
+baseURL = "http://patbrowne.me/"
+languageCode = "en-us"
 defaultContentLanguage = "en"
+title = "Patrick Browne"
+theme = "ezhil"
+
 publishDir = "docs/"
 
-paginate = 20
-pygmentsStyle = "bw"
+# Enable syntax highlighting
+pygmentsStyle = "solarized-dark"
 pygmentsCodeFences = true
 pygmentsCodeFencesGuessSyntax = true
 
+# Google Analytics tag (add in future
+googleAnalytics = ""
+
+# Number of posts to show (recent list)
+paginate = 20
+
+# Number of characters to show in summary
+summaryLength = 180
+
 [params]
 author = "Pat Browne"
-description = "Patrick Browne's personal website"
-keywords = "blog,developer,personal,projects,programs,applications,programming"
-info = "Programmer"
-avatarURL = "images/profileimage.jpg"
-dateFormat = "January 2, 2006"
-since = 2022
-colorScheme = "dark"
-# Hide the toggle button, along with the associated vertical divider
-hideColorSchemeToggle = false
-# Series see also post count
-maxSeeAlsoItems = 5
+subtitle = ""
+favicon = ""
+
+# Content types (not sections) to include on front page
+# Types I want to use: {"page", "post}
+mainSections = ["post"]
+
+# Allow fetching icons from CDN
+featherIconsCDN = true
+
+# Mode can be "dark" or "auto"
+mode = "auto"
+
+
+# ---------- Custom site content --------------- #
 # Custom CSS
 customCSS = []
 # Custom SCSS, file path is relative to Hugo's asset folder (default: {your project root}/assets)
@@ -31,23 +44,58 @@ customSCSS = []
 # Custom JS
 customJS = []
 
+
+# Main menu (below site header)
+[[menu.main]]
+name = "Posts"
+url = "/posts"
+weight = 1
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 2
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 3
+
 [taxonomies]
-category = "categories"
-series = "series"
 tag = "tags"
-author = "authors"
+
 
 [[params.social]]
 name = "Email"
-icon = "fa fa-2x fa-envelope"
-weight = 0
-url = "mailto:pbrowne2@bu.edu"
+icon = "mail"
+#weight = 1
+url = "mailto:pjbrowne011@gmail.com"
 
 [[params.social]]
 name = "Github"
-icon = "fa fa-2x fa-github"
-weight = 1
+icon = "github"
+#weight = 2
 url = "https://github.com/pbrowne011/"
+
+[[params.social]]
+name = "RSS"
+icon = "rss"
+#weight = 3
+url = "https://github.com/pbrowne011/"
+
+
+# Markdown formatting
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true # Allows rendering of raw HTML in Markdown files
+    [markup.goldmark.extensions]
+      footnote = true
+
+
+
+
+
 
 # [[params.social]]
 # name = "Gitlab"
@@ -59,26 +107,23 @@ url = "https://github.com/pbrowne011/"
 # name = "Twitter"
 # icon = "fa fa-2x fa-twitter"
 # weight = 3
-# url = "https://twitter.com/johndoe/"
+# url = "https://twitter.com/pbrowne011/"
 
-[[params.social]]
-name = "LinkedIn"
-icon = "fa fa-2x fa-linkedin"
-weight = 4
-url = "https://www.linkedin.com/in/pat-browne/"
+# [[params.social]]
+# name = "LinkedIn"
+# icon = "fa fa-2x fa-linkedin"
+# weight = 4
+# url = "https://www.linkedin.com/in/pat-browne/"
 
-[languages.en]
-languageName = ":uk:"
+# [[languages.en.menu.main]]
+# name = "About"
+# weight = 1
+# url = "about/"
 
-[[languages.en.menu.main]]
-name = "About"
-weight = 1
-url = "about/"
-
-[[languages.en.menu.main]]
-name = "Projects"
-weight = 2
-url = "projects/"
+# [[languages.en.menu.main]]
+# name = "Projects"
+# weight = 2
+# url = "projects/"
 
 # [[languages.en.menu.main]]
 # name = "Blog"
