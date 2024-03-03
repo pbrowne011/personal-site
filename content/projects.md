@@ -1,6 +1,7 @@
 +++
 title = "Projects"
 slug = "projects"
+draft = true
 +++
 
 # What I'm working on

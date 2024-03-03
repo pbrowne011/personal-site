@@ -23,7 +23,7 @@ summaryLength = 180
 [params]
 author = "Pat Browne"
 subtitle = ""
-favicon = ""
+favicon = "images/favicon.ico"
 
 # Content types (not sections) to include on front page
 # Types I want to use: {"page", "post}
@@ -44,6 +44,9 @@ customSCSS = []
 # Custom JS
 customJS = []
 
+
+[outputs]
+home = ["HTML", "RSS"]
 
 # Main menu (below site header)
 [[menu.main]]
@@ -81,7 +84,7 @@ url = "https://github.com/pbrowne011/"
 name = "RSS"
 icon = "rss"
 #weight = 3
-url = "https://github.com/pbrowne011/"
+url = "/index.xml"
 
 
 # Markdown formatting
