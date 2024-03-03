@@ -37,12 +37,12 @@ mode = "auto"
 
 
 # ---------- Custom site content --------------- #
-# Custom CSS
-customCSS = []
-# Custom SCSS, file path is relative to Hugo's asset folder (default: {your project root}/assets)
-customSCSS = []
-# Custom JS
-customJS = []
+# # Custom CSS
+# customCSS = []
+# # Custom SCSS, file path is relative to Hugo's asset folder (default: {your project root}/assets)
+# customSCSS = []
+# # Custom JS
+# customJS = []
 
 
 [outputs]
