@@ -14,12 +14,5 @@
       <guid>http://patbrowne.me/about/</guid>
       <description>My name is Pat Browne. I like to build things, and to understand how they work. This blog is one of the places where I do that.&#xA;I&amp;rsquo;m currently studying computer science and statistics at Boston University. Specific areas that I am interested in include compilers and operating systems, cryptography, machine learning/AI, probability, financial markets, and number theory. You can email me at pjbrowne011 [at] gmail [dot] com.</description>
     </item>
-    <item>
-      <title>Projects</title>
-      <link>http://patbrowne.me/projects/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://patbrowne.me/projects/</guid>
-      <description>What I&amp;rsquo;m working on These are some of the projects I&amp;rsquo;m currently working on&#xA;Systems Research Summer and Fall 2023 Repository (private) From our proposal: &amp;ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&amp;hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&amp;rdquo;&#xA;What I&amp;rsquo;ve worked on This is a list of some of the projects I&amp;rsquo;ve worked on in the past.&#xA;DFA Simulator June 2023 Repository A program written in C that takes a defined .dfa file and an input string, and returns whether that input string is accepted or not by the given dfa. I may add NFA functionality to this as well at some point.&#xA;Cubert February 2023 Repository This is a project to implement different algorithms to solve a Rubik&amp;rsquo;s cube, each with a different definition of &amp;ldquo;efficiency&amp;rdquo;.</description>
-    </item>
   </channel>
 </rss>
