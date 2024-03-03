@@ -1,6 +1,6 @@
-[submodule "hugo-coder"]
-	path = hugo-coder
-	url = https://github.com/luizdepra/hugo-coder.git
-[submodule "themes/hugo-coder"]
-	path = themes/hugo-coder
-	url = https://github.com/luizdepra/hugo-coder.git
+[submodule "ezhil"]
+	path = ezhil
+	url = https://github.com/vividvilla/ezhil.git
+[submodule "themes/ezhil"]
+	path = themes/ezhil
+	url = https://github.com/vividvilla/ezhil.git
