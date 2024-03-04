@@ -82,7 +82,7 @@ was using [lex](https://en.wikipedia.org/wiki/Lex_(software)), which was in
 its first version at the time. He got frustrated with trying to write a pattern
 for commands, and instead used a fixed patter (`'\t'`) to indicate rules. After
 a while, about a dozen people at Bell Labs were using `make`. He didn't want to
-disrupt his users, and so left the "tab in colum 1" rule in the UNIX command to
+disrupt his users, and so left the "tab in column 1" rule in the UNIX command to
 preserve backwards compatibility.
 
 As he says in the email:

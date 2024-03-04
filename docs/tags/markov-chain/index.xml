@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>markov-chain on Pat Browne</title>
+    <link>/tags/markov-chain/</link>
+    <description>Recent content in markov-chain on Pat Browne</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/markov-chain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Real-life examples of Markov chains</title>
+      <link>/posts/markov/</link>
+      <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>/posts/markov/</guid>
+      <description>One of the classes that I&amp;rsquo;m taking this semester is on stochastic processes. Stochastic processes are sequences of random variables $X_1, X_2, ..., X_n$, where $n$ represents a specific moment in time.1 The first topic we&amp;rsquo;ve focused on this semester has been Markov chains, specific stochastic models that only depend on the current state. They are unique in that future events are only affected by where you currently are, not where you have been in the past. Markov chains arise from the law of total probability, which is a way to express the probability of an event as the sum of many other probabilities. In general, when dealing with a stochastic process, you have to condition the probability of an event on all previous events before, as they all have some effect on whether or not you reach that state. Mathematically, this can be expressed as&#xA;$$P[X_{n+1} = m \mid X_0 = i, X_1 = j, ..., X_n = k]$$ However, with Markov chains, we only need to focus on the most recent event.&#xA;$$P[X_{n+1} = m \mid X_n = k]$$ This is a remarkable simplification.</description>
+    </item>
+  </channel>
+</rss>

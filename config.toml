@@ -35,6 +35,8 @@ featherIconsCDN = true
 # Mode can be "dark" or "auto"
 mode = "auto"
 
+# allow for math syntax
+math = true
 
 # ---------- Custom site content --------------- #
 # # Custom CSS
@@ -95,6 +97,11 @@ url = "/index.xml"
     [markup.goldmark.extensions]
       footnote = true
 
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]
 
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>draft on Pat Browne</title>
+    <link>/tags/draft/</link>
+    <description>Recent content in draft on Pat Browne</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/draft/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Surprising examples of Markov chains</title>
+      <link>/posts/markov/</link>
+      <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>/posts/markov/</guid>
+      <description>One of the classes that I&amp;rsquo;m taking this semester is on stochastic processes. Stochastic processes are sequences of random variables $X_1, X_2, ..., X_n$, where \(n\) represents a specific moment in time.1&#xA;One way to understand what stochastic process refers to is to break it down into each word. If something is stochastic, it means that it is possible to describe that thing with a probability distribution, to model it. A process occurs over time. Putting those together, you get a sequence of events that are time-dependent, where each event can be&amp;#160;&amp;#x21a9;&amp;#xfe0e;</description>
+    </item>
+  </channel>
+</rss>

@@ -19,6 +19,20 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 	<script src="/js/main.js"></script>
+
+	
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script>
+	  MathJax = {
+	      tex: {
+		  displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+		  inlineMath: [['\\(', '\\)'], ['$', '$']]   
+	      }
+	  };
+	</script>
+	
+	
 </head>
 
 <body>
@@ -98,7 +112,7 @@ was using <a href="https://en.wikipedia.org/wiki/Lex_(software)">lex</a>, which 
 its first version at the time. He got frustrated with trying to write a pattern
 for commands, and instead used a fixed patter (<code>'\t'</code>) to indicate rules. After
 a while, about a dozen people at Bell Labs were using <code>make</code>. He didn&rsquo;t want to
-disrupt his users, and so left the &ldquo;tab in colum 1&rdquo; rule in the UNIX command to
+disrupt his users, and so left the &ldquo;tab in column 1&rdquo; rule in the UNIX command to
 preserve backwards compatibility.</p>
 <p>As he says in the email:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>&gt; Within a few weeks of writing Make, I already had a dozen friends who were 
