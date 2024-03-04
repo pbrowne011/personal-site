@@ -65,7 +65,7 @@ Markov chains appear everywhere: the Wikipedia page for Markov chains lists
 several general examples, including random walks, board games played with dice
 (assuming players have no agency), weather predictions, and the stock
 market.[^2] Other examples we've gone over in class include bacteria
-reproduction, the classic PageRank algorithm. 
+reproduction, the PageRank algorithm, gambler's ruin, and random walks.
 However, I've become curious: what are some nonobvious things in my life
 specifically that I could potentially model with Markov chains?
 
@@ -134,7 +134,7 @@ I'll try to make something different. I could express my states as
 the different meals that I eat (rice and beans, spaghetti, and ramen), and set
 up a matrix similarly to how I did in the last two examples.
 - **What will I choose to study tonight?** This is similar to where I will
-choose to study because often the subject of the day is oen where I have an
+choose to study because often the subject of the day is the one where I have an
 assignment due. It's as if I'm putting out a fire in that subject today; as a
 result, I am less likely to study the same subject two days in a row, and more
 likely to move to another one to put out a fire there. Furthermore, my

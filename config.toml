@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://patbrowne.me/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "Pat Browne"
@@ -11,8 +11,8 @@ pygmentsStyle = "solarized-dark"
 pygmentsCodeFences = true
 pygmentsCodeFencesGuessSyntax = true
 
-# Google Analytics tag (add in future
-googleAnalytics = ""
+# Google Analytics tag
+googleAnalytics = "G-8E86LFMZPL"
 
 # Number of posts to show (recent list)
 paginate = 20
