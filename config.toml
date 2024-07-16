@@ -11,8 +11,8 @@ pygmentsStyle = "solarized-dark"
 pygmentsCodeFences = true
 pygmentsCodeFencesGuessSyntax = true
 
-# Google Analytics tag
-googleAnalytics = "G-8E86LFMZPL"
+# Google Analytics tag (not used, respect user privacy)
+# googleAnalytics = NULL
 
 # Number of posts to show (recent list)
 paginate = 20

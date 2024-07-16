@@ -7,13 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Mar 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://patbrowne.me/tags/unix/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://patbrowne.me/tags/unix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Why do commands require tabs in a Makefile?</title>
       <link>https://patbrowne.me/posts/makefile/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
+      
       <guid>https://patbrowne.me/posts/makefile/</guid>
-      <description>When I was first learning how to write a Makefile to compile a C program, one thing that stuck me (and almost everyone who encounters it) as odd was the requirement that each command line start with a tab character (&amp;rsquo;\t&amp;rsquo;). Makefiles are used to automate repetitive tasks (such as recompiling a C/C++ program), and have a unique syntax. They are made up of rules, which consist of a &amp;ldquo;target&amp;rdquo;, a list of &amp;ldquo;dependencies&amp;rdquo;, and a series of &amp;ldquo;commands&amp;rdquo;. They look like this:&#xA;target: dependencies command For example, suppose I want to automate two different tasks: recompiling my program after editing some of the source code, and deleting all non-source files after editing them. I could write a Makefile that looks like this:&#xA;.PHONY: clean myprogram: myprogram.c gcc myprogram.c -o myprogram clean: rm *.o *~ myprogram The .PHONY makes sure that when I run the shell command make clean, I don&amp;rsquo;t create a file named clean. Instead, I run the command underneath, which removes the files I don&amp;rsquo;t want in my directory. The other rule has a target filename myprogram, which requires a file named myprogram.</description>
+      <description>When I was first learning how to write a Makefile to compile a C program, one thing that stuck me (and almost everyone who encounters it) as odd was the requirement that each command line start with a tab character (&#39;\t&amp;rsquo;). Makefiles are used to automate repetitive tasks (such as recompiling a C/C++ program), and have a unique syntax. They are made up of rules, which consist of a &amp;ldquo;target&amp;rdquo;, a list of &amp;ldquo;dependencies&amp;rdquo;, and a series of &amp;ldquo;commands&amp;rdquo;. They look like this:
+target: dependencies command For example, suppose I want to automate two different tasks: recompiling my program after editing some of the source code, and deleting all non-source files after editing them. I could write a Makefile that looks like this:
+.PHONY: clean myprogram: myprogram.c gcc myprogram.c -o myprogram clean: rm *.o *~ myprogram The .PHONY makes sure that when I run the shell command make clean, I don&amp;rsquo;t create a file named clean. Instead, I run the command underneath, which removes the files I don&amp;rsquo;t want in my directory. The other rule has a target filename myprogram, which requires a file named myprogram.</description>
     </item>
+    
   </channel>
 </rss>

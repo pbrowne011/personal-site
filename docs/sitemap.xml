@@ -1,38 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>https://patbrowne.me/tags/markov-chain/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/</loc>
-    <lastmod>2024-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/posts/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/tags/probability/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/posts/markov/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/tags/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/tags/computer-history/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/tags/makefile/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/tags/unix/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/posts/makefile/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://patbrowne.me/about/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url>
+  
+  <url>
+    <loc>https://patbrowne.me/</loc>
+    <lastmod>2024-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
 </urlset>

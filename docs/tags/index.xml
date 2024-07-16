@@ -7,41 +7,54 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Mar 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://patbrowne.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://patbrowne.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>markov-chain</title>
       <link>https://patbrowne.me/tags/markov-chain/</link>
       <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
+      
       <guid>https://patbrowne.me/tags/markov-chain/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>probability</title>
       <link>https://patbrowne.me/tags/probability/</link>
       <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
+      
       <guid>https://patbrowne.me/tags/probability/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>computer-history</title>
       <link>https://patbrowne.me/tags/computer-history/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
+      
       <guid>https://patbrowne.me/tags/computer-history/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>makefile</title>
       <link>https://patbrowne.me/tags/makefile/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
+      
       <guid>https://patbrowne.me/tags/makefile/</guid>
       <description></description>
     </item>
+    
     <item>
       <title>unix</title>
       <link>https://patbrowne.me/tags/unix/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
+      
       <guid>https://patbrowne.me/tags/unix/</guid>
       <description></description>
     </item>
+    
   </channel>
 </rss>

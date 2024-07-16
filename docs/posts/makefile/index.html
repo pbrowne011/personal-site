@@ -6,11 +6,11 @@
 	<meta property="og:title" content="Why do commands require tabs in a Makefile?" />
 <meta property="og:description" content="An unfortuate historical example of backwards compatibility" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.me/posts/makefile/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://patbrowne.me/posts/makefile/" />
 <meta property="article:published_time" content="2024-03-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2024-03-03T00:00:00+00:00" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Why do commands require tabs in a Makefile?"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Why do commands require tabs in a Makefile?"/>
 <meta name="twitter:description" content="An unfortuate historical example of backwards compatibility"/>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
@@ -76,23 +76,23 @@
 		<div class="markdown">
 			<p>When I was first learning how to write a Makefile to compile a C program, one
 thing that stuck me (and almost everyone who encounters it) as odd was the
-requirement that each command line start with a tab character (&rsquo;\t&rsquo;). Makefiles
+requirement that each command line start with a tab character ('\t&rsquo;). Makefiles
 are used to automate repetitive tasks (such as recompiling a C/C++ program), and
 have a unique syntax. They are made up of rules, which consist of a &ldquo;target&rdquo;, a
 list of &ldquo;dependencies&rdquo;, and a series of &ldquo;commands&rdquo;. They look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>target: dependencies
-</span></span><span style="display:flex;"><span>	command
-</span></span></code></pre></div><p>For example, suppose I want to automate two different tasks: recompiling my
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">target: dependencies
+	command
+</code></pre></div><p>For example, suppose I want to automate two different tasks: recompiling my
 program after editing some of the source code, and deleting all non-source
 files after editing them. I could write a Makefile that looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>.PHONY: clean
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>myprogram: myprogram.c
-</span></span><span style="display:flex;"><span>	gcc myprogram.c -o myprogram
-</span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>clean:
-</span></span><span style="display:flex;"><span>	rm *.o *~ myprogram
-</span></span></code></pre></div><p>The .PHONY makes sure that when I run the shell command <code>make clean</code>, I don&rsquo;t
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.PHONY: clean
+
+myprogram: myprogram.c
+	gcc myprogram.c -o myprogram
+	
+clean:
+	rm *.o *~ myprogram
+</code></pre></div><p>The .PHONY makes sure that when I run the shell command <code>make clean</code>, I don&rsquo;t
 create a file named <code>clean</code>. Instead, I run the command underneath, which
 removes the files I don&rsquo;t want in my directory. The other rule has a target
 filename <code>myprogram</code>, which requires a file named <code>myprogram.c</code>. If it finds
@@ -115,14 +115,14 @@ a while, about a dozen people at Bell Labs were using <code>make</code>. He didn
 disrupt his users, and so left the &ldquo;tab in column 1&rdquo; rule in the UNIX command to
 preserve backwards compatibility.</p>
 <p>As he says in the email:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>&gt; Within a few weeks of writing Make, I already had a dozen friends who were 
-</span></span><span style="display:flex;"><span>&gt; using it.
-</span></span><span style="display:flex;"><span>&gt; 
-</span></span><span style="display:flex;"><span>&gt; So even though I knew that &#34;tab in column 1&#34; was a bad idea, I didn&#39;t want
-</span></span><span style="display:flex;"><span>&gt; to disrupt my user base.
-</span></span><span style="display:flex;"><span>&gt; 
-</span></span><span style="display:flex;"><span>&gt; So instead I wrought havoc on tens of millions.
-</span></span></code></pre></div><p>If you don&rsquo;t want to begin your commands with <code>'\t'</code>, different versions of
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt; Within a few weeks of writing Make, I already had a dozen friends who were 
+&gt; using it.
+&gt; 
+&gt; So even though I knew that &#34;tab in column 1&#34; was a bad idea, I didn&#39;t want
+&gt; to disrupt my user base.
+&gt; 
+&gt; So instead I wrought havoc on tens of millions.
+</code></pre></div><p>If you don&rsquo;t want to begin your commands with <code>'\t'</code>, different versions of
 <code>make</code> allow you to specify other characters. For example,
 <a href="https://www.gnu.org/software/make/manual/html_node/Special-Variables.html">GNUMake</a>
 allows for a special variable, <code>.RECIPEPREFIX</code>, where you can change the
@@ -158,18 +158,9 @@ binary file and keeps getting syntax errors!</p>
 
 
 
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-8E86LFMZPL', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 <script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 	
         <script>

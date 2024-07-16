@@ -6,11 +6,11 @@
 	<meta property="og:title" content="Real-life examples of Markov chains" />
 <meta property="og:description" content="Trying to model daily events in my life using Markov chains" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.me/posts/markov/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://patbrowne.me/posts/markov/" />
 <meta property="article:published_time" content="2024-03-04T00:00:00+00:00" />
 <meta property="article:modified_time" content="2024-03-04T00:00:00+00:00" />
-
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Real-life examples of Markov chains"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Real-life examples of Markov chains"/>
 <meta name="twitter:description" content="Trying to model daily events in my life using Markov chains"/>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
 
@@ -76,7 +76,7 @@
 		<div class="markdown">
 			<p>One of the classes that I&rsquo;m taking this semester is on
 <a href="https://www.bu.edu/academics/cas/courses/cas-ma-583/">stochastic processes</a>.
-Stochastic processes are sequences of random variables $X_1, X_2, ..., X_n$,
+Stochastic processes are sequences of random variables $X_1, X_2, &hellip;, X_n$,
 where $n$ represents a specific moment in time.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> The first topic we&rsquo;ve
 focused on this semester has been
 <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a>, specific
@@ -89,9 +89,9 @@ probabilities. In general, when dealing with a stochastic process, you have
 to condition the probability of an event on all previous events before, as they
 all have some effect on whether or not you reach that state. Mathematically,
 this can be expressed as</p>
-$$P[X_{n+1} = m \mid X_0 = i, X_1 = j, ..., X_n = k]$$
+<p>$$P[X_{n+1} = m \mid X_0 = i, X_1 = j, &hellip;, X_n = k]$$</p>
 <p>However, with Markov chains, we only need to focus on the most recent event.</p>
-$$P[X_{n+1} = m \mid X_n = k]$$
+<p>$$P[X_{n+1} = m \mid X_n = k]$$</p>
 <p>This is a remarkable simplification. We are able to ignore all previous events
 and condition our probability on $X_n$. This greatly simplifies both the
 conceptual understanding of each probability and the number of calculations
@@ -124,13 +124,13 @@ often expressed in terms of their transition probability matrix. We can make
 an example transition matrix, loosely estimated based on my running data from
 last year:
 $$
-\begin{array}{c c} 
-& \begin{array}{c c} 0 & 1 \\ \end{array} \\
-\begin{array}{c c}0\\1 \end{array} &
+\begin{array}{c c}
+&amp; \begin{array}{c c} 0 &amp; 1 \ \end{array} \<br>
+\begin{array}{c c}0\1 \end{array} &amp;
 \left[
 \begin{array}{c c}
-0.05 & 0.95 \\
-0.61 & 0.39 
+0.05 &amp; 0.95 \<br>
+0.61 &amp; 0.39
 \end{array}
 \right]
 \end{array}
@@ -153,11 +153,11 @@ three building that I like: the library, the data science building, and the
 general science building. I&rsquo;ll often choose a building different from the one
 I studied in the day before, and so my one-step transition matrix might
 look something like:
-$$P = 
+$$P =
 \begin{bmatrix}
-0.2 & 0.4 & 0.4 \\
-0.5 & 0 & 0.5 \\
-0.3 & 0.6 & 0.1
+0.2 &amp; 0.4 &amp; 0.4 \<br>
+0.5 &amp; 0 &amp; 0.5 \<br>
+0.3 &amp; 0.6 &amp; 0.1
 \end{bmatrix}
 $$
 where state 0 is the library, state 1 is the data science building, and state 2
@@ -220,10 +220,10 @@ and <a href="https://en.wikipedia.org/wiki/Markov_chain#Applications">many other
 However, it is important not to forget that they are a tool that can be applied
 to whatever we choose, depending on what process we are trying to mode. Even
 when trying to figure out how likely I am to eat ramen tomorrow.</p>
-<div class="footnotes" role="doc-endnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1">
+<li id="fn:1" role="doc-endnote">
 <p>One way to understand what the term <em>stochastic process</em> refers to is
 to break it down word by word. If something is <em>stochastic</em>, it means that it
 is inherently random, and that it can be described by a probability
@@ -231,21 +231,21 @@ distribution. A <em>process</em> occurs over time. Putting those together, you g
 sequence of events that are time-dependent, where each event can be modeled by
 some probability distribution (and represented as a random variable). Because
 each event is time-dependent, future states can be dependent on current and
-past states, allowing one to model the whole system.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+past states, allowing one to model the whole system. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2">
-<p>See <a href="https://en.wikipedia.org/wiki/Examples_of_Markov_chains">here</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:2" role="doc-endnote">
+<p>See <a href="https://en.wikipedia.org/wiki/Examples_of_Markov_chains">here</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3">
+<li id="fn:3" role="doc-endnote">
 <p>Note how each row of the transition matrix sums to 1. This is because of
 the law of total probability: the probability that event $X_n = j$ occurs is
 equal to the sum of probabilities that partition the set. That is,
 $P[X_n = j] = \sum_i P[X_n + 1 = i \mid X_n = j]$. Since we are already in
 state $X_n = j$, $P[X_n = j] = 1$, and
-$P[X_n + 1 = i \mid X_n = j] = P[X_n + 1 = i]$.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+$P[X_n + 1 = i \mid X_n = j] = P[X_n + 1 = i]$. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>
+</section>
 
 		</div>
 
@@ -273,18 +273,9 @@ $P[X_n + 1 = i \mid X_n = j] = P[X_n + 1 = i]$.&#160;<a href="#fnref:3" class="f
 
 
 
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'G-8E86LFMZPL', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
 <script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 	
         <script>
