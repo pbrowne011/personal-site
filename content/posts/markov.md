@@ -90,11 +90,11 @@ an example transition matrix, loosely estimated based on my running data from
 last year:
 $$
 \begin{array}{c c} 
-& \begin{array}{c c} 0 & 1 \\ \end{array} \\
-\begin{array}{c c}0\\1 \end{array} &
+& \begin{array}{c c} 0 & 1 \\\ \end{array} \\\
+\begin{array}{c c}0\\\1 \end{array} &
 \left[
 \begin{array}{c c}
-0.05 & 0.95 \\
+0.05 & 0.95 \\\
 0.61 & 0.39 
 \end{array}
 \right]
@@ -104,7 +104,7 @@ For those less familiar with Markov chains, there are a few things to note about
 this matrix. Each index represents a state. The indices on the left are my state
 from yesterday, and the indices on top are my state today. If I ran yesterday,
 the probability that I don't run today at time $n+1$ is
-$$P[X_{n+1} = 0 \mid X_n = 1] = \left(P^n\right)_{ij} = P_{10} = 0.61$$
+$$P[X_{n+1} = 0 \mid X_n = 1] = \left(P^n\right)&#95;{ij} = P&#95;{10} = 0.61$$
 If I ran yesterday but don't run today, I am transitioning from state 1 (the
 left index) to state 0 (the top index). We can look this up in the matrix and
 obtain this probability. This is especially useful when we want to predict many
@@ -112,16 +112,16 @@ steps in the future, as we can just raise the matrix $P$ to the $n$th power and
 look up the transition probability based on our initial state. The power of
 Markov chains lies in turning complex probability calculations into simpler
 linear algebra problems.[^3]
-- **What building will I study in this afternoon?** The building I will study
-in on a given day is often based on where I studied the day before. I have
-three building that I like: the library, the data science building, and the
-general science building. I'll often choose a building different from the one
-I studied in the day before, and so my one-step transition matrix might
-look something like:
+- **What building will I study in this afternoon?** The building I will study in
+on a given day is often based on where I studied the day before. I have three
+buildings that I enjoy studying in: the library, the data science building, and
+the general science building. I'll often choose a building different from the
+one I studied in the day before, and so my one-step transition matrix might look
+something like:
 $$P = 
 \begin{bmatrix}
-0.2 & 0.4 & 0.4 \\
-0.5 & 0 & 0.5 \\
+0.2 & 0.4 & 0.4\\\
+0.5 & 0 & 0.5\\\
 0.3 & 0.6 & 0.1
 \end{bmatrix}
 $$
