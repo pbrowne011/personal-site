@@ -36,8 +36,9 @@ target: dependencies command For example, suppose I want to automate two differe
       <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
       
       <guid>https://patbrowne.me/about/</guid>
-      <description>My name is Pat Browne. I like to build things, and to understand how they work. This blog is one of the places where I do that.
-I&amp;rsquo;m currently studying computer science and statistics at Boston University. Specific areas that I am interested in include compilers and operating systems, cryptography, machine learning/AI, probability, financial markets, and number theory. You can email me at pjbrowne011 [at] gmail [dot] com.</description>
+      <description>Hi there! My name is Pat Browne.
+I like to build things, and to understand how they work. This blog is one of the places where I do that. I&amp;rsquo;m interested in systems-level programming (OS, embedded), probability, and cryptography. In addition to these subjects, I also enjoy golf, books, and reading other&amp;rsquo;s blogs. I&amp;rsquo;m currently studying statistics and computer science at Boston University, graduating this December.
+To contact, email me at pjbrowne011 [at] gmail [dot] com - I&amp;rsquo;d love to hear from you.</description>
     </item>
     
   </channel>
