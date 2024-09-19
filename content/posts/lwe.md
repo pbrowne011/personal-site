@@ -419,7 +419,11 @@ and [Oded Regev's survey of
 LWE](https://cims.nyu.edu/~regev/papers/lwesurvey.pdf). Others included the
 various papers cited throughout the post and in the footnotes, as well as
 Wikipedia. For foundational crypography concepts, I used Boneh and Shoup's
-[*A Graduate Course in Applied Cryptography*](https://toc.cryptobook.us/).
+[*A Graduate Course in Applied Cryptography*](https://toc.cryptobook.us/) - I
+took no specific definitions from the book, but my education on modern
+cryptographic primitives came from its chapters. I highly recommend if you are
+interested in understanding cryptographpy at more than a surface level. Any
+errors in conveying their definitions and explantions of concepts are mine.
 <!--
 Resources being used to research this post:
 
