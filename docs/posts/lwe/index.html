@@ -7,8 +7,8 @@
 <meta property="og:description" content="Examining a computational hardness assumption in cryptography" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://patbrowne.me/posts/lwe/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-09-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-09-16T00:00:00+00:00" />
+<meta property="article:published_time" content="2024-09-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-19T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Understanding LWE: the learning with errors problem"/>
@@ -71,7 +71,7 @@
 		<div class="post-header">
 			<h1 class="title">Understanding LWE: the learning with errors problem</h1>
 			<div class="meta">
-                           Sep 16, 2024 
+                           Sep 19, 2024 
                           
 			</div>
 		</div>
@@ -296,12 +296,12 @@ e$. Suppose now that, instead of just presenting $c_1 &hellip; c_6$, I instead
 added an error term to each equation, where $e_i \stackrel{R}{\leftarrow}
 \{-1, 0, 1\}$ uniformly at random:</p>
 <p>$$ \begin{aligned}
-14s_1 + 15s_2 + 5s_3 + 2s_4 &amp;= 8  &amp;&amp;(\text{mod} \; 17) \\
-13s_1 + 14s_2 + 14s_3 + 6s_4 &amp;= 16 &amp;&amp;(\text{mod} \; 17)  \\
-6s_1 + 10s_2 + 13s_3 + 1s_4 &amp;= 3 &amp;&amp;(\text{mod} \; 17)  \\
-10s_1 + 4s_2 + 12s_3 + 16s_4 &amp;= 12 &amp;&amp;(\text{mod} \; 17)  \\
-9s_1 + 5s_2 + 9s_3 + 6s_4 &amp;= 9 &amp;&amp;(\text{mod} \; 17)  \\
-3s_1 + 6s_2 + 4s_3 + 5s_4 &amp;= 16 &amp;&amp;(\text{mod} \; 17)  \\
+14s_1 + 15s_2 + 5s_3 + 2s_4 &amp;\approx 8  &amp;&amp;(\text{mod} \; 17) \\
+13s_1 + 14s_2 + 14s_3 + 6s_4 &amp;\approx 16 &amp;&amp;(\text{mod} \; 17)  \\
+6s_1 + 10s_2 + 13s_3 + 1s_4 &amp;\approx 3 &amp;&amp;(\text{mod} \; 17)  \\
+10s_1 + 4s_2 + 12s_3 + 16s_4 &amp;\approx 12 &amp;&amp;(\text{mod} \; 17)  \\
+9s_1 + 5s_2 + 9s_3 + 6s_4 &amp;\approx 9 &amp;&amp;(\text{mod} \; 17)  \\
+3s_1 + 6s_2 + 4s_3 + 5s_4 &amp;\approx 16 &amp;&amp;(\text{mod} \; 17)  \\
 \end{aligned} $$</p>
 <p>We might try our first approach: Gaussian elimination. However, consider that
 each of our equations now has some error to it. The first equation could be
@@ -393,19 +393,21 @@ protocols</a>. Two
 of the protocols, Kyber and Dilithium, both come from the <a href="https://pq-crystals.org/">Cryptographic Suite
 for Algebraic Lattices</a> (CRYSTALS). Both rely on
 variants of the LWE assumption, modular LWE (MLWE).</p>
-<h2 id="resources">Resources</h2>
+<h2 id="references">References</h2>
 <p>There are many excellent resuoreces online. The primary ones I used in this post
 were <a href="https://people.csail.mit.edu/vinodv/CS294/lecturenotes.pdf">Vinod Vaikuntanathan&rsquo;s
 notes</a> on lattices
 and <a href="https://cims.nyu.edu/~regev/papers/lwesurvey.pdf">Oded Regev&rsquo;s survey of
-LWE</a>. Others included the
-various papers cited throughout the post and in the footnotes, as well as
-Wikipedia. For foundational crypography concepts, I used Boneh and Shoup&rsquo;s
-<a href="https://toc.cryptobook.us/"><em>A Graduate Course in Applied Cryptography</em></a> - I
-took no specific definitions from the book, but my education on modern
-cryptographic primitives came from its chapters. I highly recommend if you are
-interested in understanding cryptographpy at more than a surface level. Any
-errors in conveying their definitions and explantions of concepts are mine.</p>
+LWE</a>. For a survey of
+cryptographic assumptions, see <a href="https://eprint.iacr.org/2015/907.pdf">Goldwasser and Kalai&rsquo;s position
+paper</a>. Others included the various papers
+cited throughout the post and in the footnotes, as well as Wikipedia. For
+foundational crypography concepts, I used Boneh and Shoup&rsquo;s <a href="https://toc.cryptobook.us/"><em>A Graduate Course
+in Applied Cryptography</em></a> - I took no specific
+definitions from the book, but my education on modern cryptographic primitives
+came from its chapters. I highly recommend if you are interested in
+understanding cryptographpy at more than a surface level. Any errors in
+conveying their definitions and explantions of concepts are mine.</p>
 <!--
 Resources being used to research this post:
 

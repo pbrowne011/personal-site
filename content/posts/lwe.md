@@ -1,6 +1,6 @@
 +++
 title = "Understanding LWE: the learning with errors problem"
-date = 2024-09-16T00:00:00Z
+date = 2024-09-19T00:00:00Z
 draft = false
 author = "Pat"
 description = "Examining a computational hardness assumption in cryptography"
@@ -16,7 +16,7 @@ slug = ""
 type = "post"
 
 # if you want to display modification date
-# lastmod = 2024-03-01T00:00:00Z
+# lastmod = 2024-09-20T00:00:00Z
 
 # redirect old URLs to new URL for post
 aliases = []
@@ -296,12 +296,12 @@ added an error term to each equation, where $e\_i \stackrel{R}{\leftarrow}
 \\{-1, 0, 1\\}$ uniformly at random:
 
 $$ \begin{aligned}
-14s\_1 + 15s\_2 + 5s\_3 + 2s\_4 &= 8  &&(\text{mod} \\; 17) \\\
-13s\_1 + 14s\_2 + 14s\_3 + 6s\_4 &= 16 &&(\text{mod} \\; 17)  \\\
-6s\_1 + 10s\_2 + 13s\_3 + 1s\_4 &= 3 &&(\text{mod} \\; 17)  \\\
-10s\_1 + 4s\_2 + 12s\_3 + 16s\_4 &= 12 &&(\text{mod} \\; 17)  \\\
-9s\_1 + 5s\_2 + 9s\_3 + 6s\_4 &= 9 &&(\text{mod} \\; 17)  \\\
-3s\_1 + 6s\_2 + 4s\_3 + 5s\_4 &= 16 &&(\text{mod} \\; 17)  \\\
+14s\_1 + 15s\_2 + 5s\_3 + 2s\_4 &\approx 8  &&(\text{mod} \\; 17) \\\
+13s\_1 + 14s\_2 + 14s\_3 + 6s\_4 &\approx 16 &&(\text{mod} \\; 17)  \\\
+6s\_1 + 10s\_2 + 13s\_3 + 1s\_4 &\approx 3 &&(\text{mod} \\; 17)  \\\
+10s\_1 + 4s\_2 + 12s\_3 + 16s\_4 &\approx 12 &&(\text{mod} \\; 17)  \\\
+9s\_1 + 5s\_2 + 9s\_3 + 6s\_4 &\approx 9 &&(\text{mod} \\; 17)  \\\
+3s\_1 + 6s\_2 + 4s\_3 + 5s\_4 &\approx 16 &&(\text{mod} \\; 17)  \\\
 \end{aligned} $$
 
 We might try our first approach: Gaussian elimination. However, consider that
@@ -410,20 +410,22 @@ of the protocols, Kyber and Dilithium, both come from the [Cryptographic Suite
 for Algebraic Lattices](https://pq-crystals.org/) (CRYSTALS). Both rely on
 variants of the LWE assumption, modular LWE (MLWE).
 
-## Resources
+## References
 
 There are many excellent resuoreces online. The primary ones I used in this post
 were [Vinod Vaikuntanathan's
 notes](https://people.csail.mit.edu/vinodv/CS294/lecturenotes.pdf) on lattices
 and [Oded Regev's survey of
-LWE](https://cims.nyu.edu/~regev/papers/lwesurvey.pdf). Others included the
-various papers cited throughout the post and in the footnotes, as well as
-Wikipedia. For foundational crypography concepts, I used Boneh and Shoup's
-[*A Graduate Course in Applied Cryptography*](https://toc.cryptobook.us/) - I
-took no specific definitions from the book, but my education on modern
-cryptographic primitives came from its chapters. I highly recommend if you are
-interested in understanding cryptographpy at more than a surface level. Any
-errors in conveying their definitions and explantions of concepts are mine.
+LWE](https://cims.nyu.edu/~regev/papers/lwesurvey.pdf). For a survey of
+cryptographic assumptions, see [Goldwasser and Kalai's position
+paper](https://eprint.iacr.org/2015/907.pdf). Others included the various papers
+cited throughout the post and in the footnotes, as well as Wikipedia. For
+foundational crypography concepts, I used Boneh and Shoup's [*A Graduate Course
+in Applied Cryptography*](https://toc.cryptobook.us/) - I took no specific
+definitions from the book, but my education on modern cryptographic primitives
+came from its chapters. I highly recommend if you are interested in
+understanding cryptographpy at more than a surface level. Any errors in
+conveying their definitions and explantions of concepts are mine.
 <!--
 Resources being used to research this post:
 
