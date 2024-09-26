@@ -1,5 +1,5 @@
 +++
-title = "Understanding LWE: the learning with errors problem"
+title = "Understanding learning with errors"
 date = 2024-09-19T00:00:00Z
 draft = false
 author = "Pat"

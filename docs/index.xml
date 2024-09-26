@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 19 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://patbrowne.me/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Understanding LWE: the learning with errors problem</title>
+      <title>Understanding learning with errors</title>
       <link>https://patbrowne.me/posts/lwe/</link>
       <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
       
@@ -47,9 +47,9 @@ target: dependencies command For example, suppose I want to automate two differe
       <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
       
       <guid>https://patbrowne.me/about/</guid>
-      <description>Hi there! My name is Pat Browne.
-I like to build things, and to understand how they work. This blog is one of the places where I do that. I&amp;rsquo;m interested in systems-level programming (OS, embedded), probability, and cryptography. In addition to these subjects, I also enjoy golf, books, and reading other&amp;rsquo;s blogs. I&amp;rsquo;m currently studying statistics and computer science at Boston University, graduating this December.
-To contact, email me at pjbrowne011 [at] gmail [dot] com - I&amp;rsquo;d love to hear from you.</description>
+      <description>Hi, I&amp;rsquo;m Patrick.
+I like to build things, and to understand how stuff works. I&amp;rsquo;m interested in systems-level programming (OS, embedded), probability, and cryptography. I also enjoy golf, books, and reading other&amp;rsquo;s blogs. I&amp;rsquo;m currently studying statistics and computer science at Boston University, graduating this December.
+Email me at pjbrowne011 [at] gmail [dot] com - I&amp;rsquo;m always interested in meeting new people.</description>
     </item>
     
   </channel>
