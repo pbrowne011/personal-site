@@ -36,14 +36,15 @@ toc = false
 
 When I was first learning how to write a Makefile to compile a C program, one
 thing that stuck me (and almost everyone who encounters it) as odd was the
-requirement that each command line start with a tab character ('\t'). Makefiles
-are used to automate repetitive tasks (such as recompiling a C/C++ program), and
-have a unique syntax. They are made up of rules, which consist of a "target", a
-list of "dependencies", and a series of "commands". They look like this:
+requirement that each command line start with a tab character
+(`'\t'`). Makefiles are used to automate repetitive tasks (such as recompiling a
+C/C++ program), and have a unique syntax. They are made up of rules, which
+consist of a "target", a list of "dependencies", and a series of
+"commands". They look like this:
 
 ```
 target: dependencies
-	command
+        command
 ```
 
 For example, suppose I want to automate two different tasks: recompiling my 
@@ -54,10 +55,10 @@ files after editing them. I could write a Makefile that looks like this:
 .PHONY: clean
 
 myprogram: myprogram.c
-	gcc myprogram.c -o myprogram
+        gcc myprogram.c -o myprogram
 	
 clean:
-	rm *.o *~ myprogram
+        rm *.o *~ myprogram
 ```
 
 The .PHONY makes sure that when I run the shell command `make clean`, I don't
@@ -80,7 +81,7 @@ including
 Stuart explained that `make` was written in a weekend. To tokenize Makefiles, he
 was using [lex](https://en.wikipedia.org/wiki/Lex_(software)), which was in
 its first version at the time. He got frustrated with trying to write a pattern
-for commands, and instead used a fixed patter (`'\t'`) to indicate rules. After
+for commands, and instead used a fixed pattern (`'\t'`) to indicate rules. After
 a while, about a dozen people at Bell Labs were using `make`. He didn't want to
 disrupt his users, and so left the "tab in column 1" rule in the UNIX command to
 preserve backwards compatibility.
