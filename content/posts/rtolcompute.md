@@ -3,7 +3,7 @@ title = "Right to left computability"
 date = 2024-10-02T00:00:00Z
 draft = false
 author = "Pat"
-description = "Exploring notions of computability"
+description = "Exploring parallelizable bit tricks"
 tags = ["draft", "computability", "boolean-logic", "bit-tricks",
 "hackers-delight"]
 categories = []
