@@ -78,8 +78,9 @@
 
 		<div class="markdown">
 			<h3 id="manipulating-bits">Manipulating bits</h3>
-<p>Recently I&rsquo;ve been going through Hacker&rsquo;s Delight. It is a joy to become a
-&ldquo;bit-twiddler&rdquo; and explore some of the counter intuitive properties of using
+<p>Recently I&rsquo;ve been going through <a href="https://en.wikipedia.org/wiki/Hacker's_Delight">Hacker&rsquo;s
+Delight</a>. It is a joy to become
+a &ldquo;bit-twiddler&rdquo; and explore some of the counter intuitive properties of using
 bit wise operations in places you wouldn&rsquo;t expect them.</p>
 <p>Chapter 2 focuses on &ldquo;Basics&rdquo;, and covers bit manipulation tricks that perform
 specific operations. It assumes a 32-bit machine (and word size), with signed
@@ -115,9 +116,9 @@ complement arithmetic.</p>
 <h3 id="moving-right-to-left">Moving right to left</h3>
 <p>In 1977, Henry Warren (the author of Hacker&rsquo;s Delight) <a href="https://dl.acm.org/doi/abs/10.1145/359605.359632">published a short
 paper</a> in an attempt to
-generalize these sorts of bit twiddling tricks. He gave a theorem on whether or
-not one can use a coding trick of this class for a given function that they want
-to optimize. The theorem, as stated in the book (pg. 13), is:</p>
+generalize these sorts of bit twiddling tricks. He proved a theorem on whether
+or not one can use a coding trick of this class for a given function that they
+want to optimize. The theorem, as stated in the book (pg. 13), is:</p>
 <blockquote>
 <p>THEOREM. A function mapping words to words can be implemented with
 word-parallel add, subtract, and, or, and not instructions if and only if
@@ -127,7 +128,8 @@ operand.</p>
 <p>This introduces the concept of <strong>right-to-left computability</strong>: if output bits
 depend only input operand bits that are located either in the same position or
 to the right (lower order bits), the function can be optimized with these bit
-tricks.</p>
+tricks by rewriting it in terms of the five functions that are mentioned,
+providing the benefits described above.</p>
 <p>An example function is then provided to demonstrate what this means. Consider
 the following operations to compute the third bit of the output ($r_2$):</p>
 <p>$$r_2 = x_2 \mid (x_0 \; \&amp; \; y_1)$$</p>
@@ -220,7 +222,7 @@ infinitely repeating values? Again, there is no obvious solution.</p>
 branching instructions and 2) secondary registers to track sign. The first is
 dismissed in the blog post as &ldquo;a pretty big hack&rdquo;. Hypothetically, it could
 limit what the language recognizes as valid, but it allows for branching in some
-form, which permints Turing completeness (conjectured without proof here). The
+form, which permits Turing completeness (conjectured without proof here). The
 second solution works in the case of &ldquo;rational&rdquo; registers, but not in the case
 of infinitely repeating registers.</p>
 <p>In either case, it is interesting to consider how deviating from the setup of

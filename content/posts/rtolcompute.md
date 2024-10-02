@@ -37,8 +37,9 @@ toc = false
 
 ### Manipulating bits
 
-Recently I've been going through Hacker's Delight. It is a joy to become a
-"bit-twiddler" and explore some of the counter intuitive properties of using
+Recently I've been going through [Hacker's
+Delight](https://en.wikipedia.org/wiki/Hacker's_Delight). It is a joy to become
+a "bit-twiddler" and explore some of the counter intuitive properties of using
 bit wise operations in places you wouldn't expect them.
 
 Chapter 2 focuses on "Basics", and covers bit manipulation tricks that perform
@@ -79,9 +80,9 @@ complement arithmetic.
 
 In 1977, Henry Warren (the author of Hacker's Delight) [published a short
 paper](https://dl.acm.org/doi/abs/10.1145/359605.359632) in an attempt to
-generalize these sorts of bit twiddling tricks. He gave a theorem on whether or
-not one can use a coding trick of this class for a given function that they want
-to optimize. The theorem, as stated in the book (pg. 13), is:
+generalize these sorts of bit twiddling tricks. He proved a theorem on whether
+or not one can use a coding trick of this class for a given function that they
+want to optimize. The theorem, as stated in the book (pg. 13), is:
 
 > THEOREM. A function mapping words to words can be implemented with
 > word-parallel add, subtract, and, or, and not instructions if and only if
@@ -91,7 +92,8 @@ to optimize. The theorem, as stated in the book (pg. 13), is:
 This introduces the concept of **right-to-left computability**: if output bits
 depend only input operand bits that are located either in the same position or
 to the right (lower order bits), the function can be optimized with these bit
-tricks.
+tricks by rewriting it in terms of the five functions that are mentioned,
+providing the benefits described above.
 
 An example function is then provided to demonstrate what this means. Consider
 the following operations to compute the third bit of the output ($r\_2$):
@@ -207,7 +209,7 @@ Two that come to mind for me are 1) fixed size comparison and conditional
 branching instructions and 2) secondary registers to track sign. The first is
 dismissed in the blog post as "a pretty big hack". Hypothetically, it could
 limit what the language recognizes as valid, but it allows for branching in some
-form, which permints Turing completeness (conjectured without proof here). The
+form, which permits Turing completeness (conjectured without proof here). The
 second solution works in the case of "rational" registers, but not in the case
 of infinitely repeating registers.
 
