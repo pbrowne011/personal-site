@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Right to left computability | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Right to left computability" />
+<meta property="og:description" content="Exploring notions of computability" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patbrowne.me/posts/rtolcompute/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-02T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Right to left computability"/>
+<meta name="twitter:description" content="Exploring notions of computability"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.me/css/main.css" /><link rel="stylesheet" type="text/css" href="https://patbrowne.me/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://patbrowne.me/js/main.js"></script>
+
+	
+	<script>
+	  MathJax = {
+              tex: {
+                  inlineMath: [['\\(', '\\)'], ['$', '$']],
+                  displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                  packages: {'[+]': ['ams', 'noerrors']}
+              },
+              loader: {load: ['[tex]/ams', '[tex]/noerrors']},
+              svg: {
+                  fontCache: 'global'
+              }
+          };
+	</script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://patbrowne.me/">
+	<h1 class="site-title"><a href="https://patbrowne.me/">Pat Browne</a></h1>
+	<div class="site-description"><h2></h2><nav class="nav social">
+			<ul class="flat"><a href="mailto:pjbrowne011@gmail.com" title="Email"><i data-feather="mail"></i></a><a href="https://github.com/pbrowne011/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Right to left computability</h1>
+			<div class="meta">
+                           Oct 2, 2024 
+                          
+			</div>
+		</div>
+
+		<div class="markdown">
+			<h3 id="manipulating-bits">Manipulating bits</h3>
+<p>Recently I&rsquo;ve been going through Hacker&rsquo;s Delight. It is a joy to become a
+&ldquo;bit-twiddler&rdquo; and explore some of the counter intuitive properties of using
+bit wise operations in places you wouldn&rsquo;t expect them.</p>
+<p>Chapter 2 focuses on &ldquo;Basics&rdquo;, and covers bit manipulation tricks that perform
+specific operations. It assumes a 32-bit machine (and word size), with signed
+values represented in two&rsquo;s complement form. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Some tricks presented include:</p>
+<ul>
+<li>$x \; \&amp; \; (x - 1)$: turn off the rightmost bit in a word</li>
+<li>$x \; \&amp; \; (x + 1)$: turn off the trailing 1&rsquo;s in a word</li>
+<li>$\neg x \; \&amp; \; (x + 1)$: create a word with a single 1-bit at the position of the
+rightmost 0-bit</li>
+<li>$x \; \&amp; \; (-x)$: isolate the rightmost 1-bit, produce 0 if none</li>
+</ul>
+<p>Note that these hacks are much more useful than they might appear. The first
+trick can be used to great effect to count set bits and calculate powers of two,
+as demonstrated in Brian Kernighan&rsquo;s algorithm<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">unsigned int v; // count the number of bits set in v
+unsigned int c; // c accumulates the total bits set in v
+for (c = 0; v; c++)
+{
+  v &amp;= v - 1; // clear the least significant bit set
+}
+</code></pre></div><p>These bit wise operations allow for implementations of functions that are
+branch-free and do not require shift instructions, saving valuable CPU
+cycles. Additionally, they allow for word-parallelism: if a bit&rsquo;s value only
+depends on bits to its right, one can optimize by executing single instructions
+on multiple data, or
+<a href="https://en.wikipedia.org/wiki/Single_instruction,_multiple_data">SIMDs</a>.</p>
+<p>One condition of these optimizations is that they cannot depend on overflow. For
+example, if performing a SIMD addition on multiple words, carries must be
+irrelevant to the operation - if they are important, then higher-order word bits
+depend on lower-order word operations and carry bits, and the addition becomes a
+sequential computation. Another condition is that the machine must use two&rsquo;s
+complement arithmetic.</p>
+<h3 id="moving-right-to-left">Moving right to left</h3>
+<p>In 1977, Henry Warren (the author of Hacker&rsquo;s Delight) <a href="https://dl.acm.org/doi/abs/10.1145/359605.359632">published a short
+paper</a> in an attempt to
+generalize these sorts of bit twiddling tricks. He gave a theorem on whether or
+not one can use a coding trick of this class for a given function that they want
+to optimize. The theorem, as stated in the book (pg. 13), is:</p>
+<blockquote>
+<p>THEOREM. A function mapping words to words can be implemented with
+word-parallel add, subtract, and, or, and not instructions if and only if
+each bit of the result depends only on bits at and to the right of each input
+operand.</p>
+</blockquote>
+<p>This introduces the concept of <strong>right-to-left computability</strong>: if output bits
+depend only input operand bits that are located either in the same position or
+to the right (lower order bits), the function can be optimized with these bit
+tricks.</p>
+<p>An example function is then provided to demonstrate what this means. Consider
+the following operations to compute the third bit of the output ($r_2$):</p>
+<p>$$r_2 = x_2 \mid (x_0 \; \&amp; \; y_1)$$</p>
+<p>From this, it is clear to see that the output bit $r_2$ does not rely on any
+input bit $x_i$ or $y_i$ where $i &gt; 2$. Since it depends only on the bit wise
+operations <code>AND</code> and <code>OR</code>, the function to calculate $r_2$ is right-to-left
+computable. Further examples that are right-to-left computable include
+multiplication (a constant number of additions), as well as other Boolean
+operations (<code>XOR</code>, <code>NAND</code>, etc.).</p>
+<p>An example of a function that is not right-to-left computable is something like
+$\operatorname{signum}$.</p>
+<p>$$
+\operatorname{signum}(x) = \left\lbrace\begin{array}{rcl}
+-1, &amp; x &lt; 0 \\
+0, &amp; x = 0 \\
+1, &amp; x &gt; 0 \\
+\end{array}\right.
+$$</p>
+<p>$\operatorname{signum}$ takes a word as input and outputs the sign of that
+word: $1$ if positive, $-1$ if negative, and $0$ otherwise. Almost all bits of
+the output depend on the leftmost bit of the input. (The exception is the
+leftmost bit $r_0$, which depends only on itself - it is $1$ for both <code>0x1</code> and
+<code>0xff..ff</code>, and $0$ for <code>0x0</code>. The next bit $r_1$ depends on the leftmost bit.)</p>
+<p>Another function described in the book is <code>&gt;&gt;</code>, right shift: you can&rsquo;t determine
+an output bit $r_i$ of a right shift $n$ places without knowing the input bit
+to the left of it $(x_{i+n})$.</p>
+<h3 id="a-fun-problem">A fun problem</h3>
+<p>The book mentions several other functions that are not right-to-left computable
+without further explanation. One of them is left shift by a variable
+amount. The intuition is that the variable amount depends on either the whole
+input or some subset of it, which necessarily includes bits to the right of your
+output bit. Exercise 2 for the chapter challenges this claim. Courtesy of
+Donald Knuth<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
+<p>$$ x &lt;&lt; (x \; \&amp; \; 1) $$</p>
+<p>This expression is equivalent to:</p>
+<p>$$ x + (x \; \&amp; \; (-(x \; \&amp; \; 1))) $$</p>
+<p>The question is: how is this possible? We have an apparent contradiction. Left
+shift by a variable amount is not right-to-left computable, but above we have a
+variable left shift expressed in terms of <code>AND</code>, <code>-</code>, and <code>+</code>, which implies
+that it is right-to-left computable.</p>
+<p>Consider the amount we are shifting left by. We shift left by either 0 or 1
+bits, depending on the value of $x_0$. Hence, the value of each output bit
+$r_i$ depends on $x_0$, $x_i$, and $x_{i-1}$. We are shifting left by a
+variable amount, but that amount depends on the rightmost bit $x_0$, not any
+other bit in the input.</p>
+<p>On the other hand, the expression $x &lt;&lt; (x \; \&amp; \; 2)$ is not expressible
+as a right-to-left computation, as the output bit $r_0$ depends on the input
+bit $r_1$.</p>
+<h3 id="infinite-bit-registers">Infinite-bit registers</h3>
+<p>Richard Allen has a blog post, <a href="https://rsaxvc.net/blog/2020/11/21/Right_to_Left_Computability.html">Right to Left
+Computability</a>
+(archived
+<a href="https://web.archive.org/web/20241002103622/https://rsaxvc.net/blog/2020/11/21/Right_to_Left_Computability.html">here</a>),
+that explores this theorem further. In the latter half of the post (&ldquo;A
+hypothetical machine&rdquo;), he explores a hypothetical infinite-bit
+machine. The machine has registers and instructions. The registers are capable
+of storing an infinite number of bits. The instructions are all right-to-left
+computable, and are based on the five instructions allowed by Warren: <code>AND</code>,
+<code>OR</code>, <code>NOT</code>, <code>+</code>, and <code>-</code>.</p>
+<p>The construction, since it is not a two&rsquo;s complement machine (infinite
+bit strings), is subtly different from the one used as the basis of Hacker&rsquo;s
+Delight. For instance, what happens when one performs <code>0 - 1</code>? In this hypothetical
+world, since we are dealing with infinite bit string registers, it makes sense to
+consider what happens when we decrement a number. To perform this operation
+right-to-left, you flip each zero bit you find until you get to a non-zero bit,
+which you make zero.</p>
+<p>In two&rsquo;s complement format, every bit is flipped. On a 32-bit register, this
+results in the word <code>0xffffffff</code>, which is $-1$ in two&rsquo;s complement form.  With
+infinite registers, the same applies, assuming we are able to flip all of the
+infinite bits in <code>0</code>. However, you will never know the sign of a number, as
+you&rsquo;ll never be able to read its last bit (it is infinite).</p>
+<h3 id="turing-completeness">Turing completeness</h3>
+<p>However, I had trouble understanding why such a machine was not Turing complete,
+as the author claimed. To be a Turing-complete machine, this hypothetical
+infinite-bit machine must be able to emulate an arbitrary Turing machine. As
+stated
+<a href="https://www.cs.odu.edu/~zeil/cs390/latest/Public/turing-complete/index.html">here</a>
+and
+<a href="https://langdev.stackexchange.com/questions/32/how-can-i-check-if-a-new-language-is-turing-complete">elsewhere</a>,
+a heuristic for Turing completeness is to try to implement <code>if</code> and <code>while</code>
+loops with your language. For this hypothetical machine, we require some form of
+branching to implement this.</p>
+<p>General branching is not possible with infinite registers. Consider (as Allen
+does) the instruction branch-if-greater-than (<code>JA</code> on x86). This requires a
+comparison of two operands to determine which is greater. With positive values,
+this is feasible, but what about negative values? Here, one would have to read
+the entire value of the negative register, which is not feasible. What about
+infinitely repeating values? Again, there is no obvious solution.</p>
+<p>Two that come to mind for me are 1) fixed size comparison and conditional
+branching instructions and 2) secondary registers to track sign. The first is
+dismissed in the blog post as &ldquo;a pretty big hack&rdquo;. Hypothetically, it could
+limit what the language recognizes as valid, but it allows for branching in some
+form, which permints Turing completeness (conjectured without proof here). The
+second solution works in the case of &ldquo;rational&rdquo; registers, but not in the case
+of infinitely repeating registers.</p>
+<p>In either case, it is interesting to consider how deviating from the setup of
+Hacker&rsquo;s Delight changes the model of computation. Many of the tricks I&rsquo;ve read
+so far rely on either fixed word size or two&rsquo;s complement representation (or
+both) to be effective, which makes sense today given these are defaults in
+modern computers.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>For resources on two&rsquo;s complement, there are many - search the Internet
+far and wide! Three that I&rsquo;ve found helpful are <a href="https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html">Thomas Finley&rsquo;s
+introduction</a>,
+<a href="https://neugierig.org/software/blog/2023/06/twos-complement.html">Evan Martin&rsquo;s quick
+note</a>, and
+JF Bastien&rsquo;s <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0907r0.html">standards proposal for
+C++20</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetKernighan">See the original
+source</a>
+for the code, details, and other implementations of counting bits. Sean
+Anderson&rsquo;s page is another wonderful resource for bit twiddling. Note that
+Knuth points out that the method was first published in 1960 by Peter
+Wegner, and later (independently) by Derrick Lehmer - before K&amp;R used it in
+the second edition of &ldquo;The C Programming Language&rdquo; in 1988.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Knuth has a habit of finding his way into many textbooks and stories. To
+some degree, &ldquo;all roads lead to Knuth&rdquo; when it comes to computer
+science. Some recent examples off the top of my head:</p>
+<ul>
+<li>In the book &ldquo;A Book on C&rdquo;, by Kelley and Pohl, Knuth suggests to the
+authors an algorithm (exercise 1.15) that presents a better way to compute
+an average of a sum. Sadly, the exercise does not ask to explain why this
+method is better, only why it is correct. For the explanation, <a href="https://nullbuffer.com/articles/welford_algorithm.html">read this
+post</a>.</li>
+<li>In <a href="https://corecursive.com/066-sqlite-with-richard-hipp/#b-trees-and-the-art-of-computer-programming">an interview on
+CoReview</a>
+from 2021, Richard Hipp mentions that when he implemented B trees in
+SQLite, he looked to Knuth&rsquo;s TAOCP to learn and implement the
+algorithm. To use the algorithm for deleting a B tree, he had to solve the
+exercise at the end of the chapter (sourced from <a href="https://news.ycombinator.com/item?id=38444870">this HN
+comment</a>).</li>
+<li>When talking with one of my cryptography professors in office hours, he
+mentioned looking for an algorithm he needed to prove something in his
+PhD thesis. He asked around, but eventually went to TAOCP&hellip; where, sure
+enough, Knuth had presented details on the algorithm and its analysis.</li>
+</ul>
+&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+</ol>
+</section>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/draft">draft</a></li>
+								
+								<li><a href="/tags/computability">computability</a></li>
+								
+								<li><a href="/tags/boolean-logic">boolean-logic</a></li>
+								
+								<li><a href="/tags/bit-tricks">bit-tricks</a></li>
+								
+								<li><a href="/tags/hackers-delight">hackers-delight</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+	
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  var newHref = window.location.pathname + href;
+                  link.setAttribute('href', newHref);
+              });
+          });
+        </script>
+</body>
+</html>
