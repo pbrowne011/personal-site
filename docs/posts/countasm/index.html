@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Counting assembly instructions | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Counting assembly instructions" />
+<meta property="og:description" content="Writing shell scripts to count assembly mnemonics" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patbrowne.me/posts/countasm/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-07T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Counting assembly instructions"/>
+<meta name="twitter:description" content="Writing shell scripts to count assembly mnemonics"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.me/css/main.css" /><link rel="stylesheet" type="text/css" href="https://patbrowne.me/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://patbrowne.me/js/main.js"></script>
+
+	
+	<script>
+	  MathJax = {
+              tex: {
+                  inlineMath: [['\\(', '\\)'], ['$', '$']],
+                  displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                  packages: {'[+]': ['ams', 'noerrors']}
+              },
+              loader: {load: ['[tex]/ams', '[tex]/noerrors']},
+              svg: {
+                  fontCache: 'global'
+              }
+          };
+	</script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://patbrowne.me/">
+	<h1 class="site-title"><a href="https://patbrowne.me/">Pat Browne</a></h1>
+	<div class="site-description"><h2></h2><nav class="nav social">
+			<ul class="flat"><a href="mailto:pjbrowne011@gmail.com" title="Email"><i data-feather="mail"></i></a><a href="https://github.com/pbrowne011/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Counting assembly instructions</h1>
+			<div class="meta">
+                           Oct 7, 2024 
+                          
+			</div>
+		</div>
+
+		<div class="markdown">
+			<p>As someone who may or may not procrastinate, I find myself <a href="https://projects.csail.mit.edu/gsb/old-archive/gsb-archive/gsb2000-02-11.html">shaving
+yaks</a>
+occasionally. One such yak shave occurred recently while working on a project
+for my operating systems class. We were provided with an assembly file written
+in x86 GNU assembly syntax. I wondered if the file contained any instructions I
+wasn&rsquo;t familiar with or hadn&rsquo;t used in awhile. My first task was to figure out
+all of these unique assembly instructions, look them up in the Intel manual, and
+use them (plus 1-2 others) for the code I was going to write.</p>
+<p>The assembly file itself was ~200 lines of code, so it was not unthinkable to
+count them by hand, determine what the unknown instructions were, and look those
+up.</p>
+<img src="../img/bash.png" height="40" alt="Image description">
+<p>Just kidding! I needed to <a href="https://xkcd.com/1445/">be efficient</a> and
+decisive. Since I perform this task yearly (?), I also judged if <a href="https://xkcd.com/1205/">it was worth
+the time to make this task more efficient</a>. My
+calculations were influenced by procrastination, so naturally the answer was
+<strong>&ldquo;yes - I must write a bash script to do this&rdquo;</strong>.</p>
+<h3 id="first-try">First try</h3>
+<p>My first attempt at a shell script looked like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#719e07">#!/bin/bash
+</span><span style="color:#719e07"></span>
+<span style="color:#586e75"># count_mnemonics.sh</span>
+<span style="color:#586e75">#</span>
+<span style="color:#586e75"># This script counts the number of unique assembly mnemonics</span>
+<span style="color:#586e75"># in an assembly file. Assumes a tab character before every</span>
+<span style="color:#586e75"># assembly instruction</span>
+
+<span style="color:#268bd2">asfile</span><span style="color:#719e07">=</span><span style="color:#268bd2">$1</span>
+
+<span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#268bd2">$asfile</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Error: please provide an assembly file&#34;</span> 2&gt;&amp;<span style="color:#2aa198">1</span>
+    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
+<span style="color:#719e07">fi</span>
+
+touch tmp
+
+<span style="color:#268bd2">IFS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>
+<span style="color:#719e07">while</span> <span style="color:#b58900">read</span> -r line; <span style="color:#719e07">do</span>
+    <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#268bd2">$line</span> <span style="color:#719e07">==</span> *<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#719e07">[[</span>:alpha:<span style="color:#719e07">]]</span>* <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+        <span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+        <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>%% *<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> &gt;&gt; tmp
+    <span style="color:#719e07">fi</span>
+<span style="color:#719e07">done</span> &lt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asfile</span><span style="color:#2aa198">&#34;</span>
+
+sort tmp | uniq -c | sort -rn
+rm tmp
+</code></pre></div><p>The provided assembly file had a tab character in front of each mnemonic, which
+reduced the job of finding instructions to finding <code>0x09</code> bytes. Some
+positives:</p>
+<ul>
+<li><strong>I finally used <code>read</code> properly.</strong> I&rsquo;ve always followed the pattern of
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$file</span><span style="color:#2aa198">&#34;</span> | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> line; <span style="color:#719e07">do</span>
+    <span style="color:#586e75"># perform line operations</span>
+<span style="color:#719e07">done</span>
+</code></pre></div>but <code>shellcheck</code> informed me that <code>cat</code> was unnecessary. I&rsquo;d run into this a
+few times before, but I could never find the <code>man</code> page for the <code>read</code>
+command in my bash shell (not even using <code>man 1p</code>!). Little did I know that
+<a href="https://stackoverflow.com/questions/70746111/why-does-read-not-have-a-normal-man-page">bash doesn&rsquo;t have man pages for builtin
+commands</a>&hellip; and
+<code>read</code> is a builtin command for bash. Anyway, I found <a href="https://ss64.com/bash/read.html">the example that I
+needed</a>, and redirected the assembly
+file at the bottom of the while loop. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li><strong>The <code>sort</code>/<code>uniq</code> pattern.</strong> I haven&rsquo;t used this in a script before for
+whatever reason, but <a href="https://www.twoscomplement.org/podcast/unix_commands_for_wizards.txt">listening to Matt Godbolt and Ben Rady talk about the
+pattern on their
+podcast</a>
+made this an easy one-line addition to the script.</li>
+</ul>
+<p>The script got the job done and produced output that looked like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     30 movw
+     11 int
+      6 movb
+      6 inb
+      6 call
+      5 pushw
+      5 popw
+      5 outb
+      5 incw
+      4 loop
+      4 incb
+      4 decw
+      4 addb
+      3 xorb
+      3 jmp
+      2 jge
+      2 cmpb
+      1 xorw
+      1 shrb
+      1 ret
+      1 andb
+</code></pre></div><p>My script works. My task is complete. Or is it?</p>
+<p>Though it may pass <code>shellcheck</code>, there are some things one could improve upon in
+this simple script. Some of the more glaring ones that I noticed were:</p>
+<ul>
+<li><strong>Creating the file <code>tmp</code>.</strong> I wrote and ran this script in a relatively clean
+directory that I controlled. If I want to make this more portable, I need to
+consider the possibility that <code>tmp</code> exists in the same directory as whatever
+the script is being run in. What if I&rsquo;m running in the root directory (where
+<code>/tmp</code> exists)? My script doesn&rsquo;t even check if this file exists! What if
+appending to a file with data?!</li>
+<li><strong>There are tools for string parsing.</strong> Several that come to mind are <code>cut</code>,
+<code>sed</code>, <code>awk</code>, and <code>perl</code>. You can do an incredible amount of text manipulation
+and string parsing with <code>bash</code>, but if you&rsquo;re not careful it is quite easy to
+shoot yourself in the foot. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<h2 id="replacing-tmp-with-">Replacing <code>tmp</code> with <code>|</code></h2>
+<p>If we want to follow The Unix Way™ in avoiding the creation of <code>tmp</code>, one tool
+we might consider using is the humble pipe. The <a href="https://emulator.pdp-11.org.ru/misc/1978.07_-_Bell_System_Technical_Journal.pdf">second tenet of the Unix
+philosophy</a>
+(as documented by Doug McIlroy) is:</p>
+<blockquote>
+<ol start="2">
+<li>Expect the output of every program to become the input to another, as yet
+unknown, program. Don’t clutter output with extraneous information. Avoid
+stringently columnar or binary input formats. Don’t insist on interactive
+input.</li>
+</ol>
+</blockquote>
+<p>A pipe is a form of inter process communication (IPC) that is as old as Unix
+itself. Data flows in one direction, uniting the standard output of one command
+to the standard input of the next. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> Pipes are the load-bearing feature of a
+Unix-based OS that implements this aspect of the philosophy. We can avoid
+&ldquo;clutter[ing] output with extraneous information&rdquo; by not adding another named
+file to the filesystem that might interfere with our operation.</p>
+<p>In the first iteration, pipes are used to unite the last set of <code>sort</code>/<code>uniq</code>
+commands, but they don&rsquo;t connect them with the string parsing. We can reorder
+our commands to redirect output from the while loop into our output sequence.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#268bd2">IFS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>
+<span style="color:#719e07">while</span> <span style="color:#b58900">read</span> -r line; <span style="color:#719e07">do</span>
+    <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#268bd2">$line</span> <span style="color:#719e07">==</span> *<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#719e07">[[</span>:alpha:<span style="color:#719e07">]]</span>* <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+        <span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+        <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>%% *<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+    <span style="color:#719e07">fi</span>
+<span style="color:#719e07">done</span> &lt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asfile</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
+</code></pre></div><h2 id="cut-and-awk-and-sed-and-perl"><code>cut</code> and <code>awk</code> and <code>sed</code> and <code>perl</code></h2>
+<p>Currently, we use bash builtins such as the <code>test</code> command (<code>[[ ]]</code>) and string
+replacement (<code>${variable##substr}</code>) when parsing each line of the assembly file,
+as well as a full <code>while</code> loop with the <code>read</code> command. What if there was a
+different way? <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="cut"><code>cut</code></h3>
+<p>The <code>cut</code> command allows one to extract text from input lines based on different
+arguments that we specify. We can choose to extract (<code>f</code>)ields, (<code>b</code>)ytes, or
+(<code>c</code>)haracters - either a single instance, or a range (or ranges). <code>cut</code> is
+extremely effective when working with well-structured files, such as .csv
+(comma-separated values) files, lists of path names, or tab-separated data.</p>
+<p>In our case, we want to select lines that have the pattern of a tab character
+followed by a mnemonic, followed by a space. These may be of different lengths,
+so the command will use fields. To do this with cut, we can use the command</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cut -f <span style="color:#2aa198">2</span> asfile.s -s | cut -f <span style="color:#2aa198">1</span> -d <span style="color:#2aa198">&#39; &#39;</span> -s | grep -v  <span style="color:#2aa198">&#39;\..*&#39;</span>
+</code></pre></div><p>The first <code>cut</code> outputs the first field after a tab character (the default
+delimiter), removing all lines that don&rsquo;t contain a tab. The second <code>cut</code>
+outputs the first field before the space character, which removes all assembly
+operands after a mnemonic.</p>
+<p>Sadly, we need to add a <code>grep</code> command as well. <code>cut</code> doesn&rsquo;t support the
+removal of lines with a specific delimiter character, only the removal of lines
+without one. We want to get rid of lines beginning with <code>.</code>, as these are
+assembly directives. Alas, our necessary <code>grep</code>.</p>
+<h3 id="awk"><code>awk</code></h3>
+<p><a href="https://en.wikipedia.org/wiki/AWK">AWK</a> is a beast of a language that is
+engineered for text processing and data extraction. It is named after its
+authors (and legends in the field) Alfred <strong>A</strong>ho, Peter <strong>W</strong>einberger, and
+Brian <strong>K</strong>ernighan. Far from being a dead has-been shell utility, <code>awk</code> is
+<a href="https://arstechnica.com/gadgets/2022/08/unix-legend-who-owes-us-nothing-keeps-fixing-foundational-awk-code/">still
+maintained</a>
+and the one true <code>awk</code> <a href="https://github.com/onetrueawk/awk/commit/9ebe940cf3c652b0e373634d2aa4a00b8395b636">is still being contributed
+to</a>
+by bwk. Most users use <code>gawk</code>, GNU&rsquo;s <code>awk</code> implemented by the FSF in 1988, as it
+is the default on Linux systems (it uses the GPL license). Sadly, the author
+is no different, and has not committed to adding the <a href="https://github.com/onetrueawk/awk">one true
+awk</a> with <a href="https://github.com/onetrueawk/awk/commit/d322b2b5fc16484affb09e86b044596a2e347853">Unicode
+support</a>
+to his system path.</p>
+<p>The following <code>gawk</code> command will do the trick for our assembly file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk">awk <span style="color:#719e07">-</span>F<span style="color:#2aa198">&#39;\t&#39;</span> <span style="color:#2aa198">&#39;{split($2, a, &#34; &#34;); if (a[1] !~ /^\./ &amp;&amp; length(a[1]) &gt; 0) print a[1]}&#39;</span>
+</code></pre></div><p>We set our delimiter to the tab character and extract the second field of each
+separation along <code>\t</code> into an array, with each array element split by <code>' '</code>. We
+then examine the first element of the array: if it&rsquo;s not a blank line or an
+assembly directive (beginning with <code>'.'</code>), we output the value. To use on
+<code>asfile.s</code>, we append the filename to the end of the command.</p>
+<p>This command is a bit complex, and took some conversations with Claude to sort
+out. You&rsquo;ll notice at first glance that it&rsquo;s more involved than our <code>cut</code>
+command. A disadvantage when first using <code>awk</code> is that it is a full language:
+you have to understand its syntax, rules and other quirks in order to use (or
+even know about) all of its features. <code>cut</code> is a much narrow Unix utility, and
+is simpler to use for this task, but it cannot perform many of the operations
+<code>awk</code> is capable of. Additionally, this is one command; our <code>cut</code> sequence was
+three separate commands (and one of them was <code>grep</code>!).</p>
+<h3 id="sed"><code>sed</code></h3>
+<p>In the beginning, there was
+<a href="https://en.wikipedia.org/wiki/Ed_(software)"><code>ed</code></a>. Arguably, in the lineage we
+are concerned about, <a href="https://en.wikipedia.org/wiki/QED_(text_editor)"><code>qed</code></a>
+came first (1965 vs. 1969), but who&rsquo;s counting? Scripting features of both
+original text editors led Lee McMahon to create the stream editor,
+<a href="https://en.wikipedia.org/wiki/QED_(text_editor)"><code>sed</code></a>. It is the successor to
+the <a href="https://en.wikipedia.org/wiki/Grep"><code>grep</code></a> command, which also was born
+out of <code>ed</code> (for those who may not know, <code>g/re/p</code> originally stood for a
+<strong>g</strong>lobal <strong>r</strong>egular <strong>e</strong>xpression that <strong>p</strong>rints matching lines in <code>ed</code>).</p>
+<p><code>sed</code> functions as a line-oriented editor that, instead of printing matching
+regular expressions, substitutes different strings in place (as the man page
+says, &ldquo;perform[s] basic text transformations on an input stream&rdquo;). Again, we
+will use the GNU version of the <code>sed</code> utility (as opposed to the BSD
+implementation). The line that works for our purposes is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -nE <span style="color:#2aa198">&#39;/\t[[:alpha:]]/s/.*\t([[:alpha:]][^ ]*).*/\1/p&#39;</span> asfile.s
+</code></pre></div><p><code>sed</code> regular expressions are patterned on the (now standard) <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cmd/pattern/substitution/cmd
+</code></pre></div><p>where <code>cmd</code> is a one-letter command directive, such as <strong>s</strong>ubstitute (at the
+beginning) or <strong>g</strong>lobal (at the end). In our case, the first command is an
+address pattern. It matches lines that contain a tab followed by an alphabetic
+character (our mnemonics), avoiding directives, lines without tabs, etc. It then
+use the <strong>s</strong>ubstitution command to pattern-match the substring from the <code>\t</code>
+character up to the first space character - <code>([[:alpha:]][^ ]*)</code> selects every
+non-space following the first alphabetic character. The first argument of that
+pattern-match is selected and <strong>p</strong>rinted, and can be piped into our
+<code>sort</code>/<code>uniq</code> utility pipeline.</p>
+<p>The regular expression here is more complicated than that in <code>awk</code>, but slightly
+shorter (less than 80 characters). Here, we add the flags <code>-n</code> to print only
+matching lines and <code>-E</code> to use extended regular expressions (so that we don&rsquo;t
+have to escape the <code>(</code> <code>)</code> characters).</p>
+<h3 id="perl"><code>perl</code></h3>
+<p>As the great Steve Yegge once said, <sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+<blockquote>
+<p>Perl. It&rsquo;s a swiss army knife. You can use it to sidestep this problem with
+honor, by disemboweling yourself.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#719e07">-</span>lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> asfile<span style="color:#719e07">.</span>s
+</code></pre></div><h2 id="how-far-did-we-get">How far did we get?</h2>
+<p>Well, we&rsquo;ve reduced our 27-line script to a one-liner</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> asm.s | sort | uniq -c | sort -rn
+</code></pre></div><p>which fits under 80 characters, and is still fairly readable.</p>
+<p>But now that we&rsquo;ve reduced our file size, we have so many more <strong>features</strong> to
+add:</p>
+<ul>
+<li>We could add more information to this output. We could include statistics
+based on information that we&rsquo;ve ignored so far. GNU assembler syntax specifies
+operand size as a suffix to the instruction. What word sizes are involved? We
+also remove the operands when parsing. How many operands are immediate
+vs. register-to-register vs. memory?</li>
+<li>Currently, this script ignores assembly directives. What if we wanted to print
+those separately?</li>
+<li>How many cycles does each instruction take, on average? What about
+sub-averages by file section? How many are data movement instructions (<code>movw</code>)
+versus arithmetic-logic unit (ALU) instructions (<code>incb</code>) versus control flow
+instructions (<code>jge</code>)? <sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup></li>
+</ul>
+<p>We can also think about <strong>generalizations</strong>:</p>
+<ul>
+<li>This only works for GAS-formatted syntax produced by <code>gcc -S</code> or someone who
+prefers tabs over spaces in their default editor. How do you account for
+spaces before a mnemonic?</li>
+<li>How could this generalize to parse other assembly files, for instance, x86 or
+RISC-V or ARM ISAs? How could you calculate the desired statistics on those?</li>
+</ul>
+<p>To answer a few of these feature requests, I modified my shell script as
+follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#719e07">#!/bin/bash
+</span><span style="color:#719e07"></span>
+<span style="color:#586e75"># countasm.sh</span>
+<span style="color:#586e75">#</span>
+<span style="color:#586e75"># This script provides basic information about an assembly file written in GNU</span>
+<span style="color:#586e75"># assembler syntax.</span>
+
+<span style="color:#268bd2">asm</span><span style="color:#719e07">=</span><span style="color:#268bd2">$1</span>
+
+<span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#268bd2">$asm</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Error: please provide an assembly file&#34;</span> 2&gt;&amp;<span style="color:#2aa198">1</span>
+    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
+<span style="color:#719e07">fi</span>
+
+<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;Information about </span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span>
+<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nTop 10 assembly instructions&#34;</span>
+perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn | head
+
+<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nOperand sizes (b: 8, w: 16, l: 32, q: 64)&#34;</span>
+perl -lne <span style="color:#2aa198">&#39;print substr($1, -1) if /\t([a-z]\S*[bwlq])\b/ &amp;&amp; $1 ne &#34;call&#34;&#39;</span> <span style="color:#cb4b16">\
+</span><span style="color:#cb4b16"></span>     <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
+
+<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nAssembly directives&#34;</span>
+perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([.]\S*)/&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
+
+<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nRoutine names&#34;</span>
+awk -F<span style="color:#2aa198">&#34;:&#34;</span> <span style="color:#2aa198">&#39;NF&gt;1 &amp;&amp; !/^#/ { print $1 }&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq | sort -rn | column
+</code></pre></div><p>The new output of this script is</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./countasm.sh vga16.s
+Information about vga16.s
+
+Top 10 assembly instructions
+     30 movw
+     11 int
+      6 movb
+      6 inb
+      6 call
+      5 pushw
+      5 popw
+      5 outb
+      5 incw
+      4 loop
+
+Operand sizes (b: 8, w: 16, l: 32, q: 64)
+     50 w
+     32 b
+
+Assembly directives
+      2 .byte
+      1 .org
+      1 .globl
+      1 .code16
+
+Routine names
+2       1       print   _start
+</code></pre></div><p>Granted, I&rsquo;ve used the same hammer to hit three different nails at this
+point (and should probably write a separate function or perl script), but not
+bad. There&rsquo;s a bit more functionality packed into that short script.</p>
+<p>To expand further, I&rsquo;d next focus on getting data on operands, then classifying
+instructions as data/ALU/conditional, adding more categories as I went. I&rsquo;d also
+start to define functions and potentially decide on a language to best handle
+string substitutions. Maybe <code>perl</code>.</p>
+<h2 id="professional-tools">Professional tools</h2>
+<p>One thing that you might notice is I&rsquo;m trying to <strong>parse</strong> a text file
+(specifically, an assembly file). One logical step past scripting would be to
+write a real <a href="https://en.wikipedia.org/wiki/Parsing#Parser"><strong>parser</strong></a>, a core
+feature of <a href="https://en.wikipedia.org/wiki/Compiler">compilers</a>.</p>
+<p>Parsers are very useful. You can define grammars and create <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract syntax
+trees</a>, which provide a
+representation of the program or text you are trying to understand. If I wanted
+to delve further into the structure of the assembly file and try to understand
+memory vs. CPU-heavy sections, or preemptively identify hot loops and
+unoptimized code, this could be the way to go.</p>
+<p>Another useful tool operates in the opposite direction. When trying to derive
+meaning from machine code, people look to
+<a href="https://en.wikipedia.org/wiki/Disassembler">disassemblers</a> to translate from
+machine language into assembly code. The <code>countasm</code> tool could help once code is
+translated back into assembly to more quickly identify common patterns and
+add tags and labels to the code (in a world where <code>countasm</code> provides a much
+deeper analysis than it did today).</p>
+<p><strong>Static analyzers</strong> do what I attempted to do here and much more. A while back,
+John Carmack <a href="https://eamag.me/2012/Static-Code-Analysis">wrote about just how important static analysis
+is</a> to writing good code. GCC has
+<a href="https://developers.redhat.com/articles/2024/04/03/improvements-static-analysis-gcc-14-compiler">the <code>-fanalyzer</code>
+flag</a>
+that goes to serious lengths to identify issues with code at compile
+time. Imagine writing a buffer overflow in your C program and getting this
+helpful diagram:</p>
+<p><img src="https://developers.redhat.com/sites/default/files/styles/article_floated/public/screenshot_from_2024-03-28_16-05-22.png.webp?itok=DlDqiM5y" alt="Visualizing buffer overflows in GCC14."></p>
+<h2 id="beyond-bash">Beyond <code>bash</code></h2>
+<p>Shell scripts can <a href="https://www.extrema.is/blog/2021/04/11/rewrite-when-more-than-n-lines">only take you so
+far</a>
+before the overhead becomes too much to handle: you spawn many processes, you
+use tools that aren&rsquo;t quite right for your purposes, you learn <a href="https://www.quora.com/What-are-some-crazy-rm-rf-stories-you-have-heard-about">how powerful <code>rm -rf</code> really
+is</a>,
+you <a href="https://alkarn.github.io/2017-01-21-bash-scripting-horror/">delete six servers in one
+move</a>, you add <a href="http://www.yak.net/carmen/unix_horror.html">your
+name to the list of Unix horror
+stories</a>&hellip;</p>
+<p>At the end of the day, you&rsquo;re better off writing your utility in a maintainable
+language that has OS-provided guardrails to help you, some form of type
+checking, a debugger that is not <code>set -x</code>, and performant libraries. Real tools
+are not written in <code>bash</code>.</p>
+<p>However, if you are ever asked to <a href="https://sites.google.com/site/steveyegge2/five-essential-phone-screen-questions">find the phone numbers in 50,000 HTML
+pages</a>,
+you know where to start. For every well-polished and maintained tool in the
+world, there is an ugly, unportable script holding <a href="https://xkcd.com/2347/">some piece of critical infrastructure</a>
+together. <sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup></p>
+<h3 id="resources">Resources</h3>
+<p>Outside of manual pages, <a href="https://www.youtube.com/@cacharle">Charles Cabergs</a>
+has a great YouTube channel with high-quality videos on advanced C programming
+and other topics. If you enjoyed the string parsing, look at his recent videos
+on <a href="https://www.youtube.com/watch?v=G39FkcfsMNA"><code>cut</code></a> and
+<a href="https://www.youtube.com/watch?v=akN2TFarz0A"><code>sed</code></a>. I happened to find his
+content as I was finishing this, and the videos were helpful beyond <code>man sed</code>
+and <a href="https://www.gnu.org/software/sed/manual/sed.html">the HTML pages</a>.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>A good place to look for more information is <a href="https://bash-hackers.gabe565.com/commands/builtin/read/">the Bash Hackers Wiki page
+on <code>read</code></a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Bash is often known for its
+<a href="https://tldp.org/LDP/abs/html/gotchas.html">gotchas</a>, and string parsing is
+no exception. Though it has <a href="https://tldp.org/LDP/abs/html/string-manipulation.html">great builtin
+support</a>, unless you
+are very aware of the behavior of what you&rsquo;re using, you can quickly run
+into trouble. For example, my script no longer works if I change line 21
+from shortest prefix matching</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+</code></pre></div><p>to longest prefix matching</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>##*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+</code></pre></div><p>(and that&rsquo;s only on the single file I was working on).&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Note that there are different kinds of pipes: for example, stream pipes
+allow for data to flow in both directions (with two different file
+descriptors for reading and writing), and FIFOs and named pipes allow for
+IPC between processes that don&rsquo;t have a common ancestor. In this script,
+data flows in only one direction and all processes have a common ancestor
+(our subshell that is created when executing this script), so it&rsquo;s okay to
+stick with <code>|</code> for now.</p>
+<p>I&rsquo;d recommend <a href="https://blog.jessfraz.com/post/for-the-love-of-pipes/">this blog
+post</a> for a quick
+note on the beauty of pipes, and reading <a href="https://harmful.cat-v.org/cat-v/unix_prog_design.pdf">Rob Pike and Brian Kernighan&rsquo;s
+original paper</a> for
+how pipes fit into general Unix program design. For how the Unix kernel
+implements pipes, <a href="https://toroid.org/unix-pipe-implementation">look here</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Or, in this case, several different ways. Even within each one-liner I&rsquo;ve
+written, there are likely more efficient or more concise ways to extract the
+desired fields. Send me a note if you have suggested improvements - I&rsquo;d love
+to know!&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>There is no explicitly standard, but <a href="https://www.columbia.edu/~rh120/ch001j.c11">since the days of
+<code>ed</code></a>, this pattern for regular
+expression matching has continued into many other scripting
+languages. <code>awk</code>, <code>perl</code>, <code>bash</code>, <code>vim</code>, Ruby, and even the operating system
+<code>emacs</code> (using <code>sed-mode</code>) all feature this pattern. Today, it is more
+common for modern scripting languages such as JavaScript and Python to use
+method or function calls from a core language library on string objects, as
+opposed to parsing ASCII or text streams.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>See <a href="https://steve-yegge.blogspot.com/2007/06/rich-programmer-food.html">this incredible post on
+compilers</a>
+for context.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>Many of these would require a bit more information outside of the assembly
+file&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>Not the most appropriate reference: I&rsquo;m sure the random person in
+Nebraska&rsquo;s project is maintained quite a bit better than my <code>~/tools</code>
+directory.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/bash">bash</a></li>
+								
+								<li><a href="/tags/gnu-assembly">gnu-assembly</a></li>
+								
+								<li><a href="/tags/sed">sed</a></li>
+								
+								<li><a href="/tags/awk">awk</a></li>
+								
+								<li><a href="/tags/perl">perl</a></li>
+								
+								<li><a href="/tags/parsing">parsing</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+	
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  var newHref = window.location.pathname + href;
+                  link.setAttribute('href', newHref);
+              });
+          });
+        </script>
+</body>
+</html>

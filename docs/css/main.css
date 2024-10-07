@@ -63,8 +63,8 @@ textarea {
 blockquote {
     margin-left: 1rem;
     font-style: italic;
-    font-size: 1.4rem;
-    font-family: Georgia,bitstream charter,serif;
+    font-size: 1.3rem;
+    font-family: 'Ubuntu', 'Raleway', sans-serif;
     border-left: 3px solid;
     border-color: #a00;
     padding-left: 20px;
