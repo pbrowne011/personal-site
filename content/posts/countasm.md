@@ -8,6 +8,9 @@ tags = ["bash", "gnu-assembly", "sed", "awk", "perl", "parsing"]
 categories = []
 images = []
 
+# set X (formerly known as Twitter) card image
+twimg = "https://upload.wikimedia.org/wikipedia/en/2/22/Heckert_GNU_white.svg"
+
 # set slug if you want to change a page
 slug = ""
 
