@@ -4,7 +4,7 @@ date = 2024-03-04T00:00:00Z
 draft = false
 author = "Pat"
 description = "Trying to model daily events in my life using Markov chains"
-tags = ["markov-chain", "probability"]
+tags = ["probability"]
 categories = []
 images = []
 

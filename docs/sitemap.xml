@@ -11,12 +11,6 @@
     <loc>https://patbrowne.me/posts/countasm/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/gnu-assembly/</loc>
-    <lastmod>2024-10-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/tags/parsing/</loc>
-    <lastmod>2024-10-07T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://patbrowne.me/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
@@ -35,12 +29,6 @@
     <loc>https://patbrowne.me/tags/bit-tricks/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/boolean-logic/</loc>
-    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/tags/computability/</loc>
-    <lastmod>2024-10-02T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://patbrowne.me/tags/draft/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
@@ -50,20 +38,11 @@
     <loc>https://patbrowne.me/posts/rtolcompute/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/complexity/</loc>
-    <lastmod>2024-09-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://patbrowne.me/tags/cryptography/</loc>
-    <lastmod>2024-09-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/tags/lwe/</loc>
     <lastmod>2024-09-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://patbrowne.me/posts/lwe/</loc>
     <lastmod>2024-09-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/tags/markov-chain/</loc>
-    <lastmod>2024-03-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://patbrowne.me/tags/probability/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
@@ -72,9 +51,6 @@
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://patbrowne.me/tags/computer-history/</loc>
-    <lastmod>2024-03-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/tags/makefile/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://patbrowne.me/tags/unix/</loc>

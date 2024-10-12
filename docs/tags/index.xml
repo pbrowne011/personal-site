@@ -26,24 +26,6 @@
     </item>
     
     <item>
-      <title>gnu-assembly</title>
-      <link>https://patbrowne.me/tags/gnu-assembly/</link>
-      <pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/gnu-assembly/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>parsing</title>
-      <link>https://patbrowne.me/tags/parsing/</link>
-      <pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/parsing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>perl</title>
       <link>https://patbrowne.me/tags/perl/</link>
       <pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate>
@@ -71,24 +53,6 @@
     </item>
     
     <item>
-      <title>boolean-logic</title>
-      <link>https://patbrowne.me/tags/boolean-logic/</link>
-      <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/boolean-logic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>computability</title>
-      <link>https://patbrowne.me/tags/computability/</link>
-      <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/computability/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>draft</title>
       <link>https://patbrowne.me/tags/draft/</link>
       <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
@@ -107,38 +71,11 @@
     </item>
     
     <item>
-      <title>complexity</title>
-      <link>https://patbrowne.me/tags/complexity/</link>
-      <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/complexity/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>cryptography</title>
       <link>https://patbrowne.me/tags/cryptography/</link>
       <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
       
       <guid>https://patbrowne.me/tags/cryptography/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>lwe</title>
-      <link>https://patbrowne.me/tags/lwe/</link>
-      <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/lwe/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>markov-chain</title>
-      <link>https://patbrowne.me/tags/markov-chain/</link>
-      <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/markov-chain/</guid>
       <description></description>
     </item>
     
@@ -157,15 +94,6 @@
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
       
       <guid>https://patbrowne.me/tags/computer-history/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>makefile</title>
-      <link>https://patbrowne.me/tags/makefile/</link>
-      <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/tags/makefile/</guid>
       <description></description>
     </item>
     

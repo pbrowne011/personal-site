@@ -4,7 +4,7 @@ date = 2024-03-03T00:00:00Z
 draft = false
 author = "Pat"
 description = "An unfortuate historical example of backwards compatibility"
-tags = ["unix", "makefile", "computer-history"]
+tags = ["unix", "computer-history"]
 categories = []
 images = []
 

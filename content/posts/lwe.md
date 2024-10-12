@@ -4,7 +4,7 @@ date = 2024-09-19T00:00:00Z
 draft = false
 author = "Pat"
 description = "Examining a computational hardness assumption in cryptography"
-tags = ["cryptography", "lwe", "complexity"]
+tags = ["cryptography"]
 categories = []
 images = []
 

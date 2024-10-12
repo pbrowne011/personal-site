@@ -4,7 +4,7 @@ date = 2024-10-07T00:00:00Z
 draft = false
 author = "Pat"
 description = "Writing shell scripts to count assembly mnemonics"
-tags = ["bash", "gnu-assembly", "sed", "awk", "perl", "parsing"]
+tags = ["bash", "sed", "awk", "perl"]
 categories = []
 images = []
 
@@ -25,7 +25,8 @@ type = "post"
 aliases = []
 
 # SEO keywords
-keywords = []
+keywords = ["bash", "sed", "awk", "perl", "GNU", "assembly", "cut", "shell",
+"shell script"]
 
 # if post is part of a blog series
 series = []
