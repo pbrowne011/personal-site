@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>SAL/SAR/SHL/SHR — Shift | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="SAL/SAR/SHL/SHR — Shift" />
+<meta property="og:description" content="The shift operation has a maximum operand size" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patbrowne.me/posts/sal/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-11-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-11-04T00:00:00+00:00" />
+
+
+        
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SAL/SAR/SHL/SHR — Shift"/>
+<meta name="twitter:description" content="The shift operation has a maximum operand size"/>
+
+
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.me/css/main.css" /><link rel="stylesheet" type="text/css" href="https://patbrowne.me/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://patbrowne.me/js/main.js"></script>
+
+	
+	<script>
+	  MathJax = {
+              tex: {
+                  inlineMath: [['\\(', '\\)'], ['$', '$']],
+                  displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                  packages: {'[+]': ['ams', 'noerrors']}
+              },
+              loader: {load: ['[tex]/ams', '[tex]/noerrors']},
+              svg: {
+                  fontCache: 'global'
+              }
+          };
+	</script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://patbrowne.me/">
+	<h1 class="site-title"><a href="https://patbrowne.me/">Pat Browne</a></h1>
+	<div class="site-description"><h2></h2><nav class="nav social">
+			<ul class="flat"><a href="mailto:pjbrowne011@gmail.com" title="Email"><i data-feather="mail"></i></a><a href="https://github.com/pbrowne011/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">SAL/SAR/SHL/SHR — Shift</h1>
+			<div class="meta">
+                           Nov 4, 2024 
+                          
+			</div>
+		</div>
+
+		<div class="markdown">
+			<p>I&rsquo;ve been working through some of the exercises in <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">&ldquo;The C Programming
+Language&rdquo;</a> by
+Kernighan and Ritchie, and ran into an issue in Chapter 2 (&ldquo;Types, Operators,
+and Expressions&rdquo;).</p>
+<p><strong>Exercise 2-7</strong>:</p>
+<blockquote>
+<p>Write a function <code>invert(x,p,n)</code> that returns <code>x</code> with the <code>n</code> bits that begin
+at position <code>p</code> inverted (i.e., 1 changed into 0 and vice versa), leaving the
+others unchanged.</p>
+</blockquote>
+<p>This seemed easy enough, and I wrote the following function as a solution: <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#586e75">/* invert.c */</span>
+
+<span style="color:#dc322f">unsigned</span> <span style="color:#dc322f">int</span> <span style="color:#268bd2">invert</span>(<span style="color:#dc322f">unsigned</span> x, <span style="color:#dc322f">int</span> p, <span style="color:#dc322f">int</span> n)
+{
+    <span style="color:#dc322f">unsigned</span> mask <span style="color:#719e07">=</span> <span style="color:#719e07">~</span>(<span style="color:#719e07">~</span><span style="color:#2aa198">0</span> <span style="color:#719e07">&lt;&lt;</span> n) <span style="color:#719e07">&lt;&lt;</span> p<span style="color:#719e07">-</span>(n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>);
+    <span style="color:#719e07">return</span> x <span style="color:#719e07">^</span> mask;
+}
+</code></pre></div><p>Earlier, the authors wrote a similar function <code>get_bits(x,p,n)</code>, and stated
+some assumptions they made when writing it:</p>
+<blockquote>
+<p>We assume that bit position 0 is at the right end and that <code>n</code> and <code>p</code> are
+sensible positive values.</p>
+</blockquote>
+<p>Originally, I thought &ldquo;sensible positive values&rdquo; implied maximum and minimum
+bounds on <code>p</code> and <code>n</code>:</p>
+<ul>
+<li><strong><code>n &gt; 0</code>, and <code>p &gt;= 0</code></strong>: it doesn&rsquo;t make sense to have <code>n=0</code> (what&rsquo;s the
+point of inverting 0 bits?), and setting <code>p</code> or <code>n</code> to a negative value has no
+meaning in the context of absolute position or size.</li>
+<li><strong><code>p &gt;= n-1</code></strong>: inverting more bits than are
+available on the right side of a number doesn&rsquo;t make sense either.</li>
+</ul>
+<p>So I added some error checking:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#dc322f">unsigned</span> <span style="color:#dc322f">int</span> <span style="color:#268bd2">invert</span>(<span style="color:#dc322f">unsigned</span> x, <span style="color:#dc322f">int</span> p, <span style="color:#dc322f">int</span> n)
+{
+    <span style="color:#719e07">if</span> (p <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">0</span>) {
+        fprintf(stderr,
+                <span style="color:#2aa198">&#34;Error: position (p=%d) less than 0</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
+                p);
+        <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
+    } <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> (n <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">1</span>) {
+        fprintf(stderr,
+                <span style="color:#2aa198">&#34;Error: size (%d) is not a positive number</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
+                n);
+        <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
+    } <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> (p <span style="color:#719e07">&lt;</span> n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>) {
+        fprintf(stderr,
+                <span style="color:#2aa198">&#34;Error: position (%d) less than n - 1 (%d)</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
+                p, n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>);
+        <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
+    }
+    
+    <span style="color:#dc322f">unsigned</span> mask <span style="color:#719e07">=</span> <span style="color:#719e07">~</span>(<span style="color:#719e07">~</span><span style="color:#2aa198">0</span> <span style="color:#719e07">&lt;&lt;</span> n) <span style="color:#719e07">&lt;&lt;</span> p<span style="color:#719e07">-</span>(n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>);
+    <span style="color:#719e07">return</span> x <span style="color:#719e07">^</span> mask;
+}
+</code></pre></div><p>I set out to write some test cases, starting with several values for <code>x</code> and
+three sets of cases for <code>n</code> and <code>p</code>:</p>
+<ul>
+<li><code>n = 32, p = 31</code></li>
+<li><code>n = 16, p = 31</code></li>
+<li><code>n = 16, p = 15</code></li>
+</ul>
+<p>These correspond to inverting all four bytes, the first two bytes, and the last
+two bytes of <code>x</code>, respectively. I ran the program and printed the relevant
+values to stdout:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">x:                  00000000000000000000000000000000
+~x:                 11111111111111111111111111111111
+invert(x, 31, 32):  00000000000000000000000000000000
+</code></pre></div><p>Huh? The function call is to invert the last 32 bits of <code>x</code>, starting from
+position 31 (the first position). <code>~x</code> should be returned here. Instead, the
+function is returning <code>x</code>.</p>
+<p>However, later test cases print the correct output to the terminal:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">x:                  00000000000000000000000000000000
+~x:                 11111111111111111111111111111111
+invert(x, 31, 16):  11111111111111110000000000000000
+</code></pre></div><p>I ran the program in <code>gdb</code> and found an error with this expression:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#719e07">~</span>(<span style="color:#719e07">~</span><span style="color:#2aa198">0</span> <span style="color:#719e07">&lt;&lt;</span> n) <span style="color:#719e07">&lt;&lt;</span> p<span style="color:#719e07">-</span>(n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>)
+</code></pre></div><p>The mask value was being set incorrectly in the first case (<code>p=31,n=32</code>):
+instead of masking all of the bits (<code>0xffffffff</code>), it was being set to
+<code>0x0</code>. The output of the function was <code>x ^ 0 = x</code>.</p>
+<p>I went to the assembly code to see what was being generated (written below with
+explicit values for <code>p</code> and <code>n</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># invert.s
+    ...
+invert:
+    ...
+	movl	$31, -12(%rbp)
+	movl	$32, -8(%rbp)
+	movl	-8(%rbp), %eax
+	movl	$-1, %edx
+	movl	%eax, %ecx
+	sall	%cl, %edx
+    ...
+</code></pre></div><p>Other than not being optimized, it looked fine. The issue was that when I ran
+<code>sall %cl, %edx</code>, the destination register wasn&rsquo;t being shifted. What was I
+doing wrong?</p>
+<p>I then asked Claude 3.5 Sonnet for input on what was going on, and it responded
+with the following (among other comments):</p>
+<blockquote>
+<p>According to the C standard (6.5.7), shifts by an amount equal to or greater
+than the width of the type are undefined behavior.</p>
+</blockquote>
+<p>Interesting&hellip; but why was this defined this way in the C standard? I looked at
+the C standard (<a href="https://web.archive.org/web/20181230041359if_/http://www.open-std.org/jtc1/sc22/wg14/www/abq/c17_updated_proposed_fdis.pdf">ISO/IEC 9899:2017, aka the final draft of
+C17</a>),
+and found that for a left shift:</p>
+<blockquote>
+<p>6.5.7</p>
+</blockquote>
+<blockquote>
+<p>The integer promotions are performed on each of the operands. The type of the
+result is that of the promoted left operand. If the value of the right operand
+is negative or is greater than or equal to the width of the promoted left
+operand, the behavior is undefined.</p>
+</blockquote>
+<p>So, Claude was correct and the behavior is undefined. I&rsquo;m using a laptop with an
+Intel processor - what is the defined behavior within Intel&rsquo;s ISA?</p>
+<p>According to the Intel Developer Manual, pg. 4-593:</p>
+<blockquote>
+<p>The destination operand can be a register or a memory location. The count
+operand can be an immediate value or the CL register. <strong>The count is masked to
+5 bits</strong> (or 6 bits with a 64-bit operand). The count range is limited to 0 to
+31 (or 63 with a 64-bit operand). A special opcode encoding is provided for a
+count of 1.</p>
+</blockquote>
+<p>In the code above, <code>n</code> is defined as <code>unsigned</code>, which means that it has type
+<code>int</code>. On my machine, <code>sizeof(int) = 32 bits</code>. So in the first test case when <code>n = 32</code>, the entire number is being masked off (<code>0x20 ^ 0x1f == 0x0</code>). However, in
+the other two test cases, <code>n = 16</code>, which is within the lower five bits of the
+number. Mystery solved. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>It seems that there is more to &ldquo;sensible positive values&rdquo; than I first
+realized. I thought of minimum bounds on both <code>p</code> and <code>n</code>, as well as a maximum
+bound on <code>p</code> - but no maximum bound on <code>n</code>.</p>
+<p>The good news is that, with two lines of code to debug, this was <a href="https://www.cs.princeton.edu/~bwk/tpop.webpage/debugging.html">an easy
+bug</a> to
+find.</p>
+<h2 id="an-overflow-safe-approach">An overflow-safe approach</h2>
+<p>A major problem with C is that there is no mechanism to catch this undefined
+behavior at runtime. Running <code>gcc</code> with<code>-Wall</code> does provide a warning when the
+second operand is a constant:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">invert.c:71:26: warning: left shift count &gt;= width of type [-Wshift-count-overflow]
+   71 |     unsigned mask = ~(~0 &lt;&lt; 32) &lt;&lt; p-(n-1);
+      |                          ^~
+</code></pre></div><p>However, when I run the program, there are no errors (hence my debugging
+adventure). In C, <strong>undefined behavior silently produces implementation-defined
+results</strong>, so you have to be extremely careful and aware of what is undefined in
+the C standard when writing code.</p>
+<p>One of Rust&rsquo;s main features is to avoid undefined behavior like this in C. It
+can detect memory errors, overflows, and has runtime safety checks in debug
+builds.</p>
+<p>Here is an implementation of <code>invert(x,p,n)</code> in Rust:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#586e75">/* invert.rs */</span>
+
+<span style="color:#719e07">fn</span> <span style="color:#268bd2">invert</span>(x: <span style="color:#dc322f">u32</span>, p: <span style="color:#dc322f">i32</span>, n: <span style="color:#dc322f">i32</span>) -&gt; <span style="color:#dc322f">u32</span> {
+    <span style="color:#268bd2">let</span> mask <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>(<span style="color:#719e07">!</span><span style="color:#2aa198">0_</span><span style="color:#719e07">u32</span> <span style="color:#719e07">&lt;&lt;</span> n) <span style="color:#719e07">&lt;&lt;</span> (p <span style="color:#719e07">-</span> (n <span style="color:#719e07">-</span> <span style="color:#2aa198">1</span>));
+    x <span style="color:#719e07">^</span> mask
+}
+
+<span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+    <span style="color:#268bd2">let</span> result <span style="color:#719e07">=</span> invert(<span style="color:#2aa198">0xFFFFFFFF</span>, <span style="color:#2aa198">31</span>, <span style="color:#2aa198">32</span>);
+    println!(<span style="color:#2aa198">&#34;result: {:032b}&#34;</span>, result);
+}
+</code></pre></div><p>The code produced no compilation errors, but on runtime, the integer safety
+checks catch this error:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./insert
+thread &#39;main&#39; panicked at insert.rs:2:17:
+attempt to shift left with overflow
+</code></pre></div><p>This runtime check (in debug builds) catches overflow attempts regardless of
+whether the shift amount is known at compile time or computed from variables.</p>
+<p>I wrote a more direct implementation to see if <code>rustc</code> could detect a hardcoded
+left shift outside of the allowed bounds (like <code>gcc</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#586e75">/* insert_const.rs */</span>
+
+<span style="color:#719e07">fn</span> <span style="color:#268bd2">main</span>() {
+    <span style="color:#268bd2">let</span> x: <span style="color:#dc322f">u32</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">0xFFFFFFFF</span>;
+    <span style="color:#268bd2">let</span> p: <span style="color:#dc322f">i32</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">31</span>;
+    <span style="color:#268bd2">let</span> n: <span style="color:#dc322f">i32</span> <span style="color:#719e07">=</span> <span style="color:#2aa198">32</span>;
+    
+    <span style="color:#268bd2">let</span> mask <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>(<span style="color:#719e07">!</span><span style="color:#2aa198">0_</span><span style="color:#719e07">u32</span> <span style="color:#719e07">&lt;&lt;</span> n) <span style="color:#719e07">&lt;&lt;</span> (p <span style="color:#719e07">-</span> (n <span style="color:#719e07">-</span> <span style="color:#2aa198">1</span>));
+    <span style="color:#268bd2">let</span> result <span style="color:#719e07">=</span> x <span style="color:#719e07">^</span> mask;
+    
+    println!(<span style="color:#2aa198">&#34;x: {:032b}&#34;</span>, x);
+    println!(<span style="color:#2aa198">&#34;mask: {:032b}&#34;</span>, mask);
+    println!(<span style="color:#2aa198">&#34;result: {:032b}&#34;</span>, result);
+}
+</code></pre></div><p>And it did:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ rustc insert_const.rs
+error: this arithmetic operation will overflow
+ --&gt; insert_const.rs:6:17
+  |
+6 |     let mask = !(!0_u32 &lt;&lt; n) &lt;&lt; (p - (n - 1));
+  |                 ^^^^^^^^^^^^^ attempt to shift left by `32_i32`, which would overflow
+  |
+  = note: `#[deny(arithmetic_overflow)]` on by default
+
+error: aborting due to 1 previous error
+</code></pre></div><p>This is one small example in the larger picure of how Rust and C prioritize
+different features: C allows for direct hardware access and flexibility, while
+Rust mandates strict safety requirements.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Ironically, I did not come up with the idea for just XORing the mask with
+the input until I read the assembly output by <code>gcc</code> while debugging the
+function.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>After going through all of this, I also looked in Appendix A of TCPL to
+see if the authors mention this behavior. They do, on pg. 206:</p>
+<blockquote>
+<p>The shift operators <code>&lt;&lt;</code> and <code>&gt;&gt;</code> group left-to-right. For both operators,
+each operand must be integral, and is subject to the integral
+promotions. The type of the result is that of the promoted left
+operand. <strong>The result is undefined</strong> if the right operand is negative,
+<strong>or greater than or equal to the number of bits in the left expression&rsquo;s
+type</strong>.</p>
+</blockquote>
+&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<li id="fn:3" role="doc-endnote">
+<p>I also checked the ARM reference manual for 32-bit systems for their
+implementation of logical shift left (<code>LSL</code>). It operates similar to
+the Intel x86 instruction - it has a valid range of values (0 to 31,
+inclusive), but does not define behavior if the operand is outside of this
+range. I think this might be left up to the chip designer to implement, but
+will test this on the ARM Cortex-M4 at some point.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+					<nav class="nav tags">
+							<ul class="flat">
+								
+								<li><a href="/tags/c">C</a></li>
+								
+							</ul>
+					</nav>
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+	
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  var newHref = window.location.pathname + href;
+                  link.setAttribute('href', newHref);
+              });
+          });
+        </script>
+</body>
+</html>

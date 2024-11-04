@@ -6,7 +6,23 @@
     <description>Recent content in Posts on Pat Browne</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://patbrowne.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://patbrowne.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SAL/SAR/SHL/SHR — Shift</title>
+      <link>https://patbrowne.me/posts/sal/</link>
+      <pubDate>Mon, 04 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://patbrowne.me/posts/sal/</guid>
+      <description>I&amp;rsquo;ve been working through some of the exercises in &amp;ldquo;The C Programming Language&amp;rdquo; by Kernighan and Ritchie, and ran into an issue in Chapter 2 (&amp;ldquo;Types, Operators, and Expressions&amp;rdquo;).
+Exercise 2-7:
+ Write a function invert(x,p,n) that returns x with the n bits that begin at position p inverted (i.e., 1 changed into 0 and vice versa), leaving the others unchanged.
+ This seemed easy enough, and I wrote the following function as a solution: 1
+/* invert.c */ unsigned int invert(unsigned x, int p, int n) { unsigned mask = ~(~0 &amp;lt;&amp;lt; n) &amp;lt;&amp;lt; p-(n-1); return x ^ mask; } Earlier, the authors wrote a similar function get_bits(x,p,n), and stated some assumptions they made when writing it:
+ We assume that bit position 0 is at the right end and that n and p are sensible positive values.
+ Originally, I thought &amp;ldquo;sensible positive values&amp;rdquo; implied maximum and minimum bounds on p and n:
+ n &amp;gt; 0, and p &amp;gt;= 0: it doesn&amp;rsquo;t make sense to have n=0 (what&amp;rsquo;s the point of inverting 0 bits?), and setting p or n to a negative value has no meaning in the context of absolute position or size.</description>
+    </item>
+    
     <item>
       <title>Counting assembly instructions</title>
       <link>https://patbrowne.me/posts/countasm/</link>
