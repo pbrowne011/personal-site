@@ -34,9 +34,10 @@ series = []
 toc = false
 +++
 
-I've been working through some of the exercises in ["The C Programming
-Language"](https://en.wikipedia.org/wiki/The_C_Programming_Language) by
-Kernighan and Ritchie, and ran into an issue in Chapter 2 ("Types, Operators,
+I've been [working through some of the
+exercises](https://github.com/pbrowne011/tcpl-solutions/tree/main) from ["The C
+Programming Language"](https://en.wikipedia.org/wiki/The_C_Programming_Language)
+by Kernighan and Ritchie, and ran into an issue in Chapter 2 ("Types, Operators,
 and Expressions").
 
 **Exercise 2-7**:
@@ -68,27 +69,28 @@ bounds on `p` and `n`:
 - **`n > 0`, and `p >= 0`**: it doesn't make sense to have `n=0` (what's the
   point of inverting 0 bits?), and setting `p` or `n` to a negative value has no
   meaning in the context of absolute position or size.
-- **`p >= n-1`**: inverting more bits than are
-  available on the right side of a number doesn't make sense either.
+- **`sizeof(int)*8 > p >= n-1`**: inverting more bits than are available on the
+  right side of a number doesn't make sense - neither does inverting bits
+  starting from a bit position that doesn't exist.
 
 So I added some error checking:
 ```c
 unsigned int invert(unsigned x, int p, int n)
 {
-    if (p < 0) {
+    if (p < n-1) {
         fprintf(stderr,
-                "Error: position (p=%d) less than 0\n",
-                p);
+                "Error: position (p=%d) less than n - 1 (%d)\n",
+                p, n-1);
         return 0;
     } else if (n < 1) {
         fprintf(stderr,
                 "Error: size (%d) is not a positive number\n",
                 n);
         return 0;
-    } else if (p < n-1) {
+    } else if (p >= sizeof(int)*8) {
         fprintf(stderr,
-                "Error: position (%d) less than n - 1 (%d)\n",
-                p, n-1);
+                "Error: position (%d) is too large\n",
+                p);
         return 0;
     }
     
@@ -175,7 +177,7 @@ and found that for a left shift:
 > operand, the behavior is undefined.
 
 So, Claude was correct and the behavior is undefined. I'm using a laptop with an
-Intel processor - what is the defined behavior within Intel's ISA?
+Intel processor - what is the defined behavior of `SAL/SHL` within Intel's ISA?
 
 According to the Intel Developer Manual, pg. 4-593:
 
@@ -185,11 +187,26 @@ According to the Intel Developer Manual, pg. 4-593:
 > 31 (or 63 with a 64-bit operand). A special opcode encoding is provided for a
 > count of 1.
 
-In the code above, `n` is defined as `unsigned`, which means that it has type
-`int`. On my machine, `sizeof(int) = 32 bits`. So in the first test case when `n
-= 32`, the entire number is being masked off (`0x20 ^ 0x1f == 0x0`). However, in
-the other two test cases, `n = 16`, which is within the lower five bits of the
-number. Mystery solved. [^2] [^3]
+In the code above, `n` is defined as type `int`. On my machine, `sizeof(int) =
+32 bits`. So in the first test case when `n = 32 (0x20)`, the entire number is
+being masked to five bits (`0x20 & 0x1f == 0x00`) before the left shift is
+performed. The expression
+
+```c
+    ~(~0 << 32) << 0
+```
+
+becomes
+
+```c
+    ~(~0 << 0) << 0
+```
+
+which makes the mask `~(~0) == 0`, and `x ^ 0 == x`.
+
+However, in the other two test cases, `n = 16`. This is within the lower five
+bits of the number (`0x10 & 0x1f == 0x10`) and the left shift is performed
+correctly. Mystery solved. [^2] [^3]
 
 It seems that there is more to "sensible positive values" than I first
 realized. I thought of minimum bounds on both `p` and `n`, as well as a maximum
@@ -202,7 +219,7 @@ find.
 ## An overflow-safe approach
 
 A major problem with C is that there is no mechanism to catch this undefined
-behavior at runtime. Running `gcc` with`-Wall` does provide a warning when the
+behavior at runtime. Running `gcc` with `-Wall` does provide a warning when the
 second operand is a constant:
 
 ```
@@ -284,8 +301,19 @@ error: aborting due to 1 previous error
 ```
 
 This is one small example in the larger picure of how Rust and C prioritize
-different features: C allows for direct hardware access and flexibility, while
-Rust mandates strict safety requirements.
+different features.
+
+C allows for direct hardware access and flexibility. The standard often leaves
+behavior unspecified to allow compilers to best optimize a program for the
+machine architecture it is going to be run on. Additionally, a key assumption
+compilers make is that undefined behavior never occurs within a C program. `gcc`
+assumes that I was smart enough not to pass a value `n > 31` to `invert()`. This
+expectation enables many optimizations that would not otherwise be possible, but
+allows programmers to shoot themselves in the foot with the language.
+
+Rust's strict safety requirements at compile time and runtime prevent undefined
+or unspecified behavior. However, they come with the tradeoff of higher overhead
+by default in both memory and runtime execution.
 
 
 [^1]: Ironically, I did not come up with the idea for just XORing the mask with
@@ -302,9 +330,11 @@ Rust mandates strict safety requirements.
     > **or greater than or equal to the number of bits in the left expression's
     > type**. 
     
-[^3]: I also checked the ARM reference manual for 32-bit systems for their
-    implementation of logical shift left (`LSL`). It operates similar to
-    the Intel x86 instruction - it has a valid range of values (0 to 31,
-    inclusive), but does not define behavior if the operand is outside of this
-    range. I think this might be left up to the chip designer to implement, but
-    will test this on the ARM Cortex-M4 at some point.
+[^3]: I also checked several ISAs (RISC-V, ARM Cortex-M4, PDP-11, MIPS) to see
+    how register operands are handled in a left shift operation. They all
+    implement the instruction slightly differently, but all of them mask the
+    register operand at some point by only taking the lower five bits as the
+    amount to shift by. The PDP-11 was the most unique - it uses 6 bits to
+    encode a shift, with the 6th bit signalling what type of shift the
+    instruction is. Pointers to an ISA that does something different on an
+    invalid immediate or register for a shift would be appreicated!

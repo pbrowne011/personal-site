@@ -81,9 +81,10 @@
 		</div>
 
 		<div class="markdown">
-			<p>I&rsquo;ve been working through some of the exercises in <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">&ldquo;The C Programming
-Language&rdquo;</a> by
-Kernighan and Ritchie, and ran into an issue in Chapter 2 (&ldquo;Types, Operators,
+			<p>I&rsquo;ve been <a href="https://github.com/pbrowne011/tcpl-solutions/tree/main">working through some of the
+exercises</a> from <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">&ldquo;The C
+Programming Language&rdquo;</a>
+by Kernighan and Ritchie, and ran into an issue in Chapter 2 (&ldquo;Types, Operators,
 and Expressions&rdquo;).</p>
 <p><strong>Exercise 2-7</strong>:</p>
 <blockquote>
@@ -111,26 +112,27 @@ bounds on <code>p</code> and <code>n</code>:</p>
 <li><strong><code>n &gt; 0</code>, and <code>p &gt;= 0</code></strong>: it doesn&rsquo;t make sense to have <code>n=0</code> (what&rsquo;s the
 point of inverting 0 bits?), and setting <code>p</code> or <code>n</code> to a negative value has no
 meaning in the context of absolute position or size.</li>
-<li><strong><code>p &gt;= n-1</code></strong>: inverting more bits than are
-available on the right side of a number doesn&rsquo;t make sense either.</li>
+<li><strong><code>sizeof(int)*8 &gt; p &gt;= n-1</code></strong>: inverting more bits than are available on the
+right side of a number doesn&rsquo;t make sense - neither does inverting bits
+starting from a bit position that doesn&rsquo;t exist.</li>
 </ul>
 <p>So I added some error checking:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#dc322f">unsigned</span> <span style="color:#dc322f">int</span> <span style="color:#268bd2">invert</span>(<span style="color:#dc322f">unsigned</span> x, <span style="color:#dc322f">int</span> p, <span style="color:#dc322f">int</span> n)
 {
-    <span style="color:#719e07">if</span> (p <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">0</span>) {
+    <span style="color:#719e07">if</span> (p <span style="color:#719e07">&lt;</span> n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>) {
         fprintf(stderr,
-                <span style="color:#2aa198">&#34;Error: position (p=%d) less than 0</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
-                p);
+                <span style="color:#2aa198">&#34;Error: position (p=%d) less than n - 1 (%d)</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
+                p, n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>);
         <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
     } <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> (n <span style="color:#719e07">&lt;</span> <span style="color:#2aa198">1</span>) {
         fprintf(stderr,
                 <span style="color:#2aa198">&#34;Error: size (%d) is not a positive number</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
                 n);
         <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
-    } <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> (p <span style="color:#719e07">&lt;</span> n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>) {
+    } <span style="color:#719e07">else</span> <span style="color:#719e07">if</span> (p <span style="color:#719e07">&gt;=</span> <span style="color:#719e07">sizeof</span>(<span style="color:#dc322f">int</span>)<span style="color:#719e07">*</span><span style="color:#2aa198">8</span>) {
         fprintf(stderr,
-                <span style="color:#2aa198">&#34;Error: position (%d) less than n - 1 (%d)</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
-                p, n<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>);
+                <span style="color:#2aa198">&#34;Error: position (%d) is too large</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#34;</span>,
+                p);
         <span style="color:#719e07">return</span> <span style="color:#2aa198">0</span>;
     }
     
@@ -198,7 +200,7 @@ is negative or is greater than or equal to the width of the promoted left
 operand, the behavior is undefined.</p>
 </blockquote>
 <p>So, Claude was correct and the behavior is undefined. I&rsquo;m using a laptop with an
-Intel processor - what is the defined behavior within Intel&rsquo;s ISA?</p>
+Intel processor - what is the defined behavior of <code>SAL/SHL</code> within Intel&rsquo;s ISA?</p>
 <p>According to the Intel Developer Manual, pg. 4-593:</p>
 <blockquote>
 <p>The destination operand can be a register or a memory location. The count
@@ -207,10 +209,16 @@ operand can be an immediate value or the CL register. <strong>The count is maske
 31 (or 63 with a 64-bit operand). A special opcode encoding is provided for a
 count of 1.</p>
 </blockquote>
-<p>In the code above, <code>n</code> is defined as <code>unsigned</code>, which means that it has type
-<code>int</code>. On my machine, <code>sizeof(int) = 32 bits</code>. So in the first test case when <code>n = 32</code>, the entire number is being masked off (<code>0x20 ^ 0x1f == 0x0</code>). However, in
-the other two test cases, <code>n = 16</code>, which is within the lower five bits of the
-number. Mystery solved. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>In the code above, <code>n</code> is defined as type <code>int</code>. On my machine, <code>sizeof(int) = 32 bits</code>. So in the first test case when <code>n = 32 (0x20)</code>, the entire number is
+being masked to five bits (<code>0x20 &amp; 0x1f == 0x00</code>) before the left shift is
+performed. The expression</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#719e07">~</span>(<span style="color:#719e07">~</span><span style="color:#2aa198">0</span> <span style="color:#719e07">&lt;&lt;</span> <span style="color:#2aa198">32</span>) <span style="color:#719e07">&lt;&lt;</span> <span style="color:#2aa198">0</span>
+</code></pre></div><p>becomes</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#719e07">~</span>(<span style="color:#719e07">~</span><span style="color:#2aa198">0</span> <span style="color:#719e07">&lt;&lt;</span> <span style="color:#2aa198">0</span>) <span style="color:#719e07">&lt;&lt;</span> <span style="color:#2aa198">0</span>
+</code></pre></div><p>which makes the mask <code>~(~0) == 0</code>, and <code>x ^ 0 == x</code>.</p>
+<p>However, in the other two test cases, <code>n = 16</code>. This is within the lower five
+bits of the number (<code>0x10 &amp; 0x1f == 0x10</code>) and the left shift is performed
+correctly. Mystery solved. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <p>It seems that there is more to &ldquo;sensible positive values&rdquo; than I first
 realized. I thought of minimum bounds on both <code>p</code> and <code>n</code>, as well as a maximum
 bound on <code>p</code> - but no maximum bound on <code>n</code>.</p>
@@ -219,7 +227,7 @@ bug</a> to
 find.</p>
 <h2 id="an-overflow-safe-approach">An overflow-safe approach</h2>
 <p>A major problem with C is that there is no mechanism to catch this undefined
-behavior at runtime. Running <code>gcc</code> with<code>-Wall</code> does provide a warning when the
+behavior at runtime. Running <code>gcc</code> with <code>-Wall</code> does provide a warning when the
 second operand is a constant:</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">invert.c:71:26: warning: left shift count &gt;= width of type [-Wshift-count-overflow]
    71 |     unsigned mask = ~(~0 &lt;&lt; 32) &lt;&lt; p-(n-1);
@@ -278,8 +286,17 @@ error: this arithmetic operation will overflow
 
 error: aborting due to 1 previous error
 </code></pre></div><p>This is one small example in the larger picure of how Rust and C prioritize
-different features: C allows for direct hardware access and flexibility, while
-Rust mandates strict safety requirements.</p>
+different features.</p>
+<p>C allows for direct hardware access and flexibility. The standard often leaves
+behavior unspecified to allow compilers to best optimize a program for the
+machine architecture it is going to be run on. Additionally, a key assumption
+compilers make is that undefined behavior never occurs within a C program. <code>gcc</code>
+assumes that I was smart enough not to pass a value <code>n &gt; 31</code> to <code>invert()</code>. This
+expectation enables many optimizations that would not otherwise be possible, but
+allows programmers to shoot themselves in the foot with the language.</p>
+<p>Rust&rsquo;s strict safety requirements at compile time and runtime prevent undefined
+or unspecified behavior. However, they come with the tradeoff of higher overhead
+by default in both memory and runtime execution.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -301,12 +318,14 @@ type</strong>.</p>
 </blockquote>
 &#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:3" role="doc-endnote">
-<p>I also checked the ARM reference manual for 32-bit systems for their
-implementation of logical shift left (<code>LSL</code>). It operates similar to
-the Intel x86 instruction - it has a valid range of values (0 to 31,
-inclusive), but does not define behavior if the operand is outside of this
-range. I think this might be left up to the chip designer to implement, but
-will test this on the ARM Cortex-M4 at some point.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>I also checked several ISAs (RISC-V, ARM Cortex-M4, PDP-11, MIPS) to see
+how register operands are handled in a left shift operation. They all
+implement the instruction slightly differently, but all of them mask the
+register operand at some point by only taking the lower five bits as the
+amount to shift by. The PDP-11 was the most unique - it uses 6 bits to
+encode a shift, with the 6th bit signalling what type of shift the
+instruction is. Pointers to an ISA that does something different on an
+invalid immediate or register for a shift would be appreicated!&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
