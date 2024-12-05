@@ -31,7 +31,7 @@ to convert between metric and imperial units on an ATMega328P.
 {{< project 
     title="Autocom"
     image="/img/projects/autocom.gif"
-    repo="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom"
+        repo="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom"
     tags="TypeScript,VS Code,LLM" >}}
 Autocom is a VS Code extension that automatically generates both natural
 language comments and Doxygen documentation for your code using AI models such

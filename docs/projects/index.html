@@ -4,10 +4,7 @@
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Projects | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Projects" />
-<meta property="og:description" content="What I&rsquo;m working on These are some of the projects I&rsquo;m currently working on
-Systems Research  Summer and Fall 2023 Repository (private)  From our proposal: &ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&rdquo;
-hex-calc  Fall 2024  Autocom  December 2024  patbrowne.me  TBD 2024  Cribdle  Summer 2024  Github Leaderboard  WIP (do not include)  What I&rsquo;ve worked on This is a list of some of the projects I&rsquo;ve worked on in the past.
-DFA Simulator  June 2023 Repository  A program written in C that takes a defined .dfa file and an input string, and returns whether that input string is accepted or not by the given dfa. I may add NFA functionality to this as well at some point." />
+<meta property="og:description" content="What I&rsquo;m working on  Systems Research  From our proposal: &ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&rdquo; Machine Learning Systems Python     hex-calc  Simple Hex/Binary/Decimal calculator inspired by HP-16C and TI Programmer. Soldered and programmed a calculator designed by Eric Hazen. Currently implementing &ldquo;woodworking mode&rdquo; to convert between metric and imperial units on an ATMega328P. Embedded C Electronics     Autocom ↗  Autocom is a VS Code extension that automatically generates both natural language comments and Doxygen documentation for your code using AI models such as GPT-4 and Claude Sonnet 3.5.&ndash;&gt; TypeScript VS Code LLM    What I&rsquo;ve worked on  DFA Simulator ↗  A program written in C that takes a defined ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://patbrowne.me/projects/" /><meta property="article:section" content="" />
 
@@ -67,6 +64,10 @@ DFA Simulator  June 2023 Repository  A program written in C that takes a defined
 			</li>
 			
 			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
 				<a href="/tags">Tags</a>
 			</li>
 			
@@ -74,82 +75,381 @@ DFA Simulator  June 2023 Repository  A program written in C that takes a defined
 	</nav>
 </div>
 
-
 		<div class="post-header">
 			<h1 class="title">Projects</h1>
-			<div class="meta">
-                           Jan 1, 0001 
-                          
-			</div>
 		</div>
 
+		<style>
+			.project {
+				display: flex;
+				gap: 1.5rem;
+				margin-bottom: 3rem;
+			}
+			
+			.project-image {
+				flex: 0 0 200px;
+			}
+			
+			.project-image img,
+			.placeholder-img {
+				width: 100%;
+				height: 150px;
+				border-radius: 4px;
+				object-fit: cover;
+				background: var(--light-background);
+			}
+			
+			.project-content {
+				flex: 1;
+				min-width: 0;  
+			}
+			
+			.project-title {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.25rem;
+				color: var(--heading-color);
+			}
+			
+			.project-description {
+				margin: 0.5rem 0;
+				line-height: 1.5;
+			}
+
+			.project-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-top: 0.75rem;
+			}
+
+			.tag {
+				background: var(--light-background);
+				padding: 0.25rem 0.75rem;
+				border-radius: 1rem;
+				font-size: 0.875rem;
+				color: var(--text-color);
+			}
+
+			.repo-link {
+				color: var(--text-color);
+				text-decoration: none;
+				opacity: 0.7;
+				transition: opacity 0.2s;
+				margin-left: 0.5rem;
+			}
+
+			.repo-link:hover {
+				opacity: 1;
+			}
+
+			 
+			@media (max-width: 768px) {
+				.project {
+					flex-direction: column;
+					gap: 1rem;
+				}
+
+				.project-image {
+					flex: none;
+					max-width: 100%;
+				}
+
+				.project-image img,
+				.placeholder-img {
+					height: 200px;
+				}
+			}
+
+			 
+			@media (prefers-color-scheme: dark) {
+				.tag {
+					background: var(--dark-background, #2d2d2d);
+				}
+
+				.placeholder-img {
+					background: var(--dark-background, #2d2d2d);
+				}
+			}
+		</style>
+
 		<div class="markdown">
-			<h1 id="what-im-working-on">What I&rsquo;m working on</h1>
-<p>These are some of the projects I&rsquo;m currently working on</p>
-<h2 id="systems-research">Systems Research</h2>
-<ul>
-<li>Summer and Fall 2023</li>
-<li>Repository (private)</li>
-</ul>
-<p>From our proposal: &ldquo;Professor Appavoo and his research group have, for a long
+			<h2 id="what-im-working-on">What I&rsquo;m working on</h2>
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/research.png" alt="Systems Research">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      Systems Research
+      
+    </h3>
+    <p class="project-description">
+      From our proposal: &ldquo;Professor Appavoo and his research group have, for a long
 time, been looking at ways to apply machine learning to predict the execution
 of a computer&hellip; In this project, we hope to supplement and expand on this work
 with a concrete data-driven study. In particular, we hope to quantify if and
 how neural networks (or other appropriate machine learning mechanisms) can be
-trained on low-level data of a system’s operation.&rdquo;</p>
-<h2 id="hex-calc">hex-calc</h2>
-<ul>
-<li>Fall 2024</li>
-</ul>
-<h2 id="autocom">Autocom</h2>
-<ul>
-<li>December 2024</li>
-</ul>
-<h2 id="patbrowneme">patbrowne.me</h2>
-<ul>
-<li>TBD 2024</li>
-</ul>
-<h2 id="cribdle">Cribdle</h2>
-<ul>
-<li>Summer 2024</li>
-</ul>
-<h2 id="github-leaderboard">Github Leaderboard</h2>
-<ul>
-<li>WIP (do not include)</li>
-</ul>
-<h1 id="what-ive-worked-on">What I&rsquo;ve worked on</h1>
-<p>This is a list of some of the projects I&rsquo;ve worked on in the past.</p>
-<h2 id="dfa-simulator">DFA Simulator</h2>
-<ul>
-<li>June 2023</li>
-<li><a href="https://github.com/pbrowne011/dfa">Repository</a></li>
-</ul>
-<p>A program written in C that takes a defined .dfa file and an input string, and
+trained on low-level data of a system’s operation.&rdquo;
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">Machine Learning</span>
+        
+          <span class="tag">Systems</span>
+        
+          <span class="tag">Python</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/hex-calc.jpg" alt="hex-calc">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      hex-calc
+      
+    </h3>
+    <p class="project-description">
+      Simple Hex/Binary/Decimal calculator inspired by HP-16C and TI
+Programmer. Soldered and programmed a calculator designed by
+<a href="https://edf.bu.edu/ESH/">Eric Hazen</a>. Currently implementing &ldquo;woodworking mode&rdquo;
+to convert between metric and imperial units on an ATMega328P.
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">Embedded</span>
+        
+          <span class="tag">C</span>
+        
+          <span class="tag">Electronics</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/autocom.gif" alt="Autocom">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      Autocom
+      
+        <a href="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom" class="repo-link" target="_blank" rel="noopener">↗</a>
+      
+    </h3>
+    <p class="project-description">
+      Autocom is a VS Code extension that automatically generates both natural
+language comments and Doxygen documentation for your code using AI models such
+as GPT-4 and Claude Sonnet 3.5.&ndash;&gt;
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">TypeScript</span>
+        
+          <span class="tag">VS Code</span>
+        
+          <span class="tag">LLM</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+<h2 id="what-ive-worked-on">What I&rsquo;ve worked on</h2>
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/dfa.png" alt="DFA Simulator">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      DFA Simulator
+      
+        <a href="https://github.com/pbrowne011/dfa" class="repo-link" target="_blank" rel="noopener">↗</a>
+      
+    </h3>
+    <p class="project-description">
+      A program written in C that takes a defined .dfa file and an input string, and
 returns whether that input string is accepted or not by the given dfa. I may
-add NFA functionality to this as well at some point.</p>
-<h2 id="cubert">Cubert</h2>
-<ul>
-<li>February 2023</li>
-<li><a href="https://github.com/pbrowne011/cubert">Repository</a></li>
-</ul>
-<p>This is a project to implement different algorithms to solve a Rubik&rsquo;s cube,
-each with a different definition of &ldquo;efficiency&rdquo;. I implement a layered
-algorithm approach, and am working on building an implementation of the
-Thistlethwaite algorithm.</p>
-<h2 id="var">VaR</h2>
-<ul>
-<li>December 2022</li>
-<li><a href="https://github.com/pbrowne011/understandingvar">Repository</a></li>
-</ul>
-<p>Here I simulated a VaR calculation for the BU Investment club portfolio using
+add NFA functionality to this as well at some point.
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">C</span>
+        
+          <span class="tag">Automata Theory</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/cribdle.png" alt="Cribdle">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      Cribdle
+      
+        <a href="https://cribdle.com" class="repo-link" target="_blank" rel="noopener">↗</a>
+      
+    </h3>
+    <p class="project-description">
+      Cribdle is a cribbage game based on Wordle. Players aim to maximize their point
+total by selecting the best cards to discard.
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">Website</span>
+        
+          <span class="tag">JS</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/cubert.png" alt="Cubert">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      Cubert
+      
+        <a href="https://github.com/pbrowne011/cubert" class="repo-link" target="_blank" rel="noopener">↗</a>
+      
+    </h3>
+    <p class="project-description">
+      A project to implement different algorithms to solve a Rubik&rsquo;s cube, each with a
+different definition of &ldquo;efficiency&rdquo;. I implement a layered algorithm approach,
+and am working on building an implementation of the Thistlethwaite algorithm.
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">Python</span>
+        
+          <span class="tag">Algorithms</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/var.png" alt="VaR">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      VaR
+      
+        <a href="https://github.com/pbrowne011/understandingvar" class="repo-link" target="_blank" rel="noopener">↗</a>
+      
+    </h3>
+    <p class="project-description">
+      A simulation of a VaR calculation for the BU Investment club portfolio using
 the historical, variance-covariance, and Monte Carlo methods. This seems a bit
-more relevant given the banking issues of the first few months of 2023&hellip;</p>
-<h2 id="turing-house">Turing House</h2>
-<ul>
-<li>November 2022</li>
-<li><a href="https://github.com/lakitu/turing-house">Repository</a></li>
-</ul>
-<p>A hackathon project where our team built a 2D dungeon crawler game in Java
+more relevant given the banking issues of the first few months of 2023&hellip;
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">Finance</span>
+        
+          <span class="tag">Python</span>
+        
+      </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+<div class="project">
+  <div class="project-image">
+    
+      <img src="/img/projects/turinghouse.gif" alt="Turing House">
+    
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">
+      Turing House
+      
+    </h3>
+    <p class="project-description">
+      <p>A hackathon project where our team built a 2D dungeon crawler game in Java
 Processing. I built the backend, a Flask app that used the Twilio API to send
 messages to the player as they advanced through the game, giving clues and
 (hopefully) encouraging messages. I also built a chatbot interface to have a
@@ -157,12 +457,27 @@ conversation with the &ldquo;ghost&rdquo; of Alan Turing using the davinci-003 g
 from OpenAI.</p>
 <p>Our team ended up winning the Twilio Award for our project!</p>
 
-		</div>
+    </p>
+    
+      <div class="project-tags">
+        
+        
+          <span class="tag">Flask</span>
+        
+          <span class="tag">Twilio</span>
+        
+          <span class="tag">GPT-3</span>
+        
+          <span class="tag">Java (Processing)</span>
+        
+      </div>
+    
+  </div>
+</div>
 
-		<div class="post-tags">
-			
+
 		</div>
-		</div>
+	</div>
 	<div class="footer wrapper">
 	<nav class="nav">
 		<div></div>
@@ -174,16 +489,5 @@ from OpenAI.</p>
 <script>feather.replace()</script>
 <script data-goatcounter="https://personal-site.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-
-	
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
-                  var href = link.getAttribute('href');
-                  var newHref = window.location.pathname + href;
-                  link.setAttribute('href', newHref);
-              });
-          });
-        </script>
 </body>
 </html>
