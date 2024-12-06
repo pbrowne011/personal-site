@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Projects | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Projects" />
-<meta property="og:description" content="What I&rsquo;m working on  Systems Research  From our proposal: &ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&rdquo; Machine Learning Systems Python     hex-calc  Simple Hex/Binary/Decimal calculator inspired by HP-16C and TI Programmer. Soldered and programmed a calculator designed by Eric Hazen. Currently implementing &ldquo;woodworking mode&rdquo; to convert between metric and imperial units on an ATMega328P. Embedded C Electronics     Autocom ↗  Autocom is a VS Code extension that automatically generates both natural language comments and Doxygen documentation for your code using AI models such as GPT-4 and Claude Sonnet 3.5.&ndash;&gt; TypeScript VS Code LLM    What I&rsquo;ve worked on  DFA Simulator ↗  A program written in C that takes a defined ." />
+<meta property="og:description" content="What I&rsquo;m working on   Systems Research  From our proposal: &ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&rdquo; Machine Learning Systems Python      hex-calc  Simple Hex/Binary/Decimal calculator inspired by HP-16C and TI Programmer. Soldered and programmed a calculator designed by Eric Hazen. Currently implementing &ldquo;woodworking mode&rdquo; to convert between metric and imperial units on an ATMega328P. Embedded C Electronics      Autocom    Autocom is a VS Code extension that automatically generates both natural language comments and Doxygen documentation for your code using AI models such as GPT-4 and Claude Sonnet 3.5.&ndash;&gt; TypeScript VS Code LLM    What I&rsquo;ve worked on   DFA Simulator    A program written in C that takes a defined ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://patbrowne.me/projects/" /><meta property="article:section" content="" />
 
@@ -123,25 +123,34 @@
 			}
 
 			.tag {
-				background: var(--light-background);
+				background: rgba(128, 128, 128, 0.1);
 				padding: 0.25rem 0.75rem;
 				border-radius: 1rem;
 				font-size: 0.875rem;
 				color: var(--text-color);
 			}
+ 
 
-			.repo-link {
-				color: var(--text-color);
-				text-decoration: none;
-				opacity: 0.7;
-				transition: opacity 0.2s;
-				margin-left: 0.5rem;
-			}
-
-			.repo-link:hover {
-				opacity: 1;
-			}
-
+                        .repo-link {
+                            display: inline-flex;
+                            align-items: center;
+                            padding: 0.25rem 0.75rem;
+                            margin-left: 0.75rem;
+                            border: 1px solid #a00;
+                            border-radius: 4px;
+                            font-size: 0.85em;
+                            opacity: 0.8;
+                            transition: all 0.2s ease;
+                        }
+                        
+ 
+                        
+                        .repo-link:hover {
+                        opacity: 1;
+                        text-decoration: none;
+                        background: rgba(128, 128, 128, 0.1);
+                        }
+                        
 			 
 			@media (max-width: 768px) {
 				.project {
@@ -182,7 +191,9 @@
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/research.png" alt="Systems Research">
+      <a href="/img/projects/research.png" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/research.png" alt="Systems Research">
+      </a>
     
   </div>
   <div class="project-content">
@@ -221,7 +232,9 @@ trained on low-level data of a system’s operation.&rdquo;
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/hex-calc.jpg" alt="hex-calc">
+      <a href="/img/projects/hex-calc.jpg" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/hex-calc.jpg" alt="hex-calc">
+      </a>
     
   </div>
   <div class="project-content">
@@ -258,14 +271,18 @@ to convert between metric and imperial units on an ATMega328P.
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/autocom.gif" alt="Autocom">
+      <a href="/img/projects/autocom.gif" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/autocom.gif" alt="Autocom">
+      </a>
     
   </div>
   <div class="project-content">
     <h3 class="project-title">
       Autocom
       
-        <a href="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom" class="repo-link" target="_blank" rel="noopener">↗</a>
+      <a href="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom" class="repo-link" target="_blank" rel="noopener">
+        <i data-feather="link" width="16" height="16"></i>
+      </a>
       
     </h3>
     <p class="project-description">
@@ -297,14 +314,18 @@ as GPT-4 and Claude Sonnet 3.5.&ndash;&gt;
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/dfa.png" alt="DFA Simulator">
+      <a href="/img/projects/dfa.png" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/dfa.png" alt="DFA Simulator">
+      </a>
     
   </div>
   <div class="project-content">
     <h3 class="project-title">
       DFA Simulator
       
-        <a href="https://github.com/pbrowne011/dfa" class="repo-link" target="_blank" rel="noopener">↗</a>
+      <a href="https://github.com/pbrowne011/dfa" class="repo-link" target="_blank" rel="noopener">
+        <i data-feather="link" width="16" height="16"></i>
+      </a>
       
     </h3>
     <p class="project-description">
@@ -333,14 +354,18 @@ add NFA functionality to this as well at some point.
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/cribdle.png" alt="Cribdle">
+      <a href="/img/projects/cribdle.png" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/cribdle.png" alt="Cribdle">
+      </a>
     
   </div>
   <div class="project-content">
     <h3 class="project-title">
       Cribdle
       
-        <a href="https://cribdle.com" class="repo-link" target="_blank" rel="noopener">↗</a>
+      <a href="https://cribdle.com" class="repo-link" target="_blank" rel="noopener">
+        <i data-feather="link" width="16" height="16"></i>
+      </a>
       
     </h3>
     <p class="project-description">
@@ -368,14 +393,18 @@ total by selecting the best cards to discard.
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/cubert.png" alt="Cubert">
+      <a href="/img/projects/cubert.png" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/cubert.png" alt="Cubert">
+      </a>
     
   </div>
   <div class="project-content">
     <h3 class="project-title">
       Cubert
       
-        <a href="https://github.com/pbrowne011/cubert" class="repo-link" target="_blank" rel="noopener">↗</a>
+      <a href="https://github.com/pbrowne011/cubert" class="repo-link" target="_blank" rel="noopener">
+        <i data-feather="link" width="16" height="16"></i>
+      </a>
       
     </h3>
     <p class="project-description">
@@ -404,14 +433,18 @@ and am working on building an implementation of the Thistlethwaite algorithm.
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/var.png" alt="VaR">
+      <a href="/img/projects/var.png" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/var.png" alt="VaR">
+      </a>
     
   </div>
   <div class="project-content">
     <h3 class="project-title">
       VaR
       
-        <a href="https://github.com/pbrowne011/understandingvar" class="repo-link" target="_blank" rel="noopener">↗</a>
+      <a href="https://github.com/pbrowne011/understandingvar" class="repo-link" target="_blank" rel="noopener">
+        <i data-feather="link" width="16" height="16"></i>
+      </a>
       
     </h3>
     <p class="project-description">
@@ -440,7 +473,9 @@ more relevant given the banking issues of the first few months of 2023&hellip;
 <div class="project">
   <div class="project-image">
     
-      <img src="/img/projects/turinghouse.gif" alt="Turing House">
+      <a href="/img/projects/turinghouse.gif" target="_blank" rel="noopener noreferrer">
+        <img src="/img/projects/turinghouse.gif" alt="Turing House">
+      </a>
     
   </div>
   <div class="project-content">

@@ -94,23 +94,11 @@ Email me at pjbrowne011 [at] gmail [dot] com - I&amp;rsquo;m always interested i
     
     <item>
       <title>Projects</title>
-      <link>https://patbrowne.me/projects-old/</link>
-      <pubDate>Fri, 01 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://patbrowne.me/projects-old/</guid>
-      <description>What I&amp;rsquo;m working on These are some of the projects I&amp;rsquo;m currently working on
-Systems Research  Summer and Fall 2023 Repository (private)  From our proposal: &amp;ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&amp;hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&amp;rdquo;
-hex-calc  Fall 2024  Autocom  December 2024  patbrowne.me  TBD 2024  Cribdle  Summer 2024  Github Leaderboard  WIP (do not include)  What I&amp;rsquo;ve worked on This is a list of some of the projects I&amp;rsquo;ve worked on in the past.
-DFA Simulator  June 2023 Repository  A program written in C that takes a defined .dfa file and an input string, and returns whether that input string is accepted or not by the given dfa. I may add NFA functionality to this as well at some point.</description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
       <link>https://patbrowne.me/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://patbrowne.me/projects/</guid>
-      <description>What I&amp;rsquo;m working on  Systems Research  From our proposal: &amp;ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&amp;hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&amp;rdquo; Machine Learning Systems Python     hex-calc  Simple Hex/Binary/Decimal calculator inspired by HP-16C and TI Programmer. Soldered and programmed a calculator designed by Eric Hazen. Currently implementing &amp;ldquo;woodworking mode&amp;rdquo; to convert between metric and imperial units on an ATMega328P. Embedded C Electronics     Autocom ↗  Autocom is a VS Code extension that automatically generates both natural language comments and Doxygen documentation for your code using AI models such as GPT-4 and Claude Sonnet 3.5.&amp;ndash;&amp;gt; TypeScript VS Code LLM    What I&amp;rsquo;ve worked on  DFA Simulator ↗  A program written in C that takes a defined .</description>
+      <description>What I&amp;rsquo;m working on   Systems Research  From our proposal: &amp;ldquo;Professor Appavoo and his research group have, for a long time, been looking at ways to apply machine learning to predict the execution of a computer&amp;hellip; In this project, we hope to supplement and expand on this work with a concrete data-driven study. In particular, we hope to quantify if and how neural networks (or other appropriate machine learning mechanisms) can be trained on low-level data of a system’s operation.&amp;rdquo; Machine Learning Systems Python      hex-calc  Simple Hex/Binary/Decimal calculator inspired by HP-16C and TI Programmer. Soldered and programmed a calculator designed by Eric Hazen. Currently implementing &amp;ldquo;woodworking mode&amp;rdquo; to convert between metric and imperial units on an ATMega328P. Embedded C Electronics      Autocom    Autocom is a VS Code extension that automatically generates both natural language comments and Doxygen documentation for your code using AI models such as GPT-4 and Claude Sonnet 3.5.&amp;ndash;&amp;gt; TypeScript VS Code LLM    What I&amp;rsquo;ve worked on   DFA Simulator    A program written in C that takes a defined .</description>
     </item>
     
   </channel>
