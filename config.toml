@@ -108,8 +108,11 @@ url = "/index.xml"
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)'], ['$', '$']]
 
-
-
+# I will sometimes need to convert iPhone videos to a supported format
+# (mp4). Here is the FFMPEG command I've had great success with so far:
+#
+#    $ ffmpeg -i input.MOV -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt
+#    yuv420p -an -movflags +faststart input.mp4
 
 
 # [[params.social]]
