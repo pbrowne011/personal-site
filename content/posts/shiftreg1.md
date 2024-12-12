@@ -608,7 +608,7 @@ button, not its release. To send the to the output LEDs, RCLK (green) is
 pressed.
 
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/one-bit-of-data.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -619,7 +619,7 @@ pressed, shifting the '1' bit over a few places. The display is triggered by
 pressing RCLK again.
 
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/shift-7-right.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -630,7 +630,7 @@ high, allowing output through the tri-state buffer unimpeded. Pressing the red
 button sets OE to high and puts the outputs in a state of high impedance.
 
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/output-enable.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -641,7 +641,7 @@ doesn't need to be triggered - the SRCLR input is unphased and clears the shift
 register immediately.
 
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/serial-clear.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -675,7 +675,7 @@ $2^{16}\space (65536)$. I decided instead to count to 16 using a [seven-segment
 display](https://en.wikipedia.org/wiki/Seven-segment_display).
 
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="50%">
+  <video controls preload="none" playsinline width="50%" loading="lazy">
     <source src="/img/shiftreg/circuit/7-segment-arduino.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -701,7 +701,7 @@ bright the LEDs shone. I combined these two into one program running on a Nucleo
 board (STM32F4 processor).
 
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="50%">
+  <video controls preload="none" playsinline width="50%" loading="lazy">
     <source src="/img/shiftreg/circuit/pwm-chasing.mp4" type="video/mp4">
     Video not available in your browser
   </video>

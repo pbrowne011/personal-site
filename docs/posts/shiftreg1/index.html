@@ -601,7 +601,7 @@ while pressing the blue LED. The shift register is triggered on the press of the
 button, not its release. To send the to the output LEDs, RCLK (green) is
 pressed.</p>
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/one-bit-of-data.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -610,7 +610,7 @@ pressed.</p>
 pressed, shifting the &lsquo;1&rsquo; bit over a few places. The display is triggered by
 pressing RCLK again.</p>
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/shift-7-right.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -619,7 +619,7 @@ pressing RCLK again.</p>
 high, allowing output through the tri-state buffer unimpeded. Pressing the red
 button sets OE to high and puts the outputs in a state of high impedance.</p>
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/output-enable.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -628,7 +628,7 @@ button sets OE to high and puts the outputs in a state of high impedance.</p>
 doesn&rsquo;t need to be triggered - the SRCLR input is unphased and clears the shift
 register immediately.</p>
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="70%">
+  <video controls preload="none" playsinline width="70%" loading="lazy">
     <source src="/img/shiftreg/circuit/serial-clear.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -654,7 +654,7 @@ to use.</em></figcaption>
 $2^{16}\space (65536)$. I decided instead to count to 16 using a <a href="https://en.wikipedia.org/wiki/Seven-segment_display">seven-segment
 display</a>.</p>
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="50%">
+  <video controls preload="none" playsinline width="50%" loading="lazy">
     <source src="/img/shiftreg/circuit/7-segment-arduino.mp4" type="video/mp4">
     Video not available in your browser
   </video>
@@ -675,7 +675,7 @@ LEDs as a wave. Another was to use PWM (pulse width modulation) to control how
 bright the LEDs shone. I combined these two into one program running on a Nucleo
 board (STM32F4 processor).</p>
 <div style="text-align: center">
-  <video controls preload="auto" playsinline width="50%">
+  <video controls preload="none" playsinline width="50%" loading="lazy">
     <source src="/img/shiftreg/circuit/pwm-chasing.mp4" type="video/mp4">
     Video not available in your browser
   </video>
