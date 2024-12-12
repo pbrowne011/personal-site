@@ -883,8 +883,8 @@ Thank you to Eric Hazen for helps with explaining several basics of electronics
 and physics necessary for this post.
 
 Thank you also to [Ben Eater](https://www.youtube.com/@BenEater) and [Mitch
-Davis](https://www.youtube.com/@MitchDavis2). Their Valkyries of related
-concepts inspired this post.
+Davis](https://www.youtube.com/@MitchDavis2). Their videos of related concepts
+inspired this post.
 
 [^1]: The link might lead to no parts, depending on when you click it.
 
