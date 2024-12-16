@@ -46,7 +46,7 @@ well as how shift registers are used today.*
 ---
 <br>
 <img
-src="https://ardushop.ro/293-thickbox_default/ic-shift-register-sn74hc595n-74hc595.jpg"
+src="/img/shiftreg/sn74hc595n-image.jpg"
 alt="Image of an SN74HC595N integrated circuit" width="35%">
 
 <br>
@@ -832,7 +832,7 @@ burns out.
 
 I quickly added stronger resistors ($1\text{K}\space\Omega$) to reduce the
 current draw of the LEDs and avoid burning out the shift registers; however,
-none of the circuits that used those resistors
+none of the videos or images above have those circuits.
 
 ## Further reading
 
@@ -845,8 +845,8 @@ I'll also build more circuits: one uses only one GPIO output port for data
 register.
 
 This post was meant as an introduction to reading datasheets, understanding
-shift registers, and building circuits with it.The purpose of the second post is
-to solve the mystery: what exactly *are* the applications of the 74HC595N in
+shift registers, and building circuits with it. The purpose of the second post
+is to solve the mystery: what exactly *are* the applications of the 74HC595N in
 systems today? How is it used in the devices below?
 
 <figure>
