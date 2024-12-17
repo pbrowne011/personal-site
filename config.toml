@@ -48,7 +48,7 @@ math = true
 
 
 [outputs]
-home = ["HTML", "RSS"]
+  home = ["HTML", "RSS"]
 
 # Main menu (below site header)
 [[menu.main]]
