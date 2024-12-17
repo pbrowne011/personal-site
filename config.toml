@@ -107,6 +107,8 @@ url = "/index.xml"
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)'], ['$', '$']]
+  [markup.highlight]
+    lineNos = false
 
 # I will sometimes need to convert iPhone videos to a supported format
 # (mp4). Here is the FFMPEG command I've had great success with so far:
