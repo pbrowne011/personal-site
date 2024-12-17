@@ -110,6 +110,12 @@ url = "/index.xml"
   [markup.highlight]
     lineNos = false
 
+# Site redirects
+[[redirects]]
+  from = '/**'
+  status = 404
+  to = '/404.html'
+
 # I will sometimes need to convert iPhone videos to a supported format
 # (mp4). Here is the FFMPEG command I've had great success with so far:
 #
