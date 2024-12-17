@@ -9,13 +9,17 @@ slug = "projects"
 {{< project 
     title="Systems Research"
     image="/img/projects/research.png"
-    tags="Machine Learning,Systems,Python" >}}
-From our proposal: "Professor Appavoo and his research group have, for a long
-time, been looking at ways to apply machine learning to predict the execution
-of a computer... In this project, we hope to supplement and expand on this work
-with a concrete data-driven study. In particular, we hope to quantify if and
-how neural networks (or other appropriate machine learning mechanisms) can be
-trained on low-level data of a system’s operation."
+    tags="Machine Learning,Systems,Python,C,Bash" >}}
+    
+I work with [Professor
+Appavoo](https://www.cs.bu.edu/~jappavoo/jappavoo.github.com/index.html) and his
+graduate students on his lab's research into using a program's low level binary
+representation, in the form of [state
+vectors](https://www.cs.bu.edu/~jappavoo/Resources/Papers/PSML/asplos14.pdf), to
+learn its execution and improve performace. I have built tools to collect data
+on the [Microchess](https://benlo.com/microchess/index.html) program and train
+neural networks, and am developing a state vector library in C.
+
 {{< /project >}}
 
 {{< project 
@@ -31,11 +35,22 @@ to convert between metric and imperial units on an ATMega328P.
 {{< project 
     title="Autocom"
     image="/img/projects/autocom.gif"
-        repo="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom"
+    repo="https://marketplace.visualstudio.com/items?itemName=pbrowne011.autocom"
     tags="TypeScript,VS Code,LLM" >}}
 Autocom is a VS Code extension that automatically generates both natural
 language comments and Doxygen documentation for your code using AI models such
-as GPT-4 and Claude Sonnet 3.5.-->
+as GPT-4 and Claude Sonnet 3.5.
+{{< /project >}}
+
+{{< project 
+    title="StelluxOS"
+    image="/img/projects/stellux-xhci-run.png"
+    repo="https://github.com/FlareCoding/StelluxOS/"
+    tags="ARM64,C,C++,Operating systems" >}}
+Porting StelluxOS to ARM64. StelluxOS is an operating system that implements
+dynamic privilege, enabling userspace threads to elevate to kernel level and
+allowing for modular kernel components that can be monitored and hot-swapped
+without system crashes.
 {{< /project >}}
 
 
@@ -91,5 +106,5 @@ messages to the player as they advanced through the game, giving clues and
 conversation with the "ghost" of Alan Turing using the davinci-003 gpt model
 from OpenAI.
 
-Our team ended up winning the Twilio Award for our project!
+Our team ended up winning the Twilio Award for our project.
 {{< /project >}}
