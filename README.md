@@ -1,10 +1,12 @@
-# patbrowne.me
+# patbrowne.com
 
-Personal website: [patbrowne.me](https://patbrowne.me/)
+Personal website: [patbrowne.com](https://patbrowne.com/)
 
 This is a blog for things I'm interested in. Some topics I've written about
-recently include Unix utilities, cryptography, and bitwise tricks.
+recently include shift registers, Unix utilities, and bitwise tricks.
 
-This website was built with [Hugo](https://gohugo.io/) and
-[the Ezhil theme](https://github.com/pbrowne011/ezhil).
+This website was built with [Hugo](https://gohugo.io/) and [the Ezhil
+theme](https://github.com/pbrowne011/ezhil). It is currently hosted on [GitHub
+Pages](https://pages.github.com/) (someday on
+[Cloudflare](https://pages.cloudflare.com/)...)
 

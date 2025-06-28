@@ -26,12 +26,12 @@ keywords = []
 # 
 # I like to ... . This blog is one of the places where I do that.
 +++
-Hi, I'm Patrick.
+Hi, I'm Pat.
 
 I like to build things, and to understand how stuff works. I'm interested in
 systems-level programming (OS, embedded), probability, and cryptography. I also
-enjoy golf, books, and reading other's blogs. I'm currently studying statistics
-and computer science at Boston University, graduating this December.
+enjoy golf, books, and reading other's blogs. I'm currently a software engineer
+at Cloudflare working on infrastructure tooling.
 
 Email me at pjbrowne011 [at] gmail [dot] com - I'm always interested in meeting
 new people.
