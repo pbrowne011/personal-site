@@ -2,81 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://patbrowne.me/posts/shiftreg1/</loc>
+    <loc>https://patbrowne.com/2025/07/01/newblog/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://patbrowne.com/blog/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://patbrowne.com/</loc>
+    <lastmod>2025-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://patbrowne.com/posts/shiftreg1/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/electronics/</loc>
+    <loc>https://patbrowne.com/tags/electronics/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/integrated-circuits/</loc>
+    <loc>https://patbrowne.com/tags/integrated-circuits/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/</loc>
+    <loc>https://patbrowne.com/posts/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/</loc>
+    <loc>https://patbrowne.com/tags/</loc>
     <lastmod>2024-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/</loc>
-    <lastmod>2024-12-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://patbrowne.me/tags/c/</loc>
+    <loc>https://patbrowne.com/tags/c/</loc>
     <lastmod>2024-11-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/sal/</loc>
+    <loc>https://patbrowne.com/posts/sal/</loc>
     <lastmod>2024-11-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/awk/</loc>
+    <loc>https://patbrowne.com/tags/awk/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/bash/</loc>
+    <loc>https://patbrowne.com/tags/bash/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/countasm/</loc>
+    <loc>https://patbrowne.com/posts/countasm/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/perl/</loc>
+    <loc>https://patbrowne.com/tags/perl/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/sed/</loc>
+    <loc>https://patbrowne.com/tags/sed/</loc>
     <lastmod>2024-10-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/bit-tricks/</loc>
+    <loc>https://patbrowne.com/tags/bit-tricks/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/draft/</loc>
+    <loc>https://patbrowne.com/tags/draft/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/hackers-delight/</loc>
+    <loc>https://patbrowne.com/tags/hackers-delight/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/rtolcompute/</loc>
+    <loc>https://patbrowne.com/posts/rtolcompute/</loc>
     <lastmod>2024-10-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/cryptography/</loc>
+    <loc>https://patbrowne.com/tags/cryptography/</loc>
     <lastmod>2024-09-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/lwe/</loc>
+    <loc>https://patbrowne.com/posts/lwe/</loc>
     <lastmod>2024-09-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/probability/</loc>
+    <loc>https://patbrowne.com/tags/probability/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/markov/</loc>
+    <loc>https://patbrowne.com/posts/markov/</loc>
     <lastmod>2024-03-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/computer-history/</loc>
+    <loc>https://patbrowne.com/tags/computer-history/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/tags/unix/</loc>
+    <loc>https://patbrowne.com/tags/unix/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/posts/makefile/</loc>
+    <loc>https://patbrowne.com/posts/makefile/</loc>
     <lastmod>2024-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/about/</loc>
+    <loc>https://patbrowne.com/about/</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://patbrowne.me/projects/</loc>
+    <loc>https://patbrowne.com/projects/</loc>
   </url>
 </urlset>

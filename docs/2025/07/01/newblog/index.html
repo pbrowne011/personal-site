@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>A new blog | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="A new blog" />
+<meta property="og:description" content="Writing more words using shorter posts" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patbrowne.com/2025/07/01/newblog/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-07-01T00:00:00+00:00" />
+
+
+        
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A new blog"/>
+<meta name="twitter:description" content="Writing more words using shorter posts"/>
+
+
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.com/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.com/css/main.css" /><link rel="stylesheet" type="text/css" href="https://patbrowne.com/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://patbrowne.com/js/main.js"></script>
+
+	
+	<script>
+	  MathJax = {
+              tex: {
+                  inlineMath: [['\\(', '\\)'], ['$', '$']],
+                  displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                  packages: {'[+]': ['ams', 'noerrors']}
+              },
+              loader: {load: ['[tex]/ams', '[tex]/noerrors']},
+              svg: {
+                  fontCache: 'global'
+              }
+          };
+	</script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://patbrowne.com/">
+	<h1 class="site-title"><a href="https://patbrowne.com/">Pat Browne</a></h1>
+	<div class="site-description"><h2></h2><nav class="nav social">
+			<ul class="flat"><a href="mailto:pjbrowne011@gmail.com" title="Email"><i data-feather="mail"></i></a><a href="https://github.com/pbrowne011/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/blog">Blog</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">A new blog</h1>
+                        <h3 class="description">
+      			  
+			  Writing more words using shorter posts
+			  
+                        </h3>
+			<div class="meta">
+                          
+                            Jul 1, 2025
+                          
+                          
+			</div>
+		</div>
+
+		<div class="markdown">
+			<p>This is the first of (hopefully many) short blog posts. Inspired by reading
+Chris Siebenmann&rsquo;s <a href="https://utcc.utoronto.ca/~cks/space/blog/">&ldquo;Wandering
+Thoughts&rdquo;</a> and Daniel Lemire&rsquo;s
+<a href="https://lemire.me/blog/">blog</a>, as well as Gwern&rsquo;s semi-recent <a href="https://gwern.net/blog/">pivot to
+short form</a> and John Cook&rsquo;s <a href="https://www.johndcook.com/blog/">short
+posts</a>, I&rsquo;ve decided to write more unpolished,
+random thoughts on the Internet.</p>
+<p>I have folders of half-finished drafts that I want to get &ldquo;just right&rdquo; before
+posting. It is likely that many of them won&rsquo;t see the light of day because of
+this perfectionism. I want to <a href="https://jsomers.net/blog/speed-matters">write
+quickly</a>, but that&rsquo;s difficult to do
+when my last post is from <a href="/posts/shiftreg1">seven months ago</a>.</p>
+<p>The <code>/blog</code> section will be a place for me to write about topics that are
+trivial: random Emacs features I find (I just discovered <code>eshell</code> yesterday!),
+interesting puzzles and problems, code snippets, and who knows what else.</p>
+<h3 id="new-thoughts-already">New thoughts already</h3>
+<p>Even in setting this up, I found something to write about: an issue with TOML
+parsing.</p>
+<p>I wanted to add dates to blog URLs. There will (hopefully) be more of them, and
+other people seem to do this.</p>
+<p>The static site generator I use, Hugo, has several ways to configure website
+links. <a href="https://gohugo.io/configuration/permalinks/">Permalinks</a> fit my use
+case: they allow me to configure all blog URLs with a date, while leaving other
+pages (such as About or Posts) alone.</p>
+<p>Hugo allows users to write their site configuration file in either YAML, TOML,
+or JSON. By historical accident, I set up the blog with a <code>config.toml</code> file,
+though I&rsquo;m much more familiar with the other two file formats at this point and
+know <a href="https://ruudvanasseldonk.com/2023/01/11/the-yaml-document-from-hell">some</a>
+<a href="https://noyaml.com/">weaknesses</a>.</p>
+<p>My configuration is a mess, so I plopped the permalinks setting somewhat
+randomly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">...other settings
+[permalinks]
+  blog = <span style="color:#2aa198">&#39;/:year/:month/:day/:filename/&#39;</span>
+
+mainSections = [<span style="color:#2aa198">&#34;post&#34;</span>]
+
+...
+</code></pre></div><p>I ran into an unreadable panic when checking the config.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo config
+panic: runtime error: slice bounds out of range [1:0]
+
+goroutine 1 [running]:
+github.com/gohugoio/hugo/resources/page.PermalinkExpander.validate({0xc000555080?, 0x0?, 0xc000554ab0?}, {0x0?, 0x0?})
+        github.com/gohugoio/hugo/resources/page/permalinks.go:182 +0x23c
+github.com/gohugoio/hugo/resources/page.PermalinkExpander.parse({0xc000555080?, 0x0?, 0xc000554ab0?}, 0x8?)
+        github.com/gohugoio/hugo/resources/page/permalinks.go:125 +0x136
+        
+...
+</code></pre></div><p>Looking at the <a href="https://github.com/gohugoio/hugo/blob/v0.92.2/resources/page/permalinks.go#L182">offending
+line</a>,
+I noticed that the line being passed wasn&rsquo;t long enough to be indexed.</p>
+<p>I checked if I needed another &ldquo;layer&rdquo; (does it have to be permalinks.page?
+blog.permalinks?), or some format string was off, or if &ldquo;blog&rdquo; itself was
+incorrect (I had just added the directory to my &ldquo;content&rdquo;).</p>
+<p>I tried Claude Sonnet 4, but the debugging suggestions weren&rsquo;t helpful. I also
+did a bad job providing context: I typed the permalink lines I had added to the
+config, rather than pasting the whole file.</p>
+<p>Eventually, I just C-c C-ved the error into Google and found
+<a href="https://discourse.gohugo.io/t/config-permalinks-meet-panic/18479">this</a> on the
+Hugo forum from zwbetz:</p>
+<blockquote>
+<p>In TOML you can’t write a map then write a regular key/value right after (only other maps).</p>
+<p>In other words, move your permalinks to the very bottom on your config file</p>
+</blockquote>
+<p>I moved it to the bottom of the file and the config went back to normal. Why did
+that work?</p>
+<h4 id="toml-tables">TOML Tables</h4>
+<p>The <a href="https://toml.io/en/v1.0.0#table">v1.0.0 specification</a> describes the
+&ldquo;table&rdquo; feature of TOML. Tables are TOML&rsquo;s hash table implementation. Headers
+are defined by brackets (e.g., <code>[permalinks]</code>) and key-value pairs for that
+table follow underneath.</p>
+<p>In a TOML file, there is a &ldquo;root table&rdquo; that goes from the beginning of the file
+until the first table header (or EOF). I had no conception of this root table in
+my configuration, and had been throwing key-value pairs wherever they
+worked. The comments and weird whitespacing I left didn&rsquo;t help either.</p>
+<p>If you look at the example above again, you can see the array <code>mainSections = [&quot;post&quot;]</code> getting parsed incorrectly, though I didn&rsquo;t poke around long enough to
+figure out what exactly was being parsed. Maybe if I used a debugger like
+<a href="https://github.com/go-delve/delve">Delve</a>, this would be an easier mystery to
+solve.</p>
+<h4 id="woes-of-toml">Woes of TOML</h4>
+<p>Tables highlight the main issue people point out with TOML: deeply nested data
+structures.</p>
+<p>In a k8s manifest.yaml file, the indentation describes the nesting of different
+objects. While there are many footguns in describing objects in this way, the
+file format makes it obvious where this nesting is. Likewise, braces (and a good
+linter) reveal nesting in JSON objects.</p>
+<p>TOML, however, requires the user to write a well-behaved file. With dotted keys,
+an invisible root table, and no strict constraints on indentation, defining
+nested objects becomes trickier. One must parse the various table headers and
+keep track of which key-value pairs belong to each. In the other file formats,
+the syntax manages this abstraction for you.</p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+	
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  var newHref = window.location.pathname + href;
+                  link.setAttribute('href', newHref);
+              });
+          });
+        </script>
+</body>
+</html>

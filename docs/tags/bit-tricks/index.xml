@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bit-tricks on Pat Browne</title>
-    <link>https://patbrowne.me/tags/bit-tricks/</link>
+    <link>https://patbrowne.com/tags/bit-tricks/</link>
     <description>Recent content in bit-tricks on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Oct 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://patbrowne.me/tags/bit-tricks/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://patbrowne.com/tags/bit-tricks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Right to left computability</title>
-      <link>https://patbrowne.me/posts/rtolcompute/</link>
+      <link>https://patbrowne.com/posts/rtolcompute/</link>
       <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/rtolcompute/</guid>
+      <guid>https://patbrowne.com/posts/rtolcompute/</guid>
       <description>Manipulating bits Recently I&amp;rsquo;ve been going through Hacker&amp;rsquo;s Delight. It is a joy to become a &amp;ldquo;bit-twiddler&amp;rdquo; and explore some of the counter intuitive properties of using bit wise operations in places you wouldn&amp;rsquo;t expect them.
 Chapter 2 focuses on &amp;ldquo;Basics&amp;rdquo;, and covers bit manipulation tricks that perform specific operations. It assumes a 32-bit machine (and word size), with signed values represented in two&amp;rsquo;s complement form. 1 Some tricks presented include:
  $x \; \&amp;amp; \; (x - 1)$: turn off the rightmost bit in a word $x \; \&amp;amp; \; (x + 1)$: turn off the trailing 1&amp;rsquo;s in a word $\neg x \; \&amp;amp; \; (x + 1)$: create a word with a single 1-bit at the position of the rightmost 0-bit $x \; \&amp;amp; \; (-x)$: isolate the rightmost 1-bit, produce 0 if none  Note that these hacks are much more useful than they might appear. The first trick can be used to great effect to count set bits and calculate powers of two, as demonstrated in Brian Kernighan&amp;rsquo;s algorithm2:
-unsigned int v; // count the number of bits set in v unsigned int c; // c accumulates the total bits set in v for (c = 0; v; c++) { v &amp;amp;= v - 1; // clear the least significant bit set } These bit wise operations allow for implementations of functions that are branch-free and do not require shift instructions, saving valuable CPU cycles.</description>
+unsigned int v; // count the number of bits set in v unsigned int c; // c accumulates the total bits set in v for (c = 0; v; c++) { v &amp;amp;= v - 1; // clear the least significant bit set } These bit wise operations allow for implementations of functions that are branch-free and do not require shift instructions, saving valuable CPU cycles. Additionally, they allow for word-parallelism: if a bit&amp;rsquo;s value only depends on bits to its right, one can optimize by executing single instructions on multiple data, or SIMDs.</description>
     </item>
   </channel>
 </rss>

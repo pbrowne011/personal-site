@@ -1,4 +1,4 @@
-baseURL = "https://patbrowne.me/"
+baseURL = "https://patbrowne.com/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "Pat Browne"
@@ -18,15 +18,15 @@ pygmentsCodeFencesGuessSyntax = true
 paginate = 20
 
 # Number of characters to show in summary
-summaryLength = 180
+summaryLength = 240
 
 [params]
 author = "Pat Browne"
 subtitle = ""
 favicon = "/images/favicon.ico"
-
+  
 # Content types (not sections) to include on front page
-# Types I want to use: {"page", "post}
+# Types I want to use: {"page", "post"}
 mainSections = ["post"]
 
 # Allow fetching icons from CDN
@@ -57,22 +57,34 @@ url = "/posts"
 weight = 1
 
 [[menu.main]]
+name = "Blog"
+url = "/blog"
+weight = 2
+
+[[menu.main]]
 name = "About"
 url = "/about"
-weight = 2
+weight = 3
 
 [[menu.main]]
 name = "Projects"
 url = "/projects"
-weight = 3
+weight = 4
 
 [[menu.main]]
 name = "Tags"
 url = "/tags"
-weight = 4
+weight = 5
 
 [taxonomies]
 tag = "tags"
+
+
+# Reformat blog URLs to include publish date
+# Note: ':filename' is deprecated as of v0.144.0. Use ':contentbasename' instead
+# I'm currently using hugo v0.92.2, so I can't use ':contentbasename' yet
+[permalinks]
+  blog = '/:year/:month/:day/:filename/'
 
 
 [[params.social]]
@@ -121,7 +133,6 @@ url = "/index.xml"
 #
 #    $ ffmpeg -i input.MOV -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt
 #    yuv420p -an -movflags +faststart input.mp4
-
 
 # [[params.social]]
 # name = "Gitlab"

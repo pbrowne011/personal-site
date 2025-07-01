@@ -2,20 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>electronics on Pat Browne</title>
-    <link>https://patbrowne.me/tags/electronics/</link>
+    <link>https://patbrowne.com/tags/electronics/</link>
     <description>Recent content in electronics on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://patbrowne.me/tags/electronics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://patbrowne.com/tags/electronics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building circuits with the 74HC595 (Part 1)</title>
-      <link>https://patbrowne.me/posts/shiftreg1/</link>
+      <link>https://patbrowne.com/posts/shiftreg1/</link>
       <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/shiftreg1/</guid>
+      <guid>https://patbrowne.com/posts/shiftreg1/</guid>
       <description>This is the first of two posts about shift registers. This post focuses on some history behind integrated circuits, how the 74HC595 works, and how to build simple circuits with it. The second post will explore more complex circuits, as well as how shift registers are used today.
  Many general-purpose electronics kits include a few integrated circuits (ICs) in addition to jumper wires, resistors, capacitors, and other electronic circuit components. A common IC included in kits is the 74HC595N, often one manufactured by Texas Instruments (SN74HC595N). After receiving a few of these in various electronics kits, I built several circuits with this shift register to understand how it works.
-Background on integrated circuits Circuits are made up of electrical components, such as resistors, capacitors, transistors, and diodes. While all circuits can be made up of these components, it is often necessary to combine several parts together into a single component, where the parts are closer together, smaller, and merged into a single building block. These circuits are typically etched onto a semiconductor material, such as silicon, and are known as integrated circuits, or ICs for short.</description>
+Background on integrated circuits Circuits are made up of electrical components, such as resistors, capacitors, transistors, and diodes. While all circuits can be made up of these components, it is often necessary to combine several parts together into a single component, where the parts are closer together, smaller, and merged into a single building block. These circuits are typically etched onto a semiconductor material, such as silicon, and are known as integrated circuits, or ICs for short.
+The first IC (an oscillator) was created by Jack Kilby at Texas Instruments in 1958. Robert Noyce invented the first mass-producible IC, fabricating it using the planar process and silicon. IC construction exploded in well-documented fashion at companies such as Fairchild Semiconductor, Intel, and AMD, with Silicon Valley earning its name from the semiconductor material being used to produce these chips.</description>
     </item>
   </channel>
 </rss>

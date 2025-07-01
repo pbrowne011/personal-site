@@ -2,26 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Pat Browne</title>
-    <link>https://patbrowne.me/posts/</link>
+    <link>https://patbrowne.com/posts/</link>
     <description>Recent content in Posts on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://patbrowne.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://patbrowne.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building circuits with the 74HC595 (Part 1)</title>
-      <link>https://patbrowne.me/posts/shiftreg1/</link>
+      <link>https://patbrowne.com/posts/shiftreg1/</link>
       <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/shiftreg1/</guid>
+      <guid>https://patbrowne.com/posts/shiftreg1/</guid>
       <description>This is the first of two posts about shift registers. This post focuses on some history behind integrated circuits, how the 74HC595 works, and how to build simple circuits with it. The second post will explore more complex circuits, as well as how shift registers are used today.
  Many general-purpose electronics kits include a few integrated circuits (ICs) in addition to jumper wires, resistors, capacitors, and other electronic circuit components. A common IC included in kits is the 74HC595N, often one manufactured by Texas Instruments (SN74HC595N). After receiving a few of these in various electronics kits, I built several circuits with this shift register to understand how it works.
-Background on integrated circuits Circuits are made up of electrical components, such as resistors, capacitors, transistors, and diodes. While all circuits can be made up of these components, it is often necessary to combine several parts together into a single component, where the parts are closer together, smaller, and merged into a single building block. These circuits are typically etched onto a semiconductor material, such as silicon, and are known as integrated circuits, or ICs for short.</description>
+Background on integrated circuits Circuits are made up of electrical components, such as resistors, capacitors, transistors, and diodes. While all circuits can be made up of these components, it is often necessary to combine several parts together into a single component, where the parts are closer together, smaller, and merged into a single building block. These circuits are typically etched onto a semiconductor material, such as silicon, and are known as integrated circuits, or ICs for short.
+The first IC (an oscillator) was created by Jack Kilby at Texas Instruments in 1958. Robert Noyce invented the first mass-producible IC, fabricating it using the planar process and silicon. IC construction exploded in well-documented fashion at companies such as Fairchild Semiconductor, Intel, and AMD, with Silicon Valley earning its name from the semiconductor material being used to produce these chips.</description>
     </item>
     <item>
       <title>SAL/SAR/SHL/SHR — Shift</title>
-      <link>https://patbrowne.me/posts/sal/</link>
+      <link>https://patbrowne.com/posts/sal/</link>
       <pubDate>Mon, 04 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/sal/</guid>
+      <guid>https://patbrowne.com/posts/sal/</guid>
       <description>I&amp;rsquo;ve been working through some of the exercises from &amp;ldquo;The C Programming Language&amp;rdquo; by Kernighan and Ritchie, and ran into an issue in Chapter 2 (&amp;ldquo;Types, Operators, and Expressions&amp;rdquo;).
 Exercise 2-7:
  Write a function invert(x,p,n) that returns x with the n bits that begin at position p inverted (i.e., 1 changed into 0 and vice versa), leaving the others unchanged.
@@ -29,55 +30,61 @@ Exercise 2-7:
 /* invert.c */ unsigned int invert(unsigned x, int p, int n) { unsigned mask = ~(~0 &amp;lt;&amp;lt; n) &amp;lt;&amp;lt; p-(n-1); return x ^ mask; } Earlier, the authors wrote a similar function get_bits(x,p,n), and stated some assumptions they made when writing it:
  We assume that bit position 0 is at the right end and that n and p are sensible positive values.
  Originally, I thought &amp;ldquo;sensible positive values&amp;rdquo; implied maximum and minimum bounds on p and n:
- n &amp;gt; 0, and p &amp;gt;= 0: it doesn&amp;rsquo;t make sense to have n=0 (what&amp;rsquo;s the point of inverting 0 bits?), and setting p or n to a negative value has no meaning in the context of absolute position or size.</description>
+ n &amp;gt; 0, and p &amp;gt;= 0: it doesn&amp;rsquo;t make sense to have n=0 (what&amp;rsquo;s the point of inverting 0 bits?), and setting p or n to a negative value has no meaning in the context of absolute position or size. sizeof(int)*8 &amp;gt; p &amp;gt;= n-1: inverting more bits than are available on the right side of a number doesn&amp;rsquo;t make sense - neither does inverting bits starting from a bit position that doesn&amp;rsquo;t exist.  So I added some error checking:
+unsigned int invert(unsigned x, int p, int n) { if (p &amp;lt; n-1) { fprintf(stderr, &amp;#34;Error: position (p=%d) less than n - 1 (%d)\n&amp;#34;, p, n-1); return 0; } else if (n &amp;lt; 1) { fprintf(stderr, &amp;#34;Error: size (%d) is not a positive number\n&amp;#34;, n); return 0; } else if (p &amp;gt;= sizeof(int)*8) { fprintf(stderr, &amp;#34;Error: position (%d) is too large\n&amp;#34;, p); return 0; } unsigned mask = ~(~0 &amp;lt;&amp;lt; n) &amp;lt;&amp;lt; p-(n-1); return x ^ mask; } I set out to write some test cases, starting with several values for x and three sets of cases for n and p:</description>
     </item>
     <item>
       <title>Counting assembly instructions</title>
-      <link>https://patbrowne.me/posts/countasm/</link>
+      <link>https://patbrowne.com/posts/countasm/</link>
       <pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/countasm/</guid>
+      <guid>https://patbrowne.com/posts/countasm/</guid>
       <description>As someone who may or may not procrastinate, I find myself shaving yaks occasionally. One such yak shave occurred recently while working on a project for my operating systems class. We were provided with an assembly file written in x86 GNU assembly syntax. I wondered if the file contained any instructions I wasn&amp;rsquo;t familiar with or hadn&amp;rsquo;t used in awhile. My first task was to figure out all of these unique assembly instructions, look them up in the Intel manual, and use them (plus 1-2 others) for the code I was going to write.
 The assembly file itself was ~200 lines of code, so it was not unthinkable to count them by hand, determine what the unknown instructions were, and look those up.
 Just kidding! I needed to be efficient and decisive. Since I perform this task yearly (?), I also judged if it was worth the time to make this task more efficient. My calculations were influenced by procrastination, so naturally the answer was &amp;ldquo;yes - I must write a bash script to do this&amp;rdquo;.
-First try My first attempt at a shell script looked like this:</description>
+First try My first attempt at a shell script looked like this:
+#!/bin/bash  # count_mnemonics.sh # # This script counts the number of unique assembly mnemonics # in an assembly file. Assumes a tab character before every # assembly instruction asfile=$1 if [[ -z $asfile ]]; then echo &amp;#34;Error: please provide an assembly file&amp;#34; 2&amp;gt;&amp;amp;1 exit 1 fi touch tmp IFS=&amp;#39;&amp;#39; while read -r line; do if [[ $line == *$&amp;#39;\t&amp;#39;[[:alpha:]]* ]]; then line=${line#*$&amp;#39;\t&amp;#39;} echo &amp;#34;${line%% *}&amp;#34; &amp;gt;&amp;gt; tmp fi done &amp;lt; &amp;#34;$asfile&amp;#34; sort tmp | uniq -c | sort -rn rm tmp The provided assembly file had a tab character in front of each mnemonic, which reduced the job of finding instructions to finding 0x09 bytes.</description>
     </item>
     <item>
       <title>Right to left computability</title>
-      <link>https://patbrowne.me/posts/rtolcompute/</link>
+      <link>https://patbrowne.com/posts/rtolcompute/</link>
       <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/rtolcompute/</guid>
+      <guid>https://patbrowne.com/posts/rtolcompute/</guid>
       <description>Manipulating bits Recently I&amp;rsquo;ve been going through Hacker&amp;rsquo;s Delight. It is a joy to become a &amp;ldquo;bit-twiddler&amp;rdquo; and explore some of the counter intuitive properties of using bit wise operations in places you wouldn&amp;rsquo;t expect them.
 Chapter 2 focuses on &amp;ldquo;Basics&amp;rdquo;, and covers bit manipulation tricks that perform specific operations. It assumes a 32-bit machine (and word size), with signed values represented in two&amp;rsquo;s complement form. 1 Some tricks presented include:
  $x \; \&amp;amp; \; (x - 1)$: turn off the rightmost bit in a word $x \; \&amp;amp; \; (x + 1)$: turn off the trailing 1&amp;rsquo;s in a word $\neg x \; \&amp;amp; \; (x + 1)$: create a word with a single 1-bit at the position of the rightmost 0-bit $x \; \&amp;amp; \; (-x)$: isolate the rightmost 1-bit, produce 0 if none  Note that these hacks are much more useful than they might appear. The first trick can be used to great effect to count set bits and calculate powers of two, as demonstrated in Brian Kernighan&amp;rsquo;s algorithm2:
-unsigned int v; // count the number of bits set in v unsigned int c; // c accumulates the total bits set in v for (c = 0; v; c++) { v &amp;amp;= v - 1; // clear the least significant bit set } These bit wise operations allow for implementations of functions that are branch-free and do not require shift instructions, saving valuable CPU cycles.</description>
+unsigned int v; // count the number of bits set in v unsigned int c; // c accumulates the total bits set in v for (c = 0; v; c++) { v &amp;amp;= v - 1; // clear the least significant bit set } These bit wise operations allow for implementations of functions that are branch-free and do not require shift instructions, saving valuable CPU cycles. Additionally, they allow for word-parallelism: if a bit&amp;rsquo;s value only depends on bits to its right, one can optimize by executing single instructions on multiple data, or SIMDs.</description>
     </item>
     <item>
       <title>Understanding learning with errors</title>
-      <link>https://patbrowne.me/posts/lwe/</link>
+      <link>https://patbrowne.com/posts/lwe/</link>
       <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/lwe/</guid>
+      <guid>https://patbrowne.com/posts/lwe/</guid>
       <description>Cryptographic protocols that perform computations on encrypted data without decrypting it are known as homomorphic encryption. Fully homomorphic encryption (FHE) protocols, systems which support arbitrary computations, often rely on different primitives than conventional cryptography systems. Most FHE systems in practice used lattice-based cryptography, relying on a computational hardness assumption known as the learning with errors (LWE) problem.
 Cryptograhy relies on assumptions Prior to the 20th century, cryptography did not rely on a formalized system of provable security. Rather, one set of people (cryptographers) would come up with clever ciphers, and another set of people (cryptanalysts) would attempt to break those ciphers. Encryption schemes such as the Caesar cipher, the Vingenère cipher, the Enigma, and other systems were not formally proven secure by cryptographers. Rather, they relied on obfuscation and statistical properties that made deciphering messages fairly difficult. However, each one of these systems had some sort of flaw that cryptanalysts were able to exploit to decipher encrypted messages. 1
-Modern cryptography, starting in the 1970s and 80s, changed the way we define security to be about adversarial capabilities rather than strategies.</description>
+Modern cryptography, starting in the 1970s and 80s, changed the way we define security to be about adversarial capabilities rather than strategies. Instead of attempting to figure out the many ways a potential adversary could attack a specific protocol, cryptographers base security protocols on well-studied problems for which no known solution exists. The fundamental assumption that much of cryptography rests on is that $P \neq NP$.
+Why is this a bedrock assumption for many protocols? The definitions that cryptography uses today all come from security games, where an arbitrary distinguisher (the adversary) tries to figure out what the challenger (the protocol) is doing.</description>
     </item>
     <item>
       <title>Real-life examples of Markov chains</title>
-      <link>https://patbrowne.me/posts/markov/</link>
+      <link>https://patbrowne.com/posts/markov/</link>
       <pubDate>Mon, 04 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/markov/</guid>
+      <guid>https://patbrowne.com/posts/markov/</guid>
       <description>One of the classes that I&amp;rsquo;m taking this semester is on stochastic processes. Stochastic processes are sequences of random variables $X_1, X_2, &amp;hellip;, X_n$, where $n$ represents a specific moment in time.1 The first topic we&amp;rsquo;ve focused on this semester has been Markov chains, specific stochastic models that only depend on the current state. They are unique in that future events are only affected by where you currently are, not where you have been in the past. Markov chains arise from the law of total probability, which is a way to express the probability of an event as the sum of many other probabilities. In general, when dealing with a stochastic process, you have to condition the probability of an event on all previous events before, as they all have some effect on whether or not you reach that state. Mathematically, this can be expressed as
 $$P[X_{n+1} = m \mid X_0 = i, X_1 = j, &amp;hellip;, X_n = k]$$
 However, with Markov chains, we only need to focus on the most recent event.
-$$P[X_{n+1} = m \mid X_n = k]$$</description>
+$$P[X_{n+1} = m \mid X_n = k]$$
+This is a remarkable simplification. We are able to ignore all previous events and condition our probability on $X_n$. This greatly simplifies both the conceptual understanding of each probability and the number of calculations required to obtain it.
+Markov chains appear everywhere: the Wikipedia page for Markov chains lists several general examples, including random walks, board games played with dice (assuming players have no agency), weather predictions, and the stock market.</description>
     </item>
     <item>
       <title>Why do commands require tabs in a Makefile?</title>
-      <link>https://patbrowne.me/posts/makefile/</link>
+      <link>https://patbrowne.com/posts/makefile/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://patbrowne.me/posts/makefile/</guid>
+      <guid>https://patbrowne.com/posts/makefile/</guid>
       <description>When I was first learning how to write a Makefile to compile a C program, one thing that stuck me (and almost everyone who encounters it) as odd was the requirement that each command line start with a tab character (&#39;\t&#39;). Makefiles are used to automate repetitive tasks (such as recompiling a C/C++ program), and have a unique syntax. They are made up of rules, which consist of a &amp;ldquo;target&amp;rdquo;, a list of &amp;ldquo;dependencies&amp;rdquo;, and a series of &amp;ldquo;commands&amp;rdquo;. They look like this:
 target: dependencies command For example, suppose I want to automate two different tasks: recompiling my program after editing some of the source code, and deleting all non-source files after editing them. I could write a Makefile that looks like this:
-.PHONY: clean myprogram: myprogram.c gcc myprogram.c -o myprogram clean: rm *.o *~ myprogram The .PHONY makes sure that when I run the shell command make clean, I don&amp;rsquo;t create a file named clean. Instead, I run the command underneath, which removes the files I don&amp;rsquo;t want in my directory. The other rule has a target filename myprogram, which requires a file named myprogram.</description>
+.PHONY: clean myprogram: myprogram.c gcc myprogram.c -o myprogram clean: rm *.o *~ myprogram The .PHONY makes sure that when I run the shell command make clean, I don&amp;rsquo;t create a file named clean. Instead, I run the command underneath, which removes the files I don&amp;rsquo;t want in my directory. The other rule has a target filename myprogram, which requires a file named myprogram.c. If it finds this .c file in my directory, it will compile it using the command below. If you want to learn more about makefiles and their syntax, a resource that I highly recommend is Makefile Tutorial.
+Notice how each command is indented with a tab character. The UNIX utility make doesn&amp;rsquo;t allow you to list a command underneath a target/dependency combination, or to indent with a number of spaces.</description>
     </item>
   </channel>
 </rss>

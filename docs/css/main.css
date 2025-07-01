@@ -194,7 +194,12 @@ ul {
 pre code {
   display: inline-block;
 }
-  
+
+code:not(pre code) {
+    background-color: #ccc;
+    padding: 2px 3px;
+    border-radius: 3px;
+}
 
 .wrapper {
     max-width: 760px;
