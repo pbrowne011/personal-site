@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>The lognormal distribution | patbrowne.me </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="The lognormal distribution" />
+<meta property="og:description" content="Learning what I do not understand" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patbrowne.com/2025/07/02/lognormal/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-07-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-07-02T00:00:00+00:00" />
+
+
+        
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The lognormal distribution"/>
+<meta name="twitter:description" content="Learning what I do not understand"/>
+
+
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.com/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://patbrowne.com/css/main.css" /><link rel="stylesheet" type="text/css" href="https://patbrowne.com/css/dark.css" media="(prefers-color-scheme: dark)" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="https://patbrowne.com/js/main.js"></script>
+
+	
+	<script>
+	  MathJax = {
+              tex: {
+                  inlineMath: [['\\(', '\\)'], ['$', '$']],
+                  displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                  packages: {'[+]': ['ams', 'noerrors']}
+              },
+              loader: {load: ['[tex]/ams', '[tex]/noerrors']},
+              svg: {
+                  fontCache: 'global'
+              }
+          };
+	</script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://patbrowne.com/">
+	<h1 class="site-title"><a href="https://patbrowne.com/">Pat Browne</a></h1>
+	<div class="site-description"><h2></h2><nav class="nav social">
+			<ul class="flat"><a href="mailto:pjbrowne011@gmail.com" title="Email"><i data-feather="mail"></i></a><a href="https://github.com/pbrowne011/" title="Github"><i data-feather="github"></i></a><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/posts">Posts</a>
+			</li>
+			
+			<li>
+				<a href="/blog">Blog</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">The lognormal distribution</h1>
+                        <h3 class="description">
+      			  
+			  Learning what I do not understand
+			  
+                        </h3>
+			<div class="meta">
+                          
+                            Jul 2, 2025
+                          
+                          
+			</div>
+		</div>
+
+		<div class="markdown">
+			<p>I have an Anki deck that I&rsquo;ve sporadically built over the past two years. It
+contains cards ranging from Bash commands, to stanzas from Jabberwocky, to
+questions about using spaced repetition itself. I&rsquo;ve used it successfully to
+understand Unix and some CS concepts, but haven&rsquo;t been intentional about my
+memory practice habits. I&rsquo;ve heard the success stories of others, but as with
+the gym, I am not consistent.</p>
+<p>In an effort to change that fact, I&rsquo;ve been spending time with my <a href="https://x.com/andy_matuschak/status/1843014366976688450">now-&ldquo;angry&rdquo;
+Anki deck</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+recently. As a result, I&rsquo;m finding cards that are so bad that I don&rsquo;t know how
+to answer them (how <em>do</em> you create cards for sets vs. enumerations?  why did I
+decide to memorize this vague answer?).</p>
+<p>When it comes to my probabilty cards, however, I can feel myself falling into
+the classic trap. According to Piotr Wozniak, the <a href="https://www.supermemo.com/en/blog/twenty-rules-of-formulating-knowledge">first rule of spaced
+repetition</a>
+is</p>
+<blockquote>
+<p>Do not learn if you do not understand.</p>
+</blockquote>
+<p>While I did spend some time in probability and statistics classes, I don&rsquo;t
+understand every probability distribution I&rsquo;ve added to my deck.</p>
+<img src="../img/lognormal-median.png" height=400 alt="Anki card for lognormal median">
+<p>So when this card popped up, I didn&rsquo;t know where to start.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>Some things I remind myself of whenever I get a card with the word &ldquo;lognormal&rdquo;
+in it:</p>
+<ul>
+<li>When you take the log of a random variable from this distribution, you obtain
+a random variable that is normally distributed.
+$$
+X \sim \text{Lognormal}(\mu, \sigma^2) \rightarrow \ln(X) = Y \sim N(\mu, \sigma^2)
+$$</li>
+<li>Lognormal random variables cannot be negative.</li>
+<li>Francis Galton</li>
+<li>&hellip;</li>
+</ul>
+<p>This blog post is an attempt to get some intuition on the lognormal
+distribution.</p>
+<h3 id="where-does-this-distribution-come-from">Where does this distribution come from?</h3>
+<p>Francis Galton studied many naturally occuring phenomena. He got upset when
+others would measure errors and not take into account that error is not
+necessarily evenly spaced out. He <a href="https://galton.org/essays/1870-1879/galton-1879-geometric-mean.pdf">gave the
+example</a> of
+tinting: say you have white scattered on a black background in quantities of $1,
+2, 4, 8, &hellip;$ These appear to the eye to be equally spaced apart. If someone
+were to be given a tint of size $4$, they could miss either on the dark side
+($2$) or the light side ($8$).</p>
+<p>Galton pointed out that the arithmetic mean $\left(\frac{2+8}{2} = 5\right)$ was
+not the correct way of thinking about this situation: rather, one should use the
+<em>geometric</em> mean $\left(\sqrt{2*8} = 4\right)$, as the effect of one degree
+lighter (or darker) was multiplicative, not additive.</p>
+<p>What if one took the log of all of these tints? You would end up back with
+quanitites ($0, 1, 2, 3, &hellip;$) where the effect of moving a deviation would be
+additive again.</p>
+<p>Similar to the arithmetic and geometric means in the error above, the normal and
+lognormal distributions represent the relationship between <em>additive</em> and
+<em>multiplicative</em> effects. In the normal distribution, the mean $\mu$ is a
+location parameter. Increasing or decreasing the parameter just shifts the
+distribution along the $x$-axis. In the lognormal distribution, $e^{\mu}$ is a
+scaling parameter. Here, increasing $\mu$ changes the
+<a href="https://gist.github.com/yuki-koyama/675fbc373e399c00378e593f46985e78">shape</a> of
+the scale of the distribution, not just shifting its center.</p>
+<h3 id="what-is-its-density-function">What is its density function?</h3>
+<p>Let $X \sim N(\mu, \sigma^2)$. The probability density function (pdf) of the
+normal distribution is
+$$
+\large \Phi(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left[-\frac12\left(\frac{x-\mu}{\sigma}\right)^2\right]
+$$</p>
+<p>Let $Y = e^X$. Then we have $X = \ln(Y)$. It is not immediately intuitive how to
+derive the lognormal distribution from this information: if you swap $x$ with
+$ln(y)$, you don&rsquo;t obtain the correct distribution. Linear transformations are
+much more straightforward: adding by $C$ or multiplying by $D$ has effects on
+the distribution that one can derive from their expected value and variance.</p>
+<p>The textbook I&rsquo;m reading doesn&rsquo;t help with this either. Lawless in &ldquo;Statistical
+Models And Methods For Lifetime Data&rdquo; (p. 24):</p>
+<blockquote>
+<p>and from this p.d.f of $\;T=\exp{Y}$ is easily found to be &hellip;</p>
+</blockquote>
+<p>However, if I remembered from probability classes of yore (last year) before
+looking this up, one can convert between the disribution function (CDF) and
+density function by integrating, using the desired random variable as the upper
+bound. The derivation <a href="https://gregorygundersen.com/blog/2023/12/17/lognormal/#a3-probability-density-function">performed
+here</a>
+by Gregory Gundersen gives us</p>
+<p>$$
+\large f_Y(y) = \frac{1}{y\; \sigma \sqrt{2\pi}} \exp\left[ -\frac{1}{2}\left(\frac{\ln
+y - \mu}{\sigma} \right)^2 \right]
+$$</p>
+<h3 id="how-can-you-get-the-median-from-this">How can you get the median from this?</h3>
+<p>This I <a href="https://statproofbook.github.io/P/lognorm-med.html">also had to look
+up</a>. I won&rsquo;t try to derive
+it now, so I&rsquo;m left with two options:</p>
+<ul>
+<li>spend the holiday deriving this</li>
+<li>remove it from my Anki deck</li>
+</ul>
+<p>Time will tell which I choose.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Full text of the tweet from Andy Matuschak:</p>
+<p><em>A friend asks: after a hiatus of a few months, how to apologize to an Anki</em>
+<em>deck? It feels &ldquo;angry&rdquo; now! I wrote:</em></p>
+<p><em>I totally get you. Here&rsquo;s the thing: the Anki deck has been mistreated—but</em>
+<em>not by you!</em></p>
+<p><em>The Anki designers accidentally put the wrong clothes on the poor Anki</em>
+<em>deck. They dressed it up as an inbox. When you don&rsquo;t attend to an inbox,</em>
+<em>it just keeps piling higher and higher.</em></p>
+<p><em>But I think the Anki deck wants to be treated more like meditation, or a</em>
+<em>nourishing meal. If you miss a week of meditation sessions, you don&rsquo;t</em>
+<em>meditate 8 times as long next time. If you fast for a few days, you don&rsquo;t</em>
+<em>find yourself wanting to consume 4,000 calories in your next meal.</em></p>
+<p><em>Concretely, I suggest: try setting the maximum cards/day to 50 (at a</em>
+<em>typical average of 6s/card, this is 5m). When you finish, you&rsquo;re done!</em>
+<em>You did your meditation session and/or ate your nourishing meal! If you</em>
+<em>want to do another later that day, that&rsquo;s fine; you can do that if you</em>
+<em>want.</em></p>
+<p><em>Unless your deck is enormous, if you do 50/day (~5m), you&rsquo;ll catch up</em>
+<em>eventually. Really, it&rsquo;s totally fine if it takes weeks! It&rsquo;s just the</em>
+<em>hyperliteral Anki interface that makes it feel not fine.</em></p>
+<p><em>Also: taking a break actually gives you an opportunity. You have fresh</em>
+p<em>erspective on your deck. Probably now it&rsquo;s easier to sense that you don&rsquo;t</em>
+<em>care about a bunch of those cards. So, give yourself the freedom—or,</em>
+<em>better, encouragement!—to suspend/delete any cards that stimulate a</em>
+<em>disinterested response.</em>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>I added these to the deck from a formula sheet from a statistics class in
+university. We never had to learn anything about the lognormal distribution,
+just know that it existed.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div></div>
+	</nav>
+</div>
+
+
+
+<script>feather.replace()</script>
+<script data-goatcounter="https://personal-site.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+	
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              document.querySelectorAll('a[href^="#fnref:"], a[href^="#fn:"]').forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  var newHref = window.location.pathname + href;
+                  link.setAttribute('href', newHref);
+              });
+          });
+        </script>
+</body>
+</html>

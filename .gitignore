@@ -1,0 +1,7 @@
+# Exclude Emacs temp files
+*~
+\#*\#
+.\#*
+
+# Hugo files
+.hugo_build.lock
