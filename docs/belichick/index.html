@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Belichick's Library | Pat Browne</title>
-    <meta name="description" content="Searchable catalogue of Bill Belichick's football book collection at the US Naval Academy">
+    <meta name="description" content="Searchable catalog of Bill Belichick's football book collection at the US Naval Academy">
 
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/main.css">
@@ -12,7 +12,7 @@
 
     <style>
         /* Layout only - colors from theme */
-        .book-catalogue {
+        .book-catalog {
             max-width: 900px;
             margin: 0 auto;
         }
@@ -56,16 +56,16 @@
             font-size: 0.875rem;
         }
 
-        .catalogue-table-wrapper {
+        .catalog-table-wrapper {
             overflow-x: auto;
         }
 
-        .catalogue-table {
+        .catalog-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .catalogue-table th.sortable {
+        .catalog-table th.sortable {
             cursor: pointer;
             user-select: none;
         }
@@ -125,18 +125,18 @@
         }
 
         @media (max-width: 768px) {
-            .catalogue-table thead { display: none; }
-            .catalogue-table, .catalogue-table tbody, .catalogue-table tr, .catalogue-table td { display: block; }
-            .catalogue-table tr { padding: 1rem 0; border-bottom: 1px solid #ddd; }
-            .catalogue-table td { padding: 0.25rem 0; border: none; }
-            .catalogue-table td:first-child { font-weight: 600; }
+            .catalog-table thead { display: none; }
+            .catalog-table, .catalog-table tbody, .catalog-table tr, .catalog-table td { display: block; }
+            .catalog-table tr { padding: 1rem 0; border-bottom: 1px solid #ddd; }
+            .catalog-table td { padding: 0.25rem 0; border: none; }
+            .catalog-table td:first-child { font-weight: 600; }
             .book-links { margin-top: 0.5rem; }
         }
 
         @media (prefers-color-scheme: dark) {
             #book-search, .filters select { background: #111; border-color: #444; color: #ddd; }
             .book-links a { border-color: #444; }
-            .catalogue-table tr { border-color: #444; }
+            .catalog-table tr { border-color: #444; }
         }
     </style>
 </head>
@@ -154,13 +154,16 @@
         </header>
 
         <main class="container">
-            <article class="book-catalogue">
+            <article class="book-catalog">
                 <h1 class="page-title">Belichick's Library</h1>
 
                 <section class="meta-section">
-                    <p><a href="/belichick-about/">About this collection</a></p>
-                    <p><strong><span id="total-count">568</span> books</strong> in the catalogue. Data is still being cleaned and may not be fully accurate. Categories were assigned by USNA.</p>
-
+                    <p><a href="/posts/belichick-about/">About this collection</a></p>
+                    <p><span id="total-count">568</span> books in catalog. Data
+                    is still being cleaned and may not be fully accurate. For
+                    any corrections that you find, please send mail to
+                    pjbrowne011 [at] gmail [dot] com.</p>
+                    
                     <div class="link-guide">
                         <p><strong>Link abbreviations:</strong></p>
                         <p>WC = <a href="https://www.worldcat.org" target="_blank" rel="noopener">WorldCat</a> (find in libraries)</p>
@@ -170,7 +173,7 @@
                     </div>
                 </section>
 
-                <section class="catalogue-controls">
+                <section class="catalog-controls">
                     <div class="search-wrapper">
                         <input type="search"
                                id="book-search"
@@ -200,8 +203,8 @@
                     </div>
                 </section>
 
-                <section class="catalogue-table-wrapper">
-                    <table class="catalogue-table" id="books-table">
+                <section class="catalog-table-wrapper">
+                    <table class="catalog-table" id="books-table">
                         <thead>
                             <tr>
                                 <th class="sortable" data-sort="title">Title<span class="sort-indicator"></span></th>
@@ -240,7 +243,7 @@
         const showingCount = document.getElementById('showing-count');
         const totalCount = document.getElementById('total-count');
         const totalCount2 = document.getElementById('total-count-2');
-        const headers = document.querySelectorAll('.catalogue-table th.sortable');
+        const headers = document.querySelectorAll('.catalog-table th.sortable');
 
         async function init() {
             try {

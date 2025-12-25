@@ -6,8 +6,18 @@
     <description>Recent content in Posts on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://patbrowne.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Belichick&#39;s library</title>
+      <link>https://patbrowne.com/posts/belichick-about/</link>
+      <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://patbrowne.com/posts/belichick-about/</guid>
+      <description>Back to catalogue
+About This Page This is intended to be an outline of a (future) blog post explaining the page, how I made it, and anything else interesting about the process of creating it. Possible section headers:
+ Info on collection. From articles, press releases, interviews, &amp;hellip; Statistics: categories, dates, keywords, &amp;hellip; Links that I chose to include, why, and something about each ISBNs and how they came to be Fuzzy string searching, how the webpage searches for books and handles typos and related words Thoughts on data cleaning and use of AI in this process  Search Links Each book has links to four sites.
+ WC (WorldCat) - Search global library holdings to find a copy near you. Found using OCLC (Open Computer Library Center) catalog. IA (Internet Archive) - May have digitized copies for free online reading. The Internet Archive is its own digital library website for books, movies, and dated copies of websites. AA (Anna&amp;rsquo;s Archive) - Aggregates multiple sources for digital copies. Anna&amp;rsquo;s Archive is a search engine for shadow libraries that is a successor to sites such as Z-Library, Sci-Hub, and Library Genesis (LibGen). BF (BookFinder) - Search used book sellers to purchase a copy. BookFinder aggregates new and used copies from tens of thousands of booksellers, including sites such as Amazon, AbeBooks, and eBay.  It is recommended that you create accounts on WorldCat and IA to get maximum usage out of the sites.</description>
+    </item>
     <item>
       <title>Building circuits with the 74HC595 (Part 1)</title>
       <link>https://patbrowne.com/posts/shiftreg1/</link>
