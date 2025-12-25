@@ -1,30 +1,13 @@
 +++
-title = "Belichick's Library"
+title = "table"
 date = 2024-03-01T00:00:00Z
-draft = false
+draft = true
 author = "Pat"
-description = ""
+description = "belichick collection"
 tags = []
 categories = []
 images = []
-slug = "belichick"
-
-# modify type of page (posts show up on front page)
-# types can be found in mainSections
-type = "page"
-
-# if you want to display modification date
-# lastmod = 2024-09-16T00:00:00Z
-
-# redirect old URLs to new URL for post
-aliases = []
-
-# SEO keywords
-keywords = []
-
 +++
-All of Bill Belichick's books in the USNA library
-
 | Author             | Title                                  | Year |
 |:-------------------|:---------------------------------------|:-----|
 | 49’ers             | Individual & Team Records ’46          | 1958 |
@@ -347,4 +330,3 @@ All of Bill Belichick's books in the USNA library
 | Zanger             | Pro Football                           | 1965 |
 | Zuppke             | Football Techniques & Tactics          | 1924 |
 | Zuppke             | Coaching Football                      | 1930 |
- 
