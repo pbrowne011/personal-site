@@ -3,13 +3,16 @@
 <head>
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Understanding learning with errors | Pat Browne </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Understanding learning with errors" />
-<meta property="og:description" content="Examining a computational hardness assumption in cryptography" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.com/posts/lwe/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-09-19T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-09-19T00:00:00+00:00" />
-
+	<meta property="og:url" content="https://patbrowne.com/posts/lwe/">
+  <meta property="og:site_name" content="Pat Browne">
+  <meta property="og:title" content="Understanding learning with errors">
+  <meta property="og:description" content="Examining a computational hardness assumption in cryptography">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-19T00:00:00+00:00">
+    <meta property="article:tag" content="Cryptography">
 
         
 <meta name="twitter:card" content="summary"/>
@@ -150,12 +153,12 @@ this. The first two assumptions used to build secure protocols, the discrete log
 problem and the factoring problem, come from number theory.</p>
 <p><strong>Discrete Log</strong></p>
 <p>The discrete logarithm problem typically used in cryptography can be expressed
-as follows. Let $p$ be a prime number, and take the group $\mathbb{Z}_p^*$,
-the multiplicative group of numbers modulo $p$. Let $g \in \mathbb{Z}_p^*$ be
-a generator of the group $\mathbb{Z}_p^*$. Since $g$ is a generator, we can
-raise $g$ to the power of any element in $\mathbb{Z}_p^*$ and get a unique
-element from $\mathbb{Z}_p^*$ - a bijection.</p>
-<p>Now, randomly select an element $x$ from $\mathbb{Z}_p^*$ and calculate $g^x =
+as follows. Let $p$ be a prime number, and take the group $\mathbb{Z}\_p^\*$,
+the multiplicative group of numbers modulo $p$. Let $g \in \mathbb{Z}\_p^\*$ be
+a generator of the group $\mathbb{Z}\_p^\*$. Since $g$ is a generator, we can
+raise $g$ to the power of any element in $\mathbb{Z}\_p^\*$ and get a unique
+element from $\mathbb{Z}\_p^\*$ - a bijection.</p>
+<p>Now, randomly select an element $x$ from $\mathbb{Z}\_p^\*$ and calculate $g^x =
 t$. The discrete log question is: given $t$, can you calculate $x$? The
 assumption that is relevant to cryptography is that it is computationally hard
 to find $x$ given $t$. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> This assumption can be generalized to other groups
@@ -174,8 +177,8 @@ algorithm on a current computer is the general number field sieve (GNFS), which
 runs in sub-exponential time (not poly time).</p>
 <p>The RSA assumption is slightly different: we take our numbers from before ($N$,
 $p$, and $q$) and select at random an exponent $e$ from
-$\mathbb{Z}_{\varphi(N)}$, where $\varphi(N) = (p-1)(q-1)$ is Euler&rsquo;s
-totient function on $N$. We then select $x$ from $\mathbb{Z}_{N}^*$ and
+$\mathbb{Z}\_{\varphi(N)}$, where $\varphi(N) = (p-1)(q-1)$ is Euler&rsquo;s
+totient function on $N$. We then select $x$ from $\mathbb{Z}\_{N}^\*$ and
 compute $y = x^e$. The RSA assumption states that given $N, y$ and $e$, it is
 computationally hard to determine $x$. This assumption comes directly from the
 RSA protocol itself. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
@@ -213,13 +216,13 @@ would be unable to perform such a computation given restrictions on their
 computational power.</p>
 <p>The <strong>shortest vector problem</strong> is one such question. The problem is: given a
 basis $B$ of a lattice $L$ (the vector space $V$), what is the shortest non-zero
-vector, as measured by its Euclidean norm $||\mathbf{v}||_2$? <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> In other
-words: suppose I give you a set of vectors $\mathbf{v}_1, \mathbf{v}_2, &hellip;,
-\mathbf{v}_n$. These form a basis for some vector space (a lattice): you can
-take integer linear combinations (for example, $2\mathbf{v}_1 +
-5\mathbf{v}_2 + &hellip;$) of them to obtain infinitely many points in the
+vector, as measured by its Euclidean norm $||\mathbf{v}||\_2$? <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> In other
+words: suppose I give you a set of vectors $\mathbf{v}\_1, \mathbf{v}\_2, ...,
+\mathbf{v}\_n$. These form a basis for some vector space (a lattice): you can
+take integer linear combinations (for example, $2\mathbf{v}\_1 +
+5\mathbf{v}\_2 + ...$) of them to obtain infinitely many points in the
 space. How would you find the shortest possible vector $\mathbf{v}$ in that
-space, such that $||\mathbf{v}||_2 = \underset{\mathbf{v} \in L \smallsetminus
+space, such that $||\mathbf{v}||\_2 = \underset{\mathbf{v} \in L \smallsetminus
 {0}}{\min} ||\mathbf{v}||_2$?</p>
 <figure>
 <img alt="An illustration of SVP"
@@ -262,74 +265,71 @@ useful across most of these metrics, but another problem has proven more
 flexible when designing new systems and protocols.</p>
 <p>The <strong>learning with errors</strong> problem (LWE) can be stated somewhat precisely as
 follows. Fix a size parameter $n \geq 1$, a modulus $q \geq 2$, and an error
-probability distribution $\chi$ on $\mathbb{Z}_q$, the integers modulo $q$. We
-can define $A_{\mathbf{s}, \chi} \in \mathbb{Z}_q^n \times \mathbb{Z}_q$ as
+probability distribution $\chi$ on $\mathbb{Z}\_q$, the integers modulo $q$. We
+can define $A\_{\mathbf{s}, \chi} \in \mathbb{Z}\_q^n \times \mathbb{Z}\_q$ as
 the probability distribution that is obtained by choosing a vecor $\mathbf{a} \in
-\mathbb{Z}_q^n$ uniformly at random, choosing $e$ in $\mathbb{Z}_q$ based on
+\mathbb{Z}\_q^n$ uniformly at random, choosing $e$ in $\mathbb{Z}\_q$ based on
 its probability distribution $\chi$, and computing the tuple $(\mathbf{a},
 \langle \mathbf{a}, \mathbf{s} \rangle + e)$. Now: given $n, q, \chi$, and an
-arbitrary number of samples from the distribution $A_{\mathbf{s}, \chi}$, what
+arbitrary number of samples from the distribution $A\_{\mathbf{s}, \chi}$, what
 is $\mathbf{s}$.</p>
 <p>To convert this to an adversarial game (and a distinguishability problem), we
-can express the vectors $\mathbf{a}_1 &hellip; \mathbf{a}_n$ as a matrix $A$, and
+can express the vectors $\mathbf{a}\_1 ... \mathbf{a}\_n$ as a matrix $A$, and
 have a challenger select either a random vector $\mathbf{r}
-\stackrel{R}{\leftarrow} \mathbb{Z}_q^n$ and compute $A\mathbf{r}$, or select a
-secret $\mathbf{s}$ and an error vector $\mathbf{e} \leftarrow \mathbb{Z}_q^n$
+\stackrel{R}{\leftarrow} \mathbb{Z}\_q^n$ and compute $A\mathbf{r}$, or select a
+secret $\mathbf{s}$ and an error vector $\mathbf{e} \leftarrow \mathbb{Z}\_q^n$
 based on $\chi$, and compute $A\mathbf{s} + \mathbf{e}$. The problem in this form
 is to distinguish between these two games, and the assumption is that they are
 computationally indistinugashable.</p>
-<p>$$
+$$
 \begin{aligned}
-A\mathbf{s} + \mathbf{e} \approx A\mathbf{r} \
+A\mathbf{s} + \mathbf{e} \approx A\mathbf{r} \\
 \end{aligned}
-$$</p>
-<p>The two paragraphs above may not make much sense at first, so let&rsquo;s look at an
+$$<p>The two paragraphs above may not make much sense at first, so let&rsquo;s look at an
 example. This specific example was taken from a survey paper, &ldquo;The Learning with
 Errors Problem&rdquo;, by Oded Regev, the person who first came up with LWE (and later
 won the Gödel prize).</p>
 <h3 id="an-example-of-learning-with-errors">An example of learning with errors</h3>
 <p>First, we fix our parameters. For this example, $n = 4$ and $q = 17$. One way to
-think about &ldquo;an arbitrary number of samples&rdquo; from $A_{\mathbf{s}, \chi}$ is as
+think about &ldquo;an arbitrary number of samples&rdquo; from $A\_{\mathbf{s}, \chi}$ is as
 a system of equations. In each equation, we will have 4 variables $(n = 4)$, all
 expressed modulo $17$. The coefficients of each variable can be expressed by the
 vector $\mathbf{a}$, whose entries we select uniformly at random from
-$\mathbb{Z}_q$. Let us forget about the error term $e$ for the moment and focus
+$\mathbb{Z}\_q$. Let us forget about the error term $e$ for the moment and focus
 on the problem at hand.</p>
 <p>Let&rsquo;s sample $\mathbf{a} \hspace{0.25em} 6$ times, multiply it by the secret
 vector $\mathbf{s}$, and look at its result (the second element of the tuple
-given to us, denoted here as $c_i$). We might expect something like the
+given to us, denoted here as $c\_i$). We might expect something like the
 following:</p>
-<p>$$ \begin{aligned}
-14s_1 + 15s_2 + 5s_3 + 2s_4 &amp;= c_1 \: (\text{mod} \; 17) \\
-13s_1 + 14s_2 + 14s_3 + 6s_4 &amp;= c_2 \: (\text{mod} \; 17)  \\
-6s_1 + 10s_2 + 13s_3 + 1s_4 &amp;= c_3 \: (\text{mod} \; 17)  \\
-10s_1 + 4s_2 + 12s_3 + 16s_4 &amp;= c_4 \: (\text{mod} \; 17)  \\
-9s_1 + 5s_2 + 9s_3 + 6s_4 &amp;= c_5 \: (\text{mod} \; 17)  \\
-3s_1 + 6s_2 + 4s_3 + 5s_4 &amp;= c_6 \: (\text{mod} \; 17)  \\
-\end{aligned} $$</p>
-<p>How would you solve for $\mathbf{s}$, given the vector $\mathbf{c}$? The
+$$ \begin{aligned}
+14s\_1 + 15s\_2 + 5s\_3 + 2s\_4 &= c\_1 \\: (\text{mod} \\; 17) \\\
+13s\_1 + 14s\_2 + 14s\_3 + 6s\_4 &= c\_2 \\: (\text{mod} \\; 17)  \\\
+6s\_1 + 10s\_2 + 13s\_3 + 1s\_4 &= c\_3 \\: (\text{mod} \\; 17)  \\\
+10s\_1 + 4s\_2 + 12s\_3 + 16s\_4 &= c\_4 \\: (\text{mod} \\; 17)  \\\
+9s\_1 + 5s\_2 + 9s\_3 + 6s\_4 &= c\_5 \\: (\text{mod} \\; 17)  \\\
+3s\_1 + 6s\_2 + 4s\_3 + 5s\_4 &= c\_6 \\: (\text{mod} \\; 17)  \\\
+\end{aligned} $$<p>How would you solve for $\mathbf{s}$, given the vector $\mathbf{c}$? The
 straightforward approach is to use Gaussian elimination. The brilliance of LWE,
 and what makes it computationally hard, is the error term $e$ for each
 equation.</p>
 <p>Recall the second term of our tuple: $\langle \mathbf{a}, \mathbf{s} \rangle +
-e$. Suppose now that, instead of just presenting $c_1 &hellip; c_6$, I instead
-added an error term to each equation, where $e_i \stackrel{R}{\leftarrow}
-\{-1, 0, 1\}$ uniformly at random:</p>
-<p>$$ \begin{aligned}
-14s_1 + 15s_2 + 5s_3 + 2s_4 &amp;\approx 8  &amp;&amp;(\text{mod} \; 17) \\
-13s_1 + 14s_2 + 14s_3 + 6s_4 &amp;\approx 16 &amp;&amp;(\text{mod} \; 17)  \\
-6s_1 + 10s_2 + 13s_3 + 1s_4 &amp;\approx 3 &amp;&amp;(\text{mod} \; 17)  \\
-10s_1 + 4s_2 + 12s_3 + 16s_4 &amp;\approx 12 &amp;&amp;(\text{mod} \; 17)  \\
-9s_1 + 5s_2 + 9s_3 + 6s_4 &amp;\approx 9 &amp;&amp;(\text{mod} \; 17)  \\
-3s_1 + 6s_2 + 4s_3 + 5s_4 &amp;\approx 16 &amp;&amp;(\text{mod} \; 17)  \\
-\end{aligned} $$</p>
-<p>We might try our first approach: Gaussian elimination. However, consider that
+e$. Suppose now that, instead of just presenting $c\_1 ... c\_6$, I instead
+added an error term to each equation, where $e\_i \stackrel{R}{\leftarrow}
+\\{-1, 0, 1\\}$ uniformly at random:</p>
+$$ \begin{aligned}
+14s\_1 + 15s\_2 + 5s\_3 + 2s\_4 &\approx 8  &&(\text{mod} \\; 17) \\\
+13s\_1 + 14s\_2 + 14s\_3 + 6s\_4 &\approx 16 &&(\text{mod} \\; 17)  \\\
+6s\_1 + 10s\_2 + 13s\_3 + 1s\_4 &\approx 3 &&(\text{mod} \\; 17)  \\\
+10s\_1 + 4s\_2 + 12s\_3 + 16s\_4 &\approx 12 &&(\text{mod} \\; 17)  \\\
+9s\_1 + 5s\_2 + 9s\_3 + 6s\_4 &\approx 9 &&(\text{mod} \\; 17)  \\\
+3s\_1 + 6s\_2 + 4s\_3 + 5s\_4 &\approx 16 &&(\text{mod} \\; 17)  \\\
+\end{aligned} $$<p>We might try our first approach: Gaussian elimination. However, consider that
 each of our equations now has some error to it. The first equation could be
 $8$&hellip; or $7$&hellip; or $9$. We don&rsquo;t know for cerain. If we guess the error term
 incorrectly (here, the probability of this is $\frac{2}{3}$), we&rsquo;re in trouble -
 our error will compound throughout each equation. Since we have only 4 variables
 to solve for, we can limit this by taking the first four equations, but the
-probability that we are correct with every error term $e_i$ that  we choose is
+probability that we are correct with every error term $e\_i$ that  we choose is
 $(1 - \frac{2}{3})^4$, and thus the probability that we are wrong somewhere is
 $1 - (1 - \frac{2}{3})^4 = \frac{80}{81}$. <sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup></p>
 <p>This is the trickiness of the learning with <em>errors</em> problem - the errors in
@@ -349,7 +349,7 @@ follows (from [Reg05]):</p>
 we are given access to an oracle that solves the $\text{LWE}$ problem with
 modulus $q$ and error parameter $\alpha$. Then, given as input any lattice
 $\Lambda$, a large enough polynomial number of samples from the discrete
-Gaussian distribution $D_{\Lambda^*, r}$, for some (not too small) $r$, and a
+Gaussian distribution $D\_{\Lambda^\*, r}$, for some (not too small) $r$, and a
 point $\mathbf{x}$ witin distance $\alpha q / (\sqrt{2r})$ of $\Lambda$, we can
 output the (unique) closest lattice point $\mathbf{x}$ in polynomial time.</em></p>
 <p>Note that the radius does not depend on $n$ but only on $q$, $\alpha$, and
@@ -363,28 +363,28 @@ problem (SIVP) and GapSVP.</p>
 <p>The learning with errors problem is very versatile, but computationally
 expensive. The size of the matrix $A$ required for the protocol is on the order
 of $n^2$, as you need at least that many vectors to decode $\mathbf{s}$, and
-often has $m &gt; n$ columns (a short, fat matrix). It is much more desirable to
+often has $m > n$ columns (a short, fat matrix). It is much more desirable to
 have key sizes on the order of $O(n)$, as it makes practical usage of a
 cryptographic protocol easier.</p>
-<p><strong>Ring-LWE</strong> allows us to replace the group $\mathbb{Z}_q^n$ with the ring
-$\mathbb{Z}_q[x] / \langle x^n + 1 \rangle$. The idea is to assume structure in
+<p><strong>Ring-LWE</strong> allows us to replace the group $\mathbb{Z}\_q^n$ with the ring
+$\mathbb{Z}\_q[x] / \langle x^n + 1 \rangle$. The idea is to assume structure in
 the LWE samples ($A$) provided, and to condense this representation. We assume
-$n$ is a power of two and select the first vector of $A$ $\mathbf{a}_1 = (a_1,
-a_2, &hellip; a_n)$ as before, uniformly at random from $\mathbb{Z}_q^n$. We then
-replace the remaining vectors $(\mathbf{a}_{2} &hellip; \mathbf{a}_n)$ with
-$\mathbf{a}_i = (\mathbf{a}_i, &hellip; \mathbf{a}_n, -\mathbf{a}_1 &hellip;
+$n$ is a power of two and select the first vector of $A$ $\mathbf{a}\_1 = (a\_1,
+a\_2, ... a\_n)$ as before, uniformly at random from $\mathbb{Z}\_q^n$. We then
+replace the remaining vectors $(\mathbf{a}\_{2} ... \mathbf{a}\_n)$ with
+$\mathbf{a}\_i = (\mathbf{a}\_i, ... \mathbf{a}\_n, -\mathbf{a}\_1 ...
 -\mathbf{a}_{i-1})$. These permutations give a ring structure, which is why we
 must have $n$ as a power of two (to guarantee that we cannot reduce $x^n + 1$
 over $\mathbb{Q}$ by factoring it).  These remaining vectors now only require
-$O(n)$ storage (we are repeating elements from $a_1$) and we can speed up
+$O(n)$ storage (we are repeating elements from $a\_1$) and we can speed up
 vector operations using the fast Fourier transform. (e.g., convert polynomials
 to point-value representation, multiply, and convert back in <em>O(n</em> log <em>n)</em>
 rather than <em>O(n^2)</em>).</p>
 <p>A dual problem with LWE is known as the <strong>short integer solutions</strong> problem
-(SIS). In this lattice problem, we are given vectors $\mathbf{a}_1,
-\mathbf{a}_2, &hellip;$ selected uniformly at random from $\mathbb{Z}_q^n$ and have
-to determine a &ldquo;small&rdquo; linear combination $\mathbf{s} = c_1 \mathbf{a}_1 +
-c_2 \mathbf{a}_2 + &hellip;$ such that $\displaystyle\sum_{i=1}^n \mathbf{a}_i +
+(SIS). In this lattice problem, we are given vectors $\mathbf{a}\_1,
+\mathbf{a}\_2, ...$ selected uniformly at random from $\mathbb{Z}\_q^n$ and have
+to determine a &ldquo;small&rdquo; linear combination $\mathbf{s} = c\_1 \mathbf{a}\_1 +
+c\_2 \mathbf{a}\_2 + ...$ such that $\displaystyle\sum_{i=1}^n \mathbf{a}\_i +
 \mathbf{s} = 0$.</p>
 <h3 id="crypto-uses">Crypto uses</h3>
 <p>Though the purpose of this post is primarily to go over the learning with errors
@@ -392,13 +392,13 @@ assumption and its computational hardness, it is important to mention some
 of the cryptographic protocols based off of it.</p>
 <p><strong>Public key protocols</strong>: Regev encryption [Reg05] was the first to use the LWE
 assumption as the basis for a public key cryptography system. It used the random
-matrix $A \in \mathbb{Z}_q^{n\times m}$ and random vector $\mathbf{b} \in
-\mathbb{Z}_q^m$ as its public key and the vector $\mathbf{s} \in
-\mathbb{Z}_q^m$ as its secret key. To encrypt a message $m$,
+matrix $A \in \mathbb{Z}\_q^{n\times m}$ and random vector $\mathbf{b} \in
+\mathbb{Z}\_q^m$ as its public key and the vector $\mathbf{s} \in
+\mathbb{Z}\_q^m$ as its secret key. To encrypt a message $m$,
 the protocol goes bit by bit. For a given bit $x$, you select a random vector
-$\mathbf{r} \in \mathbb{Z}_q^n$ and compute $(A\mathbf{r},
-\mathbf{b}'\mathbf{r} + x\lfloor \frac{q}{2} \rfloor) = (c_1, c_2)$, To
-decrypt, calculate $\hat{x} = c_2 - \mathbf{s}' c_1$. If closer to $\lfloor
+$\mathbf{r} \in \mathbb{Z}\_q^n$ and compute $(A\mathbf{r},
+\mathbf{b}'\mathbf{r} + x\lfloor \frac{q}{2} \rfloor) = (c\_1, c\_2)$, To
+decrypt, calculate $\hat{x} = c\_2 - \mathbf{s}' c\_1$. If closer to $\lfloor
 \frac{q}{2} \rfloor$ modulo $q$, output 1, else ouptut 0.</p>
 <p>Other public key protocols using LWE (or ring-LWE) include NTRU Prime and SABER.</p>
 <p><strong>FHE protocols</strong>: The first fully homomorphic encryption scheme was created
@@ -446,14 +446,14 @@ https://dl.acm.org/doi/pdf/10.1145/1568318.156832
 Others
 https://en.wikipedia.org/wiki/Learning_with_errors
 -->
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>See Daniel Kahn&rsquo;s excellent book, <em>The Codebreakers</em>, for more on the
 history of early ciphers (and the field of cryptography).&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>In case it is unclear, it is assumed that in addition to the number $t$,
 the group $G$ and the generator $g$ are also public information. The deeper
 principle behind this (and modern cryptography more generally) is known as
@@ -463,49 +463,49 @@ security of a cryptosystem must lie in the choice of its keys only, and
 everything else (including the algorithm itself) should be considered public
 knowledge.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>To learn more about RSA, <a href="https://people.csail.mit.edu/rivest/pubs/RSA78.pdf">read the original
 paper</a> or consult the
 Internet (or your LLM of choice).&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>This comes from the Encyclopedia of Mathematic&rsquo;s <a href="https://encyclopediaofmath.org/wiki/Lattice">definition of a
 lattice</a>. For more on lattice
 theory, J.B. Nation has very helpful <a href="https://math.hawaii.edu/~jb/lat1-6.pdf">introductory
 notes</a> to the subject.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
+<li id="fn:5">
 <p>Here, we will assume use of the Euclidean norm, but note that any norm of
 your choosing will work here.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:6" role="doc-endnote">
+<li id="fn:6">
 <p>See <a href="https://dl.acm.org/doi/pdf/10.1145/276698.276705">this paper</a> by
 Ajtai for the proof of this statement, as well as an explanation of the term
 &ldquo;randomized reduction&rdquo; in the first section.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:7" role="doc-endnote">
+<li id="fn:7">
 <p>The above footnote contains the 1996 paper;
 <a href="https://dl.acm.org/doi/pdf/10.1145/237814.237838">here</a> is a link to his
 paper from 1994. The paper explains how to generate average-case hardness
 from worst-case hardness.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:8" role="doc-endnote">
+<li id="fn:8">
 <p>In this case, $\mathbf{s} = (0,13,9,11)$&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:9" role="doc-endnote">
+<li id="fn:9">
 <p>See <a href="https://securitycryptographywhatever.com/2023/11/13/lattice-attacks/">this
 episode</a>
 of the &ldquo;Security Cryptography Whatever&rdquo; podcast for an explanation by Martin
 Albrecht about why this might be the case (timestamp: 22:10, go further back
 for context on the algorithms used)&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:10" role="doc-endnote">
+<li id="fn:10">
 <p>For more on BDD and its computational hardness, see <a href="https://web.eecs.umich.edu/~cpeikert/pubs/bdd-hardness.pdf">this
 paper</a> by
 Bennett and Peikert&#160;<a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
 		</div>
 

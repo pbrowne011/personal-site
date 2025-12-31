@@ -15,7 +15,8 @@ pygmentsCodeFencesGuessSyntax = true
 # googleAnalytics = NULL
 
 # Number of posts to show (recent list)
-paginate = 20
+[pagination]
+pagerSize = 20
 
 # Number of characters to show in summary
 summaryLength = 240
@@ -81,10 +82,8 @@ tag = "tags"
 
 
 # Reformat blog URLs to include publish date
-# Note: ':filename' is deprecated as of v0.144.0. Use ':contentbasename' instead
-# I'm currently using hugo v0.92.2, so I can't use ':contentbasename' yet
 [permalinks]
-  blog = '/:year/:month/:day/:filename/'
+  blog = '/:year/:month/:day/:contentbasename/'
 
 
 [[params.social]]

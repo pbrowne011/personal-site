@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>unix on Pat Browne</title>
+    <title>Unix on Pat Browne</title>
     <link>https://patbrowne.com/tags/unix/</link>
-    <description>Recent content in unix on Pat Browne</description>
+    <description>Recent content in Unix on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Mar 2024 00:00:00 +0000</lastBuildDate>
@@ -13,10 +13,13 @@
       <link>https://patbrowne.com/posts/makefile/</link>
       <pubDate>Sun, 03 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://patbrowne.com/posts/makefile/</guid>
-      <description>When I was first learning how to write a Makefile to compile a C program, one thing that stuck me (and almost everyone who encounters it) as odd was the requirement that each command line start with a tab character (&#39;\t&#39;). Makefiles are used to automate repetitive tasks (such as recompiling a C/C++ program), and have a unique syntax. They are made up of rules, which consist of a &amp;ldquo;target&amp;rdquo;, a list of &amp;ldquo;dependencies&amp;rdquo;, and a series of &amp;ldquo;commands&amp;rdquo;. They look like this:
-target: dependencies command For example, suppose I want to automate two different tasks: recompiling my program after editing some of the source code, and deleting all non-source files after editing them. I could write a Makefile that looks like this:
-.PHONY: clean myprogram: myprogram.c gcc myprogram.c -o myprogram clean: rm *.o *~ myprogram The .PHONY makes sure that when I run the shell command make clean, I don&amp;rsquo;t create a file named clean. Instead, I run the command underneath, which removes the files I don&amp;rsquo;t want in my directory. The other rule has a target filename myprogram, which requires a file named myprogram.c. If it finds this .c file in my directory, it will compile it using the command below. If you want to learn more about makefiles and their syntax, a resource that I highly recommend is Makefile Tutorial.
-Notice how each command is indented with a tab character. The UNIX utility make doesn&amp;rsquo;t allow you to list a command underneath a target/dependency combination, or to indent with a number of spaces.</description>
+      <description>&lt;p&gt;When I was first learning how to write a Makefile to compile a C program, one
+thing that stuck me (and almost everyone who encounters it) as odd was the
+requirement that each command line start with a tab character
+(&lt;code&gt;&#39;\t&#39;&lt;/code&gt;). Makefiles are used to automate repetitive tasks (such as recompiling a
+C/C++ program), and have a unique syntax. They are made up of rules, which
+consist of a &amp;ldquo;target&amp;rdquo;, a list of &amp;ldquo;dependencies&amp;rdquo;, and a series of
+&amp;ldquo;commands&amp;rdquo;. They look like this:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

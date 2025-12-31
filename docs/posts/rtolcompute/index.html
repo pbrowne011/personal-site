@@ -3,13 +3,18 @@
 <head>
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Right to left computability | Pat Browne </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Right to left computability" />
-<meta property="og:description" content="Exploring parallelizable bit tricks" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.com/posts/rtolcompute/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-10-02T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-10-02T00:00:00+00:00" />
-
+	<meta property="og:url" content="https://patbrowne.com/posts/rtolcompute/">
+  <meta property="og:site_name" content="Pat Browne">
+  <meta property="og:title" content="Right to left computability">
+  <meta property="og:description" content="Exploring parallelizable bit tricks">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-02T00:00:00+00:00">
+    <meta property="article:tag" content="Draft">
+    <meta property="article:tag" content="Bit-Tricks">
+    <meta property="article:tag" content="Hackers-Delight">
 
         
 <meta name="twitter:card" content="summary"/>
@@ -106,22 +111,22 @@ bit wise operations in places you wouldn&rsquo;t expect them.</p>
 specific operations. It assumes a 32-bit machine (and word size), with signed
 values represented in two&rsquo;s complement form. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Some tricks presented include:</p>
 <ul>
-<li>$x \; \&amp; \; (x - 1)$: turn off the rightmost bit in a word</li>
-<li>$x \; \&amp; \; (x + 1)$: turn off the trailing 1&rsquo;s in a word</li>
-<li>$\neg x \; \&amp; \; (x + 1)$: create a word with a single 1-bit at the position of the
+<li>$x \\; \\& \\; (x - 1)$: turn off the rightmost bit in a word</li>
+<li>$x \\; \\& \\; (x + 1)$: turn off the trailing 1&rsquo;s in a word</li>
+<li>$\neg x \\; \\& \\; (x + 1)$: create a word with a single 1-bit at the position of the
 rightmost 0-bit</li>
-<li>$x \; \&amp; \; (-x)$: isolate the rightmost 1-bit, produce 0 if none</li>
+<li>$x \\; \\& \\; (-x)$: isolate the rightmost 1-bit, produce 0 if none</li>
 </ul>
 <p>Note that these hacks are much more useful than they might appear. The first
 trick can be used to great effect to count set bits and calculate powers of two,
 as demonstrated in Brian Kernighan&rsquo;s algorithm<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">unsigned int v; // count the number of bits set in v
-unsigned int c; // c accumulates the total bits set in v
-for (c = 0; v; c++)
-{
-  v &amp;= v - 1; // clear the least significant bit set
-}
-</code></pre></div><p>These bit wise operations allow for implementations of functions that are
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>unsigned int v; // count the number of bits set in v
+</span></span><span style="display:flex;"><span>unsigned int c; // c accumulates the total bits set in v
+</span></span><span style="display:flex;"><span>for (c = 0; v; c++)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  v &amp;= v - 1; // clear the least significant bit set
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>These bit wise operations allow for implementations of functions that are
 branch-free and do not require shift instructions, saving valuable CPU
 cycles. Additionally, they allow for word-parallelism: if a bit&rsquo;s value only
 depends on bits to its right, one can optimize by executing single instructions
@@ -143,39 +148,36 @@ want to optimize. The theorem, as stated in the book (pg. 13), is:</p>
 <p>THEOREM. A function mapping words to words can be implemented with
 word-parallel add, subtract, and, or, and not instructions if and only if
 each bit of the result depends only on bits at and to the right of each input
-operand.</p>
-</blockquote>
+operand.</p></blockquote>
 <p>This introduces the concept of <strong>right-to-left computability</strong>: if output bits
 depend only input operand bits that are located either in the same position or
 to the right (lower order bits), the function can be optimized with these bit
 tricks by rewriting it in terms of the five functions that are mentioned,
 providing the benefits described above.</p>
 <p>An example function is then provided to demonstrate what this means. Consider
-the following operations to compute the third bit of the output ($r_2$):</p>
-<p>$$r_2 = x_2 \mid (x_0 \; \&amp; \; y_1)$$</p>
-<p>From this, it is clear to see that the output bit $r_2$ does not rely on any
-input bit $x_i$ or $y_i$ where $i &gt; 2$. Since it depends only on the bit wise
-operations <code>AND</code> and <code>OR</code>, the function to calculate $r_2$ is right-to-left
+the following operations to compute the third bit of the output ($r\_2$):</p>
+$$r\_2 = x\_2 \mid (x\_0 \\; \\& \\; y\_1)$$<p>From this, it is clear to see that the output bit $r\_2$ does not rely on any
+input bit $x\_i$ or $y\_i$ where $i > 2$. Since it depends only on the bit wise
+operations <code>AND</code> and <code>OR</code>, the function to calculate $r\_2$ is right-to-left
 computable. Further examples that are right-to-left computable include
 multiplication (a constant number of additions), as well as other Boolean
 operations (<code>XOR</code>, <code>NAND</code>, etc.).</p>
 <p>An example of a function that is not right-to-left computable is something like
 $\operatorname{signum}$.</p>
-<p>$$
+$$
 \operatorname{signum}(x) = \left\lbrace\begin{array}{rcl}
--1, &amp; x &lt; 0 \\
-0, &amp; x = 0 \\
-1, &amp; x &gt; 0 \\
+-1, & x < 0 \\\
+0, & x = 0 \\\
+1, & x > 0 \\\
 \end{array}\right.
-$$</p>
-<p>$\operatorname{signum}$ takes a word as input and outputs the sign of that
+$$<p>$\operatorname{signum}$ takes a word as input and outputs the sign of that
 word: $1$ if positive, $-1$ if negative, and $0$ otherwise. Almost all bits of
 the output depend on the leftmost bit of the input. (The exception is the
-leftmost bit $r_0$, which depends only on itself - it is $1$ for both <code>0x1</code> and
-<code>0xff..ff</code>, and $0$ for <code>0x0</code>. The next bit $r_1$ depends on the leftmost bit.)</p>
+leftmost bit $r\_0$, which depends only on itself - it is $1$ for both <code>0x1</code> and
+<code>0xff..ff</code>, and $0$ for <code>0x0</code>. The next bit $r\_1$ depends on the leftmost bit.)</p>
 <p>Another function described in the book is <code>&gt;&gt;</code>, right shift: you can&rsquo;t determine
-an output bit $r_i$ of a right shift $n$ places without knowing the input bit
-to the left of it $(x_{i+n})$.</p>
+an output bit $r\_i$ of a right shift $n$ places without knowing the input bit
+to the left of it $(x\_{i+n})$.</p>
 <h3 id="a-fun-problem">A fun problem</h3>
 <p>The book mentions several other functions that are not right-to-left computable
 without further explanation. One of them is left shift by a variable
@@ -183,21 +185,19 @@ amount. The intuition is that the variable amount depends on either the whole
 input or some subset of it, which necessarily includes bits to the right of your
 output bit. Exercise 2 for the chapter challenges this claim. Courtesy of
 Donald Knuth<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
-<p>$$ x &lt;&lt; (x \; \&amp; \; 1) $$</p>
-<p>This expression is equivalent to:</p>
-<p>$$ x + (x \; \&amp; \; (-(x \; \&amp; \; 1))) $$</p>
-<p>The question is: how is this possible? We have an apparent contradiction. Left
+$$ x \<\< (x \\; \\& \\; 1) $$<p>This expression is equivalent to:</p>
+$$ x + (x \\; \\& \\; (-(x \\; \\& \\; 1))) $$<p>The question is: how is this possible? We have an apparent contradiction. Left
 shift by a variable amount is not right-to-left computable, but above we have a
 variable left shift expressed in terms of <code>AND</code>, <code>-</code>, and <code>+</code>, which implies
 that it is right-to-left computable.</p>
 <p>Consider the amount we are shifting left by. We shift left by either 0 or 1
-bits, depending on the value of $x_0$. Hence, the value of each output bit
-$r_i$ depends on $x_0$, $x_i$, and $x_{i-1}$. We are shifting left by a
-variable amount, but that amount depends on the rightmost bit $x_0$, not any
+bits, depending on the value of $x\_0$. Hence, the value of each output bit
+$r\_i$ depends on $x\_0$, $x\_i$, and $x\_{i-1}$. We are shifting left by a
+variable amount, but that amount depends on the rightmost bit $x\_0$, not any
 other bit in the input.</p>
-<p>On the other hand, the expression $x &lt;&lt; (x \; \&amp; \; 2)$ is not expressible
-as a right-to-left computation, as the output bit $r_0$ depends on the input
-bit $r_1$.</p>
+<p>On the other hand, the expression $x \<\< (x \\; \\& \\; 2)$ is not expressible
+as a right-to-left computation, as the output bit $r\_0$ depends on the input
+bit $r\_1$.</p>
 <h3 id="infinite-bit-registers">Infinite-bit registers</h3>
 <p>Richard Allen has a blog post, <a href="https://rsaxvc.net/blog/2020/11/21/Right_to_Left_Computability.html">Right to Left
 Computability</a>
@@ -250,10 +250,10 @@ Hacker&rsquo;s Delight changes the model of computation. Many of the tricks I&rs
 so far rely on either fixed word size or two&rsquo;s complement representation (or
 both) to be effective, which makes sense today given these are defaults in
 modern computers.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>For resources on two&rsquo;s complement, there are many - search the Internet
 far and wide! Three that I&rsquo;ve found helpful are <a href="https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html">Thomas Finley&rsquo;s
 introduction</a>,
@@ -262,7 +262,7 @@ note</a>, and
 JF Bastien&rsquo;s <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0907r0.html">standards proposal for
 C++20</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p><a href="https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetKernighan">See the original
 source</a>
 for the code, details, and other implementations of counting bits. Sean
@@ -271,7 +271,7 @@ Knuth points out that the method was first published in 1960 by Peter
 Wegner, and later (independently) by Derrick Lehmer - before K&amp;R used it in
 the second edition of &ldquo;The C Programming Language&rdquo; in 1988.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Knuth has a habit of finding his way into many textbooks and stories. To
 some degree, &ldquo;all roads lead to Knuth&rdquo; when it comes to computer
 science. Some recent examples off the top of my head:</p>
@@ -295,7 +295,7 @@ enough, Knuth had presented details on the algorithm and its analysis.</li>
 </ul>
 &#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
-</section>
+</div>
 
 		</div>
 

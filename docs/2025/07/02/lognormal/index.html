@@ -3,13 +3,15 @@
 <head>
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>The lognormal distribution | Pat Browne </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="The lognormal distribution" />
-<meta property="og:description" content="Learning what I do not understand" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.com/2025/07/02/lognormal/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-02T00:00:00+00:00" />
-<meta property="article:modified_time" content="2025-07-02T00:00:00+00:00" />
-
+	<meta property="og:url" content="https://patbrowne.com/2025/07/02/lognormal/">
+  <meta property="og:site_name" content="Pat Browne">
+  <meta property="og:title" content="The lognormal distribution">
+  <meta property="og:description" content="Learning what I do not understand">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-02T00:00:00+00:00">
 
         
 <meta name="twitter:card" content="summary"/>
@@ -113,8 +115,7 @@ the classic trap. According to Piotr Wozniak, the <a href="https://www.supermemo
 repetition</a>
 is</p>
 <blockquote>
-<p>Do not learn if you do not understand.</p>
-</blockquote>
+<p>Do not learn if you do not understand.</p></blockquote>
 <p>While I did spend some time in probability and statistics classes, I don&rsquo;t
 understand every probability distribution I&rsquo;ve added to my deck.</p>
 <img src="../img/lognormal-median.png" height=400 alt="Anki card for lognormal median">
@@ -125,8 +126,8 @@ in it:</p>
 <li>When you take the log of a random variable from this distribution, you obtain
 a random variable that is normally distributed.
 $$
-X \sim \text{Lognormal}(\mu, \sigma^2) \rightarrow \ln(X) = Y \sim N(\mu, \sigma^2)
-$$</li>
+  X \sim \text{Lognormal}(\mu, \sigma^2) \rightarrow \ln(X) = Y \sim N(\mu, \sigma^2)
+  $$</li>
 <li>Lognormal random variables cannot be negative.</li>
 <li>Francis Galton</li>
 <li>&hellip;</li>
@@ -139,7 +140,7 @@ others would measure errors and not take into account that error is not
 necessarily evenly spaced out. He <a href="https://galton.org/essays/1870-1879/galton-1879-geometric-mean.pdf">gave the
 example</a> of
 tinting: say you have white scattered on a black background in quantities of $1,
-2, 4, 8, &hellip;$ These appear to the eye to be equally spaced apart. If someone
+2, 4, 8, ...$ These appear to the eye to be equally spaced apart. If someone
 were to be given a tint of size $4$, they could miss either on the dark side
 ($2$) or the light side ($8$).</p>
 <p>Galton pointed out that the arithmetic mean $\left(\frac{2+8}{2} = 5\right)$ was
@@ -147,7 +148,7 @@ not the correct way of thinking about this situation: rather, one should use the
 <em>geometric</em> mean $\left(\sqrt{2*8} = 4\right)$, as the effect of one degree
 lighter (or darker) was multiplicative, not additive.</p>
 <p>What if one took the log of all of these tints? You would end up back with
-quanitites ($0, 1, 2, 3, &hellip;$) where the effect of moving a deviation would be
+quanitites ($0, 1, 2, 3, ...$) where the effect of moving a deviation would be
 additive again.</p>
 <p>Similar to the arithmetic and geometric means in the error above, the normal and
 lognormal distributions represent the relationship between <em>additive</em> and
@@ -160,10 +161,10 @@ the scale of the distribution, not just shifting its center.</p>
 <h3 id="what-is-its-density-function">What is its density function?</h3>
 <p>Let $X \sim N(\mu, \sigma^2)$. The probability density function (pdf) of the
 normal distribution is
+</p>
 $$
 \large \Phi(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left[-\frac12\left(\frac{x-\mu}{\sigma}\right)^2\right]
-$$</p>
-<p>Let $Y = e^X$. Then we have $X = \ln(Y)$. It is not immediately intuitive how to
+$$<p>Let $Y = e^X$. Then we have $X = \ln(Y)$. It is not immediately intuitive how to
 derive the lognormal distribution from this information: if you swap $x$ with
 $ln(y)$, you don&rsquo;t obtain the correct distribution. Linear transformations are
 much more straightforward: adding by $C$ or multiplying by $D$ has effects on
@@ -171,19 +172,17 @@ the distribution that one can derive from their expected value and variance.</p>
 <p>The textbook I&rsquo;m reading doesn&rsquo;t help with this either. Lawless in &ldquo;Statistical
 Models And Methods For Lifetime Data&rdquo; (p. 24):</p>
 <blockquote>
-<p>and from this p.d.f of $\;T=\exp{Y}$ is easily found to be &hellip;</p>
-</blockquote>
+<p>and from this p.d.f of $\\;T=\exp{Y}$ is easily found to be &hellip;</p></blockquote>
 <p>However, if I remembered from probability classes of yore (last year) before
 looking this up, one can convert between the disribution function (CDF) and
 density function by integrating, using the desired random variable as the upper
 bound. The derivation <a href="https://gregorygundersen.com/blog/2023/12/17/lognormal/#a3-probability-density-function">performed
 here</a>
 by Gregory Gundersen gives us</p>
-<p>$$
-\large f_Y(y) = \frac{1}{y\; \sigma \sqrt{2\pi}} \exp\left[ -\frac{1}{2}\left(\frac{\ln
-y - \mu}{\sigma} \right)^2 \right]
-$$</p>
-<h3 id="how-can-you-get-the-median-from-this">How can you get the median from this?</h3>
+$$
+\large f_Y(y) = \frac{1}{y\\; \sigma \sqrt{2\pi}} \exp\left\[ -\frac{1}{2}\left(\frac{\ln
+y - \mu}{\sigma} \right)^2 \right\]
+$$<h3 id="how-can-you-get-the-median-from-this">How can you get the median from this?</h3>
 <p>This I <a href="https://statproofbook.github.io/P/lognorm-med.html">also had to look
 up</a>. I won&rsquo;t try to derive
 it now, so I&rsquo;m left with two options:</p>
@@ -192,10 +191,10 @@ it now, so I&rsquo;m left with two options:</p>
 <li>remove it from my Anki deck</li>
 </ul>
 <p>Time will tell which I choose.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Full text of the tweet from Andy Matuschak:</p>
 <p><em>A friend asks: after a hiatus of a few months, how to apologize to an Anki</em>
 <em>deck? It feels &ldquo;angry&rdquo; now! I wrote:</em></p>
@@ -222,13 +221,13 @@ p<em>erspective on your deck. Probably now it&rsquo;s easier to sense that you d
 <em>better, encouragement!—to suspend/delete any cards that stimulate a</em>
 <em>disinterested response.</em>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>I added these to the deck from a formula sheet from a statistics class in
 university. We never had to learn anything about the lognormal distribution,
 just know that it existed.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
 		</div>
 

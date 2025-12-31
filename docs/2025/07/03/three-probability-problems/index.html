@@ -3,13 +3,15 @@
 <head>
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Three probability problems | Pat Browne </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Three probability problems" />
-<meta property="og:description" content="How much do I really understand?" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.com/2025/07/03/three-probability-problems/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-07-03T00:00:00+00:00" />
-<meta property="article:modified_time" content="2025-07-03T00:00:00+00:00" />
-
+	<meta property="og:url" content="https://patbrowne.com/2025/07/03/three-probability-problems/">
+  <meta property="og:site_name" content="Pat Browne">
+  <meta property="og:title" content="Three probability problems">
+  <meta property="og:description" content="How much do I really understand?">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-07-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-03T00:00:00+00:00">
 
         
 <meta name="twitter:card" content="summary"/>
@@ -117,8 +119,7 @@ studying the subject actively.</p>
 cards of the same face value, so that a bridge hand of thirteen cards may
 contain $0, 1, 2,$ or $3$ quadruples.  Calculate the corresponding
 probabilities.</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p>Things that went well:</p>
 <ul>
 <li>I understood the problem well. Card-counting problems are common when learning
@@ -145,16 +146,16 @@ didn&rsquo;t pay attention to detail and only accounted for $12$ of the $13$
 cards. I also decided to subtract the probabilities of $1$ quad and $2$ quads by
 the higher-numbered probabilities, but can&rsquo;t remember if I discarded that before
 peeking at the key. The correct answers (as written by Feller) are:
+</p>
 $$
 \begin{aligned}
-\text{Let } p^{-1}=\binom{52}{13}\text{.  Then} \\[1.5ex]
-\Pr(X=3) &amp;= 40 \cdot \binom{13}{3} \cdot p \\[1.5ex]
-\Pr(X=2) &amp;= \binom{44}{5} \cdot \binom{13}{2} \cdot p \\[1.5ex]
-\Pr(X=1) &amp;= \binom{48}{9} \cdot 13 \cdot p \\[1.5ex]
-\Pr(X=0) &amp;= 1 - \sum_{x=1}^{3}\;\Pr(X=x)
+\text{Let } p^{-1}=\binom{52}{13}\text{.  Then} \\\\[1.5ex]
+\Pr(X=3) &= 40 \cdot \binom{13}{3} \cdot p \\\\[1.5ex]
+\Pr(X=2) &= \binom{44}{5} \cdot \binom{13}{2} \cdot p \\\\[1.5ex]
+\Pr(X=1) &= \binom{48}{9} \cdot 13 \cdot p \\\\[1.5ex]
+\Pr(X=0) &= 1 - \sum_{x=1}^{3}\\;\Pr(X=x)
 \end{aligned}
-$$</p>
-<p>Overall, I didn&rsquo;t fare too well here. I need to relearn how to count (and
+$$<p>Overall, I didn&rsquo;t fare too well here. I need to relearn how to count (and
 practice it much more). I have Anki cards for permutations and combinations,
 but some card additions that might help include</p>
 <ul>
@@ -174,8 +175,7 @@ yet, but I&rsquo;ll keep this in mind as I encounter more of this type of Anki c
 <li><em>Birthdays</em>.  For a group of $n$ people find the expected number of days
 of the year which are birthdays of exactly $k$ people.  (Assume $365$ days
 and that all arrangements are equally probable.</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p><em>Ah, the <a href="https://en.wikipedia.org/wiki/Birthday_problem">birthday paradox</a></em> he
 exclaimed! as I proceeded to blunder through this problem. Again relying on
 pattern matching, I remembered that there was something unique in the birthday
@@ -184,42 +184,45 @@ problem, as the birthday paradox asks about the case where $k \geq 2$.</p>
 <p>Reeling, I considered the binomial distribution: we&rsquo;re given variables with the
 names $n$ and $k$, and there&rsquo;s a $p$ ($\frac{1}{365}$). Applying this intuition,
 I came up with
+</p>
 $$
 P(X=k)=p^k(1-p)^{n-k}
-$$
+$$<p>
 however, as the astute might notice, this is not the probability mass function
 of the binomial distribution. That is instead
+</p>
 $$
 P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
-$$
+$$<p>
 which includes an actual binomial term to account for the ways in which these
 events can be ordered. Counting matters quite a bit in probability.</p>
 <p>In the end the correct answer (again, courtesy of Feller) is
+</p>
 $$
 \binom{n}{k}364^{n-k}365^{1-n}
-$$</p>
-<p>Evaluating what I had originally (and adding the binomial term),
+$$<p>Evaluating what I had originally (and adding the binomial term),
+</p>
 $$
 \begin{align}
-&amp;= \binom{n}{k}\left(\frac{1}{365}\right)^k\left(1-\frac{1}{365}\right)^{n-k} \\
-&amp;= \binom{n}{k}\frac{1^k \cdot 364^{n-k}}{365^k \cdot 365^{n-k}} \\
-&amp;= \binom{n}{k}364^{n-k} \cdot 365^{-n} \\
+&= \binom{n}{k}\left(\frac{1}{365}\right)^k\left(1-\frac{1}{365}\right)^{n-k} \\\
+&= \binom{n}{k}\frac{1^k \cdot 364^{n-k}}{365^k \cdot 365^{n-k}} \\\
+&= \binom{n}{k}364^{n-k} \cdot 365^{-n} \\\
 \end{align}
-$$
+$$<p>
 I&rsquo;m missing $365$ in the numerator. I did not account for another part of this
 problem: we are not calculating a probability, rather,</p>
 <blockquote>
-<p>the <em>expected number of days</em> of the year&hellip;</p>
-</blockquote>
+<p>the <em>expected number of days</em> of the year&hellip;</p></blockquote>
 <p>(strike two from the first problem, attention to detail)</p>
 <p>Since this is an expectation, we multiply each day by its probability and sum
 the days up. In mathematical terms,
+</p>
 $$
 \begin{align}
-\mathbb{E}[X] &amp;= \sum_{x=1}^{365}\;1 \cdot \Pr(X=x) \\[1.2ex]
-&amp;= 365 \cdot \Pr(X=x)
+\mathbb{E}[X] &= \sum_{x=1}^{365}\\;1 \cdot \Pr(X=x) \\\\[1.2ex]
+&= 365 \cdot \Pr(X=x)
 \end{align}
-$$
+$$<p>
 giving us the missing $365$ from above.</p>
 <p>Overall, not great: making the same mistakes, relying on pattern recognition
 rather than intuition, not understanding the question.</p>
@@ -228,14 +231,13 @@ rather than intuition, not understanding the question.</p>
 <ol start="21">
 <li>Find the covariance of the number of ones and sixes in <em>n</em> throws of a
 die.</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p>I did not give this problem a full effort. I saw the term <em>covariance</em>,
 attempted to recall the formula from memory, and gave up when I could not.</p>
 <p>This problem attacked another area of probability (properties of random
 variables) that I studied but can no longer recall. It wasn&rsquo;t too hard to answer
 this with the formula for covariance in front of me: $\mathbb{E}[XY] - \mu_x
-\mu_y = 0 - \frac{n}{6\; \cdot \;6} = -\frac{n}{36}$ (the throws are assumed
+\mu_y = 0 - \frac{n}{6\\; \cdot \\;6} = -\frac{n}{36}$ (the throws are assumed
 to be independent). My unfamiliarity with covariance is once again not great.</p>
 <h3 id="what-have-i-learned-what-do-i-understand">What have I learned? What do I understand?</h3>
 <p>While answering these questions, I felt like someone returning to a place they
@@ -256,10 +258,10 @@ haphazardly. As a result, I can be more intentional about my memory practice and
 what I choose to learn in general. I&rsquo;ll consider tradeoffs with, e.g.,
 technologies I need to know for work, but now I know better what
 I&hellip; <a href="https://en.wikipedia.org/wiki/Circle_of_competence">know</a>.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Aside: I am undecided on what to use for $\LaTeX$ probability
 notation. When writing, I often use $P$ and $\Pr$, but prefer
 $\mathbb{P}\text{r}$ (without the double line in the bend of the P). I
@@ -267,7 +269,7 @@ haven&rsquo;t found a symbol for that P yet and would want to turn it into an
 Emacs/$\LaTeX$ macro as well if it&rsquo;s complex.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
 		</div>
 

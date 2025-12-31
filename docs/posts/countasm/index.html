@@ -3,13 +3,19 @@
 <head>
         <meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Counting assembly instructions | Pat Browne </title><link rel="icon" type="image/png" href=/images/favicon.ico /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="Counting assembly instructions" />
-<meta property="og:description" content="Writing shell scripts to count assembly mnemonics" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://patbrowne.com/posts/countasm/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-10-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-10-07T00:00:00+00:00" />
-
+	<meta property="og:url" content="https://patbrowne.com/posts/countasm/">
+  <meta property="og:site_name" content="Pat Browne">
+  <meta property="og:title" content="Counting assembly instructions">
+  <meta property="og:description" content="Writing shell scripts to count assembly mnemonics">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-07T00:00:00+00:00">
+    <meta property="article:tag" content="Bash">
+    <meta property="article:tag" content="Sed">
+    <meta property="article:tag" content="Awk">
+    <meta property="article:tag" content="Perl">
 
         
 <meta name="twitter:card" content="summary_img"/>
@@ -116,42 +122,42 @@ calculations were influenced by procrastination, so naturally the answer was
 <strong>&ldquo;yes - I must write a bash script to do this&rdquo;</strong>.</p>
 <h3 id="first-try">First try</h3>
 <p>My first attempt at a shell script looked like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#719e07">#!/bin/bash
-</span><span style="color:#719e07"></span>
-<span style="color:#586e75"># count_mnemonics.sh</span>
-<span style="color:#586e75">#</span>
-<span style="color:#586e75"># This script counts the number of unique assembly mnemonics</span>
-<span style="color:#586e75"># in an assembly file. Assumes a tab character before every</span>
-<span style="color:#586e75"># assembly instruction</span>
-
-<span style="color:#268bd2">asfile</span><span style="color:#719e07">=</span><span style="color:#268bd2">$1</span>
-
-<span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#268bd2">$asfile</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
-    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Error: please provide an assembly file&#34;</span> 2&gt;&amp;<span style="color:#2aa198">1</span>
-    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
-<span style="color:#719e07">fi</span>
-
-touch tmp
-
-<span style="color:#268bd2">IFS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>
-<span style="color:#719e07">while</span> <span style="color:#b58900">read</span> -r line; <span style="color:#719e07">do</span>
-    <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#268bd2">$line</span> <span style="color:#719e07">==</span> *<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#719e07">[[</span>:alpha:<span style="color:#719e07">]]</span>* <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
-        <span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
-        <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>%% *<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> &gt;&gt; tmp
-    <span style="color:#719e07">fi</span>
-<span style="color:#719e07">done</span> &lt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asfile</span><span style="color:#2aa198">&#34;</span>
-
-sort tmp | uniq -c | sort -rn
-rm tmp
-</code></pre></div><p>The provided assembly file had a tab character in front of each mnemonic, which
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#719e07">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># count_mnemonics.sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># This script counts the number of unique assembly mnemonics</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># in an assembly file. Assumes a tab character before every</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># assembly instruction</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">asfile</span><span style="color:#719e07">=</span><span style="color:#268bd2">$1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#268bd2">$asfile</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Error: please provide an assembly file&#34;</span> 2&gt;&amp;<span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>touch tmp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">IFS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">while</span> <span style="color:#b58900">read</span> -r line; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#268bd2">$line</span> <span style="color:#719e07">==</span> *<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#719e07">[[</span>:alpha:<span style="color:#719e07">]]</span>* <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>%% *<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span> &gt;&gt; tmp
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">done</span> &lt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asfile</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sort tmp | uniq -c | sort -rn
+</span></span><span style="display:flex;"><span>rm tmp
+</span></span></code></pre></div><p>The provided assembly file had a tab character in front of each mnemonic, which
 reduced the job of finding instructions to finding <code>0x09</code> bytes. Some
 positives:</p>
 <ul>
 <li><strong>I finally used <code>read</code> properly.</strong> I&rsquo;ve always followed the pattern of
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$file</span><span style="color:#2aa198">&#34;</span> | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> line; <span style="color:#719e07">do</span>
-    <span style="color:#586e75"># perform line operations</span>
-<span style="color:#719e07">done</span>
-</code></pre></div>but <code>shellcheck</code> informed me that <code>cat</code> was unnecessary. I&rsquo;d run into this a
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$file</span><span style="color:#2aa198">&#34;</span> | <span style="color:#719e07">while</span> <span style="color:#b58900">read</span> line; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75"># perform line operations</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">done</span>
+</span></span></code></pre></div>but <code>shellcheck</code> informed me that <code>cat</code> was unnecessary. I&rsquo;d run into this a
 few times before, but I could never find the <code>man</code> page for the <code>read</code>
 command in my bash shell (not even using <code>man 1p</code>!). Little did I know that
 <a href="https://stackoverflow.com/questions/70746111/why-does-read-not-have-a-normal-man-page">bash doesn&rsquo;t have man pages for builtin
@@ -166,28 +172,28 @@ podcast</a>
 made this an easy one-line addition to the script.</li>
 </ul>
 <p>The script got the job done and produced output that looked like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     30 movw
-     11 int
-      6 movb
-      6 inb
-      6 call
-      5 pushw
-      5 popw
-      5 outb
-      5 incw
-      4 loop
-      4 incb
-      4 decw
-      4 addb
-      3 xorb
-      3 jmp
-      2 jge
-      2 cmpb
-      1 xorw
-      1 shrb
-      1 ret
-      1 andb
-</code></pre></div><p>My script works. My task is complete. Or is it?</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>     30 movw
+</span></span><span style="display:flex;"><span>     11 int
+</span></span><span style="display:flex;"><span>      6 movb
+</span></span><span style="display:flex;"><span>      6 inb
+</span></span><span style="display:flex;"><span>      6 call
+</span></span><span style="display:flex;"><span>      5 pushw
+</span></span><span style="display:flex;"><span>      5 popw
+</span></span><span style="display:flex;"><span>      5 outb
+</span></span><span style="display:flex;"><span>      5 incw
+</span></span><span style="display:flex;"><span>      4 loop
+</span></span><span style="display:flex;"><span>      4 incb
+</span></span><span style="display:flex;"><span>      4 decw
+</span></span><span style="display:flex;"><span>      4 addb
+</span></span><span style="display:flex;"><span>      3 xorb
+</span></span><span style="display:flex;"><span>      3 jmp
+</span></span><span style="display:flex;"><span>      2 jge
+</span></span><span style="display:flex;"><span>      2 cmpb
+</span></span><span style="display:flex;"><span>      1 xorw
+</span></span><span style="display:flex;"><span>      1 shrb
+</span></span><span style="display:flex;"><span>      1 ret
+</span></span><span style="display:flex;"><span>      1 andb
+</span></span></code></pre></div><p>My script works. My task is complete. Or is it?</p>
 <p>Though it may pass <code>shellcheck</code>, there are some things one could improve upon in
 this simple script. Some of the more glaring ones that I noticed were:</p>
 <ul>
@@ -213,8 +219,7 @@ philosophy</a>
 unknown, program. Don’t clutter output with extraneous information. Avoid
 stringently columnar or binary input formats. Don’t insist on interactive
 input.</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p>A pipe is a form of inter process communication (IPC) that is as old as Unix
 itself. Data flows in one direction, uniting the standard output of one command
 to the standard input of the next. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> Pipes are the load-bearing feature of a
@@ -224,14 +229,14 @@ file to the filesystem that might interfere with our operation.</p>
 <p>In the first iteration, pipes are used to unite the last set of <code>sort</code>/<code>uniq</code>
 commands, but they don&rsquo;t connect them with the string parsing. We can reorder
 our commands to redirect output from the while loop into our output sequence.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#268bd2">IFS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>
-<span style="color:#719e07">while</span> <span style="color:#b58900">read</span> -r line; <span style="color:#719e07">do</span>
-    <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#268bd2">$line</span> <span style="color:#719e07">==</span> *<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#719e07">[[</span>:alpha:<span style="color:#719e07">]]</span>* <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
-        <span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
-        <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>%% *<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
-    <span style="color:#719e07">fi</span>
-<span style="color:#719e07">done</span> &lt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asfile</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
-</code></pre></div><h2 id="cut-and-awk-and-sed-and-perl"><code>cut</code> and <code>awk</code> and <code>sed</code> and <code>perl</code></h2>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#268bd2">IFS</span><span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">while</span> <span style="color:#b58900">read</span> -r line; <span style="color:#719e07">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> <span style="color:#268bd2">$line</span> <span style="color:#719e07">==</span> *<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#719e07">[[</span>:alpha:<span style="color:#719e07">]]</span>* <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>%% *<span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">done</span> &lt; <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asfile</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
+</span></span></code></pre></div><h2 id="cut-and-awk-and-sed-and-perl"><code>cut</code> and <code>awk</code> and <code>sed</code> and <code>perl</code></h2>
 <p>Currently, we use bash builtins such as the <code>test</code> command (<code>[[ ]]</code>) and string
 replacement (<code>${variable##substr}</code>) when parsing each line of the assembly file,
 as well as a full <code>while</code> loop with the <code>read</code> command. What if there was a
@@ -245,8 +250,8 @@ extremely effective when working with well-structured files, such as .csv
 <p>In our case, we want to select lines that have the pattern of a tab character
 followed by a mnemonic, followed by a space. These may be of different lengths,
 so the command will use fields. To do this with cut, we can use the command</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cut -f <span style="color:#2aa198">2</span> asfile.s -s | cut -f <span style="color:#2aa198">1</span> -d <span style="color:#2aa198">&#39; &#39;</span> -s | grep -v  <span style="color:#2aa198">&#39;\..*&#39;</span>
-</code></pre></div><p>The first <code>cut</code> outputs the first field after a tab character (the default
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cut -f <span style="color:#2aa198">2</span> asfile.s -s | cut -f <span style="color:#2aa198">1</span> -d <span style="color:#2aa198">&#39; &#39;</span> -s | grep -v  <span style="color:#2aa198">&#39;\..*&#39;</span>
+</span></span></code></pre></div><p>The first <code>cut</code> outputs the first field after a tab character (the default
 delimiter), removing all lines that don&rsquo;t contain a tab. The second <code>cut</code>
 outputs the first field before the space character, which removes all assembly
 operands after a mnemonic.</p>
@@ -270,8 +275,8 @@ awk</a> with <a href="https://github.com/onetrueawk/awk/commit/d322b2b5fc16484af
 support</a>
 to his system path.</p>
 <p>The following <code>gawk</code> command will do the trick for our assembly file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk">awk <span style="color:#719e07">-</span>F<span style="color:#2aa198">&#39;\t&#39;</span> <span style="color:#2aa198">&#39;{split($2, a, &#34; &#34;); if (a[1] !~ /^\./ &amp;&amp; length(a[1]) &gt; 0) print a[1]}&#39;</span>
-</code></pre></div><p>We set our delimiter to the tab character and extract the second field of each
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-awk" data-lang="awk"><span style="display:flex;"><span>awk <span style="color:#719e07">-</span>F<span style="color:#2aa198">&#39;\t&#39;</span> <span style="color:#2aa198">&#39;{split($2, a, &#34; &#34;); if (a[1] !~ /^\./ &amp;&amp; length(a[1]) &gt; 0) print a[1]}&#39;</span>
+</span></span></code></pre></div><p>We set our delimiter to the tab character and extract the second field of each
 separation along <code>\t</code> into an array, with each array element split by <code>' '</code>. We
 then examine the first element of the array: if it&rsquo;s not a blank line or an
 assembly directive (beginning with <code>'.'</code>), we output the value. To use on
@@ -299,10 +304,10 @@ regular expressions, substitutes different strings in place (as the man page
 says, &ldquo;perform[s] basic text transformations on an input stream&rdquo;). Again, we
 will use the GNU version of the <code>sed</code> utility (as opposed to the BSD
 implementation). The line that works for our purposes is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -nE <span style="color:#2aa198">&#39;/\t[[:alpha:]]/s/.*\t([[:alpha:]][^ ]*).*/\1/p&#39;</span> asfile.s
-</code></pre></div><p><code>sed</code> regular expressions are patterned on the (now standard) <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cmd/pattern/substitution/cmd
-</code></pre></div><p>where <code>cmd</code> is a one-letter command directive, such as <strong>s</strong>ubstitute (at the
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sed -nE <span style="color:#2aa198">&#39;/\t[[:alpha:]]/s/.*\t([[:alpha:]][^ ]*).*/\1/p&#39;</span> asfile.s
+</span></span></code></pre></div><p><code>sed</code> regular expressions are patterned on the (now standard) <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>cmd/pattern/substitution/cmd
+</span></span></code></pre></div><p>where <code>cmd</code> is a one-letter command directive, such as <strong>s</strong>ubstitute (at the
 beginning) or <strong>g</strong>lobal (at the end). In our case, the first command is an
 address pattern. It matches lines that contain a tab followed by an alphabetic
 character (our mnemonics), avoiding directives, lines without tabs, etc. It then
@@ -319,13 +324,12 @@ have to escape the <code>(</code> <code>)</code> characters).</p>
 <p>As the great Steve Yegge once said, <sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
 <blockquote>
 <p>Perl. It&rsquo;s a swiss army knife. You can use it to sidestep this problem with
-honor, by disemboweling yourself.</p>
-</blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">perl <span style="color:#719e07">-</span>lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> asfile<span style="color:#719e07">.</span>s
-</code></pre></div><h2 id="how-far-did-we-get">How far did we get?</h2>
+honor, by disemboweling yourself.</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span>perl <span style="color:#719e07">-</span>lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> asfile<span style="color:#719e07">.</span>s
+</span></span></code></pre></div><h2 id="how-far-did-we-get">How far did we get?</h2>
 <p>Well, we&rsquo;ve reduced our 27-line script to a one-liner</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> asm.s | sort | uniq -c | sort -rn
-</code></pre></div><p>which fits under 80 characters, and is still fairly readable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> asm.s | sort | uniq -c | sort -rn
+</span></span></code></pre></div><p>which fits under 80 characters, and is still fairly readable.</p>
 <p>But now that we&rsquo;ve reduced our file size, we have so many more <strong>features</strong> to
 add:</p>
 <ul>
@@ -351,62 +355,62 @@ RISC-V or ARM ISAs? How could you calculate the desired statistics on those?</li
 </ul>
 <p>To answer a few of these feature requests, I modified my shell script as
 follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#719e07">#!/bin/bash
-</span><span style="color:#719e07"></span>
-<span style="color:#586e75"># countasm.sh</span>
-<span style="color:#586e75">#</span>
-<span style="color:#586e75"># This script provides basic information about an assembly file written in GNU</span>
-<span style="color:#586e75"># assembler syntax.</span>
-
-<span style="color:#268bd2">asm</span><span style="color:#719e07">=</span><span style="color:#268bd2">$1</span>
-
-<span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#268bd2">$asm</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
-    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Error: please provide an assembly file&#34;</span> 2&gt;&amp;<span style="color:#2aa198">1</span>
-    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
-<span style="color:#719e07">fi</span>
-
-<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;Information about </span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span>
-<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nTop 10 assembly instructions&#34;</span>
-perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn | head
-
-<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nOperand sizes (b: 8, w: 16, l: 32, q: 64)&#34;</span>
-perl -lne <span style="color:#2aa198">&#39;print substr($1, -1) if /\t([a-z]\S*[bwlq])\b/ &amp;&amp; $1 ne &#34;call&#34;&#39;</span> <span style="color:#cb4b16">\
-</span><span style="color:#cb4b16"></span>     <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
-
-<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nAssembly directives&#34;</span>
-perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([.]\S*)/&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
-
-<span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nRoutine names&#34;</span>
-awk -F<span style="color:#2aa198">&#34;:&#34;</span> <span style="color:#2aa198">&#39;NF&gt;1 &amp;&amp; !/^#/ { print $1 }&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq | sort -rn | column
-</code></pre></div><p>The new output of this script is</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./countasm.sh vga16.s
-Information about vga16.s
-
-Top 10 assembly instructions
-     30 movw
-     11 int
-      6 movb
-      6 inb
-      6 call
-      5 pushw
-      5 popw
-      5 outb
-      5 incw
-      4 loop
-
-Operand sizes (b: 8, w: 16, l: 32, q: 64)
-     50 w
-     32 b
-
-Assembly directives
-      2 .byte
-      1 .org
-      1 .globl
-      1 .code16
-
-Routine names
-2       1       print   _start
-</code></pre></div><p>Granted, I&rsquo;ve used the same hammer to hit three different nails at this
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#719e07">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#719e07"></span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># countasm.sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># This script provides basic information about an assembly file written in GNU</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># assembler syntax.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">asm</span><span style="color:#719e07">=</span><span style="color:#268bd2">$1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">if</span> <span style="color:#719e07">[[</span> -z <span style="color:#268bd2">$asm</span> <span style="color:#719e07">]]</span>; <span style="color:#719e07">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">echo</span> <span style="color:#2aa198">&#34;Error: please provide an assembly file&#34;</span> 2&gt;&amp;<span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#b58900">exit</span> <span style="color:#2aa198">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#719e07">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;Information about </span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nTop 10 assembly instructions&#34;</span>
+</span></span><span style="display:flex;"><span>perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([a-z]\S*)/&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn | head
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nOperand sizes (b: 8, w: 16, l: 32, q: 64)&#34;</span>
+</span></span><span style="display:flex;"><span>perl -lne <span style="color:#2aa198">&#39;print substr($1, -1) if /\t([a-z]\S*[bwlq])\b/ &amp;&amp; $1 ne &#34;call&#34;&#39;</span> <span style="color:#cb4b16">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cb4b16"></span>     <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nAssembly directives&#34;</span>
+</span></span><span style="display:flex;"><span>perl -lne <span style="color:#2aa198">&#39;print $1 if /\t([.]\S*)/&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq -c | sort -rn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#b58900">echo</span> -e <span style="color:#2aa198">&#34;\nRoutine names&#34;</span>
+</span></span><span style="display:flex;"><span>awk -F<span style="color:#2aa198">&#34;:&#34;</span> <span style="color:#2aa198">&#39;NF&gt;1 &amp;&amp; !/^#/ { print $1 }&#39;</span> <span style="color:#2aa198">&#34;</span><span style="color:#268bd2">$asm</span><span style="color:#2aa198">&#34;</span> | sort | uniq | sort -rn | column
+</span></span></code></pre></div><p>The new output of this script is</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ ./countasm.sh vga16.s
+</span></span><span style="display:flex;"><span>Information about vga16.s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Top 10 assembly instructions
+</span></span><span style="display:flex;"><span>     30 movw
+</span></span><span style="display:flex;"><span>     11 int
+</span></span><span style="display:flex;"><span>      6 movb
+</span></span><span style="display:flex;"><span>      6 inb
+</span></span><span style="display:flex;"><span>      6 call
+</span></span><span style="display:flex;"><span>      5 pushw
+</span></span><span style="display:flex;"><span>      5 popw
+</span></span><span style="display:flex;"><span>      5 outb
+</span></span><span style="display:flex;"><span>      5 incw
+</span></span><span style="display:flex;"><span>      4 loop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Operand sizes (b: 8, w: 16, l: 32, q: 64)
+</span></span><span style="display:flex;"><span>     50 w
+</span></span><span style="display:flex;"><span>     32 b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Assembly directives
+</span></span><span style="display:flex;"><span>      2 .byte
+</span></span><span style="display:flex;"><span>      1 .org
+</span></span><span style="display:flex;"><span>      1 .globl
+</span></span><span style="display:flex;"><span>      1 .code16
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Routine names
+</span></span><span style="display:flex;"><span>2       1       print   _start
+</span></span></code></pre></div><p>Granted, I&rsquo;ve used the same hammer to hit three different nails at this
 point (and should probably write a separate function or perl script), but not
 bad. There&rsquo;s a bit more functionality packed into that short script.</p>
 <p>To expand further, I&rsquo;d next focus on getting data on operands, then classifying
@@ -439,7 +443,8 @@ flag</a>
 that goes to serious lengths to identify issues with code at compile
 time. Imagine writing a buffer overflow in your C program and getting this
 helpful diagram:</p>
-<p><img src="https://developers.redhat.com/sites/default/files/styles/article_floated/public/screenshot_from_2024-03-28_16-05-22.png.webp?itok=DlDqiM5y" alt="Visualizing buffer overflows in GCC14."></p>
+<p><img src="https://developers.redhat.com/sites/default/files/styles/article_floated/public/screenshot_from_2024-03-28_16-05-22.png.webp?itok=DlDqiM5y" alt="Visualizing buffer overflows in GCC
+14."></p>
 <h2 id="beyond-bash">Beyond <code>bash</code></h2>
 <p>Shell scripts can <a href="https://www.extrema.is/blog/2021/04/11/rewrite-when-more-than-n-lines">only take you so
 far</a>
@@ -467,14 +472,14 @@ on <a href="https://www.youtube.com/watch?v=G39FkcfsMNA"><code>cut</code></a> an
 <a href="https://www.youtube.com/watch?v=akN2TFarz0A"><code>sed</code></a>. I happened to find his
 content as I was finishing this, and the videos were helpful beyond <code>man sed</code>
 and <a href="https://www.gnu.org/software/sed/manual/sed.html">the HTML pages</a>.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>A good place to look for more information is <a href="https://bash-hackers.gabe565.com/commands/builtin/read/">the Bash Hackers Wiki page
 on <code>read</code></a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Bash is often known for its
 <a href="https://tldp.org/LDP/abs/html/gotchas.html">gotchas</a>, and string parsing is
 no exception. Though it has <a href="https://tldp.org/LDP/abs/html/string-manipulation.html">great builtin
@@ -482,12 +487,12 @@ support</a>, unless you
 are very aware of the behavior of what you&rsquo;re using, you can quickly run
 into trouble. For example, my script no longer works if I change line 21
 from shortest prefix matching</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
-</code></pre></div><p>to longest prefix matching</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>##*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
-</code></pre></div><p>(and that&rsquo;s only on the single file I was working on).&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>#*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+</span></span></code></pre></div><p>to longest prefix matching</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#268bd2">line</span><span style="color:#719e07">=</span><span style="color:#2aa198">${</span><span style="color:#268bd2">line</span>##*<span style="color:#2aa198">$&#39;\t&#39;</span><span style="color:#2aa198">}</span>
+</span></span></code></pre></div><p>(and that&rsquo;s only on the single file I was working on).&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Note that there are different kinds of pipes: for example, stream pipes
 allow for data to flow in both directions (with two different file
 descriptors for reading and writing), and FIFOs and named pipes allow for
@@ -502,13 +507,13 @@ original paper</a> for
 how pipes fit into general Unix program design. For how the Unix kernel
 implements pipes, <a href="https://toroid.org/unix-pipe-implementation">look here</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>Or, in this case, several different ways. Even within each one-liner I&rsquo;ve
 written, there are likely more efficient or more concise ways to extract the
 desired fields. Send me a note if you have suggested improvements - I&rsquo;d love
 to know!&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
+<li id="fn:5">
 <p>There is no explicitly standard, but <a href="https://www.columbia.edu/~rh120/ch001j.c11">since the days of
 <code>ed</code></a>, this pattern for regular
 expression matching has continued into many other scripting
@@ -518,22 +523,22 @@ common for modern scripting languages such as JavaScript and Python to use
 method or function calls from a core language library on string objects, as
 opposed to parsing ASCII or text streams.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:6" role="doc-endnote">
+<li id="fn:6">
 <p>See <a href="https://steve-yegge.blogspot.com/2007/06/rich-programmer-food.html">this incredible post on
 compilers</a>
 for context.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:7" role="doc-endnote">
+<li id="fn:7">
 <p>Many of these would require a bit more information outside of the assembly
 file&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:8" role="doc-endnote">
+<li id="fn:8">
 <p>Not the most appropriate reference: I&rsquo;m sure the random person in
 Nebraska&rsquo;s project is maintained quite a bit better than my <code>~/tools</code>
 directory.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
 		</div>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sed on Pat Browne</title>
+    <title>Sed on Pat Browne</title>
     <link>https://patbrowne.com/tags/sed/</link>
-    <description>Recent content in sed on Pat Browne</description>
+    <description>Recent content in Sed on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 07 Oct 2024 00:00:00 +0000</lastBuildDate>
@@ -13,11 +13,14 @@
       <link>https://patbrowne.com/posts/countasm/</link>
       <pubDate>Mon, 07 Oct 2024 00:00:00 +0000</pubDate>
       <guid>https://patbrowne.com/posts/countasm/</guid>
-      <description>As someone who may or may not procrastinate, I find myself shaving yaks occasionally. One such yak shave occurred recently while working on a project for my operating systems class. We were provided with an assembly file written in x86 GNU assembly syntax. I wondered if the file contained any instructions I wasn&amp;rsquo;t familiar with or hadn&amp;rsquo;t used in awhile. My first task was to figure out all of these unique assembly instructions, look them up in the Intel manual, and use them (plus 1-2 others) for the code I was going to write.
-The assembly file itself was ~200 lines of code, so it was not unthinkable to count them by hand, determine what the unknown instructions were, and look those up.
-Just kidding! I needed to be efficient and decisive. Since I perform this task yearly (?), I also judged if it was worth the time to make this task more efficient. My calculations were influenced by procrastination, so naturally the answer was &amp;ldquo;yes - I must write a bash script to do this&amp;rdquo;.
-First try My first attempt at a shell script looked like this:
-#!/bin/bash  # count_mnemonics.sh # # This script counts the number of unique assembly mnemonics # in an assembly file. Assumes a tab character before every # assembly instruction asfile=$1 if [[ -z $asfile ]]; then echo &amp;#34;Error: please provide an assembly file&amp;#34; 2&amp;gt;&amp;amp;1 exit 1 fi touch tmp IFS=&amp;#39;&amp;#39; while read -r line; do if [[ $line == *$&amp;#39;\t&amp;#39;[[:alpha:]]* ]]; then line=${line#*$&amp;#39;\t&amp;#39;} echo &amp;#34;${line%% *}&amp;#34; &amp;gt;&amp;gt; tmp fi done &amp;lt; &amp;#34;$asfile&amp;#34; sort tmp | uniq -c | sort -rn rm tmp The provided assembly file had a tab character in front of each mnemonic, which reduced the job of finding instructions to finding 0x09 bytes.</description>
+      <description>&lt;p&gt;As someone who may or may not procrastinate, I find myself &lt;a href=&#34;https://projects.csail.mit.edu/gsb/old-archive/gsb-archive/gsb2000-02-11.html&#34;&gt;shaving
+yaks&lt;/a&gt;
+occasionally. One such yak shave occurred recently while working on a project
+for my operating systems class. We were provided with an assembly file written
+in x86 GNU assembly syntax. I wondered if the file contained any instructions I
+wasn&amp;rsquo;t familiar with or hadn&amp;rsquo;t used in awhile. My first task was to figure out
+all of these unique assembly instructions, look them up in the Intel manual, and
+use them (plus 1-2 others) for the code I was going to write.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

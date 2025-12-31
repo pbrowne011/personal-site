@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>draft on Pat Browne</title>
+    <title>Draft on Pat Browne</title>
     <link>https://patbrowne.com/tags/draft/</link>
-    <description>Recent content in draft on Pat Browne</description>
+    <description>Recent content in Draft on Pat Browne</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Oct 2024 00:00:00 +0000</lastBuildDate>
@@ -13,10 +13,24 @@
       <link>https://patbrowne.com/posts/rtolcompute/</link>
       <pubDate>Wed, 02 Oct 2024 00:00:00 +0000</pubDate>
       <guid>https://patbrowne.com/posts/rtolcompute/</guid>
-      <description>Manipulating bits Recently I&amp;rsquo;ve been going through Hacker&amp;rsquo;s Delight. It is a joy to become a &amp;ldquo;bit-twiddler&amp;rdquo; and explore some of the counter intuitive properties of using bit wise operations in places you wouldn&amp;rsquo;t expect them.
-Chapter 2 focuses on &amp;ldquo;Basics&amp;rdquo;, and covers bit manipulation tricks that perform specific operations. It assumes a 32-bit machine (and word size), with signed values represented in two&amp;rsquo;s complement form. 1 Some tricks presented include:
- $x \; \&amp;amp; \; (x - 1)$: turn off the rightmost bit in a word $x \; \&amp;amp; \; (x + 1)$: turn off the trailing 1&amp;rsquo;s in a word $\neg x \; \&amp;amp; \; (x + 1)$: create a word with a single 1-bit at the position of the rightmost 0-bit $x \; \&amp;amp; \; (-x)$: isolate the rightmost 1-bit, produce 0 if none  Note that these hacks are much more useful than they might appear. The first trick can be used to great effect to count set bits and calculate powers of two, as demonstrated in Brian Kernighan&amp;rsquo;s algorithm2:
-unsigned int v; // count the number of bits set in v unsigned int c; // c accumulates the total bits set in v for (c = 0; v; c++) { v &amp;amp;= v - 1; // clear the least significant bit set } These bit wise operations allow for implementations of functions that are branch-free and do not require shift instructions, saving valuable CPU cycles. Additionally, they allow for word-parallelism: if a bit&amp;rsquo;s value only depends on bits to its right, one can optimize by executing single instructions on multiple data, or SIMDs.</description>
+      <description>&lt;h3 id=&#34;manipulating-bits&#34;&gt;Manipulating bits&lt;/h3&gt;
+&lt;p&gt;Recently I&amp;rsquo;ve been going through &lt;a href=&#34;https://en.wikipedia.org/wiki/Hacker&#39;s_Delight&#34;&gt;Hacker&amp;rsquo;s
+Delight&lt;/a&gt;. It is a joy to become
+a &amp;ldquo;bit-twiddler&amp;rdquo; and explore some of the counter intuitive properties of using
+bit wise operations in places you wouldn&amp;rsquo;t expect them.&lt;/p&gt;
+&lt;p&gt;Chapter 2 focuses on &amp;ldquo;Basics&amp;rdquo;, and covers bit manipulation tricks that perform
+specific operations. It assumes a 32-bit machine (and word size), with signed
+values represented in two&amp;rsquo;s complement form. &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; Some tricks presented include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$x \\; \\&amp; \\; (x - 1)$: turn off the rightmost bit in a word&lt;/li&gt;
+&lt;li&gt;$x \\; \\&amp; \\; (x + 1)$: turn off the trailing 1&amp;rsquo;s in a word&lt;/li&gt;
+&lt;li&gt;$\neg x \\; \\&amp; \\; (x + 1)$: create a word with a single 1-bit at the position of the
+rightmost 0-bit&lt;/li&gt;
+&lt;li&gt;$x \\; \\&amp; \\; (-x)$: isolate the rightmost 1-bit, produce 0 if none&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that these hacks are much more useful than they might appear. The first
+trick can be used to great effect to count set bits and calculate powers of two,
+as demonstrated in Brian Kernighan&amp;rsquo;s algorithm&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
