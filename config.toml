@@ -4,7 +4,7 @@ defaultContentLanguage = "en"
 title = "Pat Browne"
 theme = "ezhil"
 
-publishDir = "docs/"
+publishDir = "public/"
 
 # Enable syntax highlighting
 pygmentsStyle = "solarized-dark"
